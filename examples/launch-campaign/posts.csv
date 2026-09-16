@@ -1,0 +1,87 @@
+id,platform,scheduled_time,content,media_urls,tags,thread_order,utm_campaign,status
+post-001-tw,twitter,2026-09-17T13:00:00Z,"Something major is dropping tomorrow for developers building social automation in Python. 🐍
+
+No brittle scrapers. No opaque APIs. 100% type-safe and MCP native.
+
+Turn notifications on. 🔔
+
+#BuildInPublic #Python #OpenSource",https://raw.githubusercontent.com/omnipost/assets/main/teaser_card.png,"BuildInPublic,Python,OpenSource",1,omnipost_launch_v1,scheduled
+post-001-li,linkedin,2026-09-17T13:00:00Z,"For the past 6 months, we've observed engineering teams struggle with fragile social media scripts and fragmented platform limits.
+
+Tomorrow at 2 PM UTC, we're open-sourcing our distributed multi-platform publishing engine.
+
+Designed specifically for Python 3.9–3.13 with native Model Context Protocol (MCP) support for Claude and Cursor.
+
+Stay tuned for the full release.
+
+#SoftwareEngineering #Python #DevTools #OpenSource",https://raw.githubusercontent.com/omnipost/assets/main/teaser_card.png,"SoftwareEngineering,Python,DevTools,OpenSource",1,omnipost_launch_v1,scheduled
+post-001-bs,bluesky,2026-09-17T13:00:00Z,"Something big is dropping tomorrow for Python developers building social apps. 🦋
+
+No brittle scrapers. No opaque wrappers. Type-safe, asynchronous, and MCP native.
+
+Turn notifications on! 🚀",https://raw.githubusercontent.com/omnipost/assets/main/teaser_card.png,"Python,DevTools,BlueSky",1,omnipost_launch_v1,scheduled
+post-001-th,threads,2026-09-17T13:00:00Z,"Tired of hacking together custom scripts every time a social platform changes its character limits?
+
+Tomorrow we open source the ultimate Python social engine. 🧵
+
+Drop a comment if you want early access to the repo.",https://raw.githubusercontent.com/omnipost/assets/main/teaser_card.png,"Python,Tech,DevCommunity",1,omnipost_launch_v1,scheduled
+post-001-ma,mastodon,2026-09-17T13:00:00Z,"Announcing a major open source release tomorrow for the Fediverse and beyond: a unified Python social engine with full Mastodon, Bluesky, and X interoperability. 🐘
+
+Stay tuned! #OpenSource #Fediverse #Python",https://raw.githubusercontent.com/omnipost/assets/main/teaser_card.png,"OpenSource,Fediverse,Python",1,omnipost_launch_v1,scheduled
+post-002-tw,twitter,2026-09-18T14:00:00Z,"🚀 𝗪𝗲 𝗷𝘂𝘀𝘁 𝗼𝗽𝗲𝗻-𝘀𝗼𝘂𝗿𝗰𝗲𝗱 𝗢𝗺𝗻𝗶𝗽𝗼𝘀𝘁 𝗦𝗼𝗰𝗶𝗮𝗹 𝗘𝗻𝗴𝗶𝗻𝗲!
+
+One unified Python library to compose, simulate, and broadcast across:
+• Twitter / X
+• LinkedIn
+• BlueSky & Threads
+• Mastodon
+
+Built-in Material 3 Studio + MCP Server for Claude & Cursor.
+
+⭐ Star on GitHub 👇
+https://github.com/omnipost/omnipost-social-engine",https://raw.githubusercontent.com/omnipost/assets/main/launch_banner_1200x630.png,"OpenSource,Python,DevTools",1,omnipost_launch_v1,scheduled
+post-002-li,linkedin,2026-09-18T14:00:00Z,"🚀 We are thrilled to introduce Omnipost Social Engine v1.0 — the open-source social orchestration framework for Python.
+
+Managing multi-platform developer advocacy and marketing shouldn't require five different dashboard tabs and fragile cron jobs.
+
+Omnipost provides:
+✅ Real-time multi-platform simulator (Twitter, LinkedIn, BlueSky, Threads, Mastodon)
+✅ Automated thread splitting & unicode mathematical typography
+✅ Algorithmic virality scoring before publication
+✅ Native Model Context Protocol (MCP) server for Claude Desktop, Cursor, and Cline
+
+Check out the repo, try the interactive web studio, and let us know what you build:
+👉 https://github.com/omnipost/omnipost-social-engine
+
+#Python #OpenSource #DeveloperTools #AI #DevOps",https://raw.githubusercontent.com/omnipost/assets/main/launch_banner_1200x630.png,"Python,OpenSource,DeveloperTools,AI,DevOps",1,omnipost_launch_v1,scheduled
+post-002-bs,bluesky,2026-09-18T14:00:00Z,"🚀 We just open-sourced Omnipost Social Engine!
+
+A unified Python framework for multi-platform broadcasting with BlueSky, Mastodon, X, and Threads support.
+
+Includes a full Google Material 3 Studio UI and MCP server for AI agents.
+
+Explore the repo 👇
+https://github.com/omnipost/omnipost-social-engine",https://raw.githubusercontent.com/omnipost/assets/main/launch_banner_1200x630.png,"OpenSource,Python,BlueSky",1,omnipost_launch_v1,scheduled
+post-002-th,threads,2026-09-18T14:00:00Z,"Omnipost Social Engine is officially LIVE on GitHub! 🚀
+
+Write your post once. Simulate how it looks on Threads, X, and LinkedIn with accurate line-breaks, then publish with one clean Python call.
+
+Link in bio & first comment! 🔗",https://raw.githubusercontent.com/omnipost/assets/main/launch_banner_1200x630.png,"OpenSource,Python,Threads",1,omnipost_launch_v1,scheduled
+post-002-ma,mastodon,2026-09-18T14:00:00Z,"🐘 Omnipost Social Engine v1.0 is now available under Apache 2.0 / MIT license!
+
+Built from the ground up to respect open protocols (ActivityPub, ATProto) alongside traditional platforms. Clean Python async client + local Web UI.
+
+https://github.com/omnipost/omnipost-social-engine",https://raw.githubusercontent.com/omnipost/assets/main/launch_banner_1200x630.png,"Fediverse,OpenSource,Python",1,omnipost_launch_v1,scheduled
+post-003-tw,twitter,2026-09-19T15:30:00Z,"🧵 How we built an MCP-compliant social engine in pure Python (with sub-millisecond tool execution):
+
+1/7 Most social tools fail when platforms truncate text unpredictably. We built deterministic platform envelope parsers with AST unicode mapping.
+
+Read the architecture breakdown 👇",,"Python,Architecture,MCP",1,omnipost_launch_v1,scheduled
+post-004-tw,twitter,2026-09-20T17:00:00Z,"What is the most frustrating part of managing social media for dev projects?
+
+• Character truncation?
+• Formatting loss?
+• Fragmented schedulers?
+• Rate limit errors?
+
+Drop your thoughts below — building top requested feature this weekend! 🛠️",,"Community,OpenSource,Discussion",1,omnipost_launch_v1,scheduled

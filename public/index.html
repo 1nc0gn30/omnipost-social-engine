@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Google Omnipost Studio — Multi-Platform Social Automation & MCP Hub</title>
+  <style>
+    :root {
+      /* Google Material 3 Color Tokens */
+      --google-blue: #1a73e8;
+      --google-blue-hover: #1765cc;
+      --google-blue-light: #e8f0fe;
+      --google-green: #1e8e3e;
+      --google-yellow: #f9ab00;
+      --google-red: #d93025;
+      --google-purple: #9334e6;
+      
+      --md-sys-color-surface: #202124;
+      --md-sys-color-surface-dim: #171717;
+      --md-sys-color-surface-container: #2d2e31;
+      --md-sys-color-surface-container-high: #3c4043;
+      --md-sys-color-on-surface: #e8eaed;
+      --md-sys-color-on-surface-variant: #9aa0a6;
+      --md-sys-color-outline: #5f6368;
+      
+      --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Google Sans", "Helvetica Neue", Arial, sans-serif;
+      --font-mono: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--md-sys-color-surface-dim);
+      color: var(--md-sys-color-on-surface);
+      font-family: var(--font-family);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Top Google Material 3 Header Bar */
+    header {
+      background: var(--md-sys-color-surface-container);
+      border-bottom: 1px solid var(--md-sys-color-outline);
+      padding: 0.85rem 1.75rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .brand-container {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .google-dots {
+      display: flex;
+      gap: 4px;
+      align-items: center;
+    }
+    .dot-blue { width: 10px; height: 10px; border-radius: 50%; background-color: var(--google-blue); }
+    .dot-red { width: 10px; height: 10px; border-radius: 50%; background-color: var(--google-red); }
+    .dot-yellow { width: 10px; height: 10px; border-radius: 50%; background-color: var(--google-yellow); }
+    .dot-green { width: 10px; height: 10px; border-radius: 50%; background-color: var(--google-green); }
+
+    .brand-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #FFFFFF;
+      letter-spacing: -0.3px;
+    }
+    .brand-badge {
+      background: var(--google-purple);
+      color: #FFFFFF;
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 0.2rem 0.6rem;
+      border-radius: 12px;
+    }
+
+    .header-status {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .virality-dial {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--md-sys-color-surface-container-high);
+      padding: 0.35rem 0.8rem;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+    #headerViralityValue {
+      color: #81c995;
+      font-weight: 700;
+    }
+
+    /* Workspace Tabs Bar */
+    .tabs-bar {
+      background: var(--md-sys-color-surface);
+      border-bottom: 1px solid var(--md-sys-color-outline);
+      display: flex;
+      gap: 0.5rem;
+      padding: 0.5rem 1.75rem 0;
+      overflow-x: auto;
+    }
+    .tab-btn {
+      background: transparent;
+      border: none;
+      color: var(--md-sys-color-on-surface-variant);
+      font-family: inherit;
+      font-weight: 600;
+      font-size: 0.95rem;
+      padding: 0.85rem 1.25rem;
+      cursor: pointer;
+      border-bottom: 3px solid transparent;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+    .tab-btn:hover {
+      color: #FFFFFF;
+    }
+    .tab-btn.active {
+      color: #8ab4f8;
+      border-bottom-color: #8ab4f8;
+    }
+
+    /* Main Container */
+    main {
+      flex: 1;
+      padding: 1.75rem;
+      max-width: 1400px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .tab-content { display: none; }
+    .tab-content.active { display: block; animation: fadeIn 0.2s ease-out; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* Grid Layouts */
+    .two-col {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 1.75rem;
+    }
+    @media (max-width: 960px) {
+      .two-col { grid-template-columns: 1fr; }
+    }
+
+    /* Cards */
+    .card {
+      background: var(--md-sys-color-surface-container);
+      border: 1px solid var(--md-sys-color-outline);
+      border-radius: 16px;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+    .card-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #FFFFFF;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    /* Form Controls */
+    label {
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--md-sys-color-on-surface-variant);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 0.4rem;
+    }
+    textarea, input, select {
+      background: var(--md-sys-color-surface-container-high);
+      border: 1px solid var(--md-sys-color-outline);
+      color: #FFFFFF;
+      font-family: inherit;
+      font-size: 0.95rem;
+      border-radius: 8px;
+      padding: 0.75rem 1rem;
+      width: 100%;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    textarea:focus, input:focus, select:focus {
+      border-color: #8ab4f8;
+    }
+    textarea {
+      min-height: 160px;
+      resize: vertical;
+      line-height: 1.5;
+    }
+    .code-box {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      white-space: pre-wrap;
+      word-break: break-word;
+      background: #111111;
+      border: 1px solid #333333;
+      border-radius: 8px;
+      padding: 1rem;
+      color: #81c995;
+      max-height: 380px;
+      overflow-y: auto;
+    }
+
+    /* Buttons */
+    .btn-row {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+    .btn {
+      background: var(--google-blue);
+      color: #FFFFFF;
+      border: none;
+      padding: 0.7rem 1.4rem;
+      border-radius: 20px;
+      font-family: inherit;
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.2s;
+    }
+    .btn:hover {
+      background: var(--google-blue-hover);
+    }
+
+    /* Chips */
+    .chip-row {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+    .chip {
+      background: var(--md-sys-color-surface-dim);
+      border: 1px solid var(--md-sys-color-outline);
+      padding: 0.35rem 0.75rem;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      font-family: var(--font-mono);
+    }
+    .chip.good { color: #81c995; border-color: var(--google-green); }
+    .chip.warn { color: #fdd663; border-color: var(--google-yellow); }
+    .chip.bad { color: #f28b82; border-color: var(--google-red); }
+
+    /* Mockup Simulator Cards */
+    .sim-card {
+      background: var(--md-sys-color-surface-dim);
+      border: 1px solid var(--md-sys-color-outline);
+      border-radius: 12px;
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .sim-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: #8ab4f8;
+    }
+    .sim-content {
+      font-size: 0.95rem;
+      line-height: 1.5;
+      white-space: pre-wrap;
+    }
+
+    /* Progress Ring Bar */
+    .progress-bar-container {
+      width: 100%;
+      height: 8px;
+      background: #333333;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .progressRingBar {
+      height: 100%;
+      background: linear-gradient(90deg, var(--google-blue), var(--google-green));
+      width: 35%;
+      transition: width 0.3s ease;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand-container">
+      <div class="google-dots">
+        <div class="dot-blue"></div>
+        <div class="dot-red"></div>
+        <div class="dot-yellow"></div>
+        <div class="dot-green"></div>
+      </div>
+      <div class="brand-title">Google Omnipost Studio</div>
+      <div class="brand-badge">Material 3</div>
+    </div>
+    <div class="header-status">
+      <div class="virality-dial">
+        <span>⚡ Virality Readiness:</span>
+        <span id="headerViralityValue">88 / 100</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- 4 Interactive Workspace Tabs -->
+  <nav class="tabs-bar">
+    <button class="tab-btn active" onclick="switchTab('composer')">Multi-Platform Composer & Simulator</button>
+    <button class="tab-btn" onclick="switchTab('splitter')">Smart Thread Splitter</button>
+    <button class="tab-btn" onclick="switchTab('hooks')">Viral Hook Generator</button>
+    <button class="tab-btn" onclick="switchTab('agent')">AI Agent & MCP Hub</button>
+  </nav>
+
+  <main>
+    <!-- TAB 1: Multi-Platform Composer & Simulator -->
+    <div id="tab-composer" class="tab-content active">
+      <div class="two-col">
+        <div class="card">
+          <div class="card-title">Live Social Copywriter</div>
+          <div>
+            <label>Unicode Typography Style</label>
+            <select id="fmt-style" onchange="runFormat()">
+              <option value="normal">Normal (Default)</option>
+              <option value="bold">Bold (𝗕𝗼𝗹𝗱)</option>
+              <option value="italic">Italic (𝘐𝘵𝘢𝘭𝘪𝘤)</option>
+              <option value="bold_italic">Bold Italic (𝘽𝙤𝙡𝙙 𝙄𝙩𝙖𝙡𝙞𝙘)</option>
+              <option value="monospace">Monospace (𝙼𝚘𝚗𝚘𝚜𝚙𝚊𝚌𝚎)</option>
+              <option value="script">Script (𝒮𝒸𝓇𝒾𝓅𝓉)</option>
+              <option value="double_struck">Double Struck (𝔻𝕠𝕦𝕓𝕝𝕖)</option>
+              <option value="sans">Sans-Serif (𝖲𝖺𝗇𝗌)</option>
+              <option value="underline">Underline (U̲n̲d̲e̲r̲l̲i̲n̲e̲)</option>
+              <option value="strikethrough">Strikethrough (S̶t̶r̶i̶k̶e̶)</option>
+            </select>
+          </div>
+          <div>
+            <label>Master Post Content</label>
+            <textarea id="fmt-text" placeholder="Write or paste your social post..." oninput="runFormat()">Most developers think building AI tools requires 50 npm packages.
+
+They are completely wrong.
+
+Here is how we built a standalone MCP server in pure Python 3.13 stdlib:
+- Pure JSON-RPC 2.0 stdio loop
+- Zero external dependencies
+- Material 3 Studio UI
+
+What is your favorite stdlib trick? Drop it below 👇</textarea>
+          </div>
+          <div>
+            <label>Hashtags (Comma Separated)</label>
+            <input type="text" id="fmt-tags" placeholder="buildinpublic, python, mcp" oninput="runFormat()">
+          </div>
+          <div>
+            <label>Character Budget Meter</label>
+            <div class="progress-bar-container">
+              <div id="compProgressBar" class="progressRingBar"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">Platform Simulators</div>
+          <div class="chip-row">
+            <div id="fmt-chip-count" class="chip good">0 / 280 chars</div>
+            <div id="fmt-chip-words" class="chip">0 words</div>
+            <div id="fmt-chip-valid" class="chip good">Valid</div>
+          </div>
+
+          <!-- Platform Simulator Mockups -->
+          <div id="mockTwitter" class="sim-card">
+            <div class="sim-header">
+              <span>🐦 Twitter / X Mockup (280)</span>
+              <span id="tw-count" class="chip good">OK</span>
+            </div>
+            <div id="tw-content" class="sim-content"></div>
+          </div>
+
+          <div id="mockLinkedIn" class="sim-card">
+            <div class="sim-header">
+              <span>💼 LinkedIn Story Mockup (3000)</span>
+              <span class="chip good">OK</span>
+            </div>
+            <div id="li-content" class="sim-content"></div>
+          </div>
+
+          <div id="mockBlueSky" class="sim-card">
+            <div class="sim-header">
+              <span>🦋 BlueSky Mockup (300)</span>
+              <span class="chip good">OK</span>
+            </div>
+            <div id="bs-content" class="sim-content"></div>
+          </div>
+
+          <div id="mockThreads" class="sim-card">
+            <div class="sim-header">
+              <span>🧵 Meta Threads Mockup (500)</span>
+              <span class="chip good">OK</span>
+            </div>
+            <div id="th-content" class="sim-content"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 2: Smart Thread Splitter -->
+    <div id="tab-splitter" class="tab-content">
+      <div class="two-col">
+        <div class="card">
+          <div class="card-title">Long Copy Input</div>
+          <div>
+            <label>Character Limit</label>
+            <input type="number" id="split-limit" value="280">
+          </div>
+          <div>
+            <label>Numbering Format</label>
+            <select id="split-format">
+              <option value="fraction">(1/N) Standard</option>
+              <option value="fraction_thread">🧵 1/N Thread Header</option>
+              <option value="bracket">[1/N] Brackets</option>
+              <option value="counter">1. Ordered List</option>
+            </select>
+          </div>
+          <div>
+            <label>Full Article / Story</label>
+            <textarea id="split-text" style="min-height: 220px;">Why we rejected a 300MB node_modules stack for our social automation engine:
+
+Last month, we audited our team's social publishing workflow. We were juggling 4 different SaaS tabs, fighting character count truncations, and fixing broken line breaks on mobile.
+
+Instead of subscribing to another $99/mo tool, we engineered Omnipost:
+1/ 100% offline & local-first
+2/ Native Model Context Protocol (MCP) server for Claude & Cursor
+3/ Material 3 UI Studio served over local HTTP
+4/ Automatic Unicode typography styling
+
+Simplicity scales.</textarea>
+          </div>
+          <button class="btn" onclick="runSplit()">🧵 Split Into Thread</button>
+        </div>
+
+        <div class="card">
+          <div class="card-title">
+            <span>Generated Thread Sequence</span>
+            <span id="split-total-badge" class="chip">0 posts</span>
+          </div>
+          <div id="split-results" style="display:flex; flex-direction:column; gap:0.75rem;"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 3: Viral Hook Generator -->
+    <div id="tab-hooks" class="tab-content">
+      <div class="two-col">
+        <div class="card">
+          <div class="card-title">Viral Hook Formulas</div>
+          <div>
+            <label>Topic / Concept</label>
+            <input type="text" id="hook-topic" value="Python Automation Tools">
+          </div>
+          <div>
+            <label>Niche / Target Audience</label>
+            <input type="text" id="hook-niche" value="Software Engineers">
+          </div>
+          <div>
+            <label>Framework</label>
+            <select id="hook-framework">
+              <option value="all">All Proven Frameworks</option>
+              <option value="contrarian">Contrarian / Unpopular Opinion</option>
+              <option value="question">Curiosity Question</option>
+              <option value="number_list">Numbered List / Micro-habits</option>
+              <option value="curiosity_gap">Curiosity Gap</option>
+              <option value="transformation">Zero to Mastery Transformation</option>
+              <option value="how_to">How-To Masterclass</option>
+              <option value="negative_bias">Costly Mistakes / Negative Bias</option>
+              <option value="secret_mistake">Secret Blueprint</option>
+              <option value="story_lead">Behind-the-Scenes Story</option>
+            </select>
+          </div>
+          <button class="btn" onclick="runHooks()">⚡ Generate 10 Hooks</button>
+        </div>
+
+        <div class="card">
+          <div class="card-title">Generated Viral Hooks</div>
+          <div id="hooks-results" style="display:flex; flex-direction:column; gap:0.75rem;"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 4: AI Agent & MCP Hub -->
+    <div id="tab-agent" class="tab-content">
+      <div class="card">
+        <div class="card-title">Model Context Protocol (MCP) Client Configurations</div>
+        <p style="color: var(--md-sys-color-on-surface-variant); font-size: 0.9rem;">
+          Connect your local Omnipost MCP server directly to Claude Desktop, Cursor, Cline, or Zed to give your AI assistants native social copywriting, thread splitting, and campaign tools.
+        </p>
+        <div class="two-col">
+          <div>
+            <label>Claude Desktop (~/.config/Claude/claude_desktop_config.json)</label>
+            <div id="mcp-claude" class="code-box">Loading...</div>
+          </div>
+          <div>
+            <label>Cursor (.cursor/mcp.json)</label>
+            <div id="mcp-cursor" class="code-box">Loading...</div>
+          </div>
+        </div>
+        <div class="two-col" style="margin-top: 1rem;">
+          <div>
+            <label>Cline (cline_mcp_settings.json)</label>
+            <div id="mcp-cline" class="code-box">Loading...</div>
+          </div>
+          <div>
+            <label>Zed (settings.json)</label>
+            <div id="mcp-zed" class="code-box">Loading...</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+      event.target.classList.add('active');
+      document.getElementById('tab-' + tabId).classList.add('active');
+      if (tabId === 'agent') loadMcpConfig();
+    }
+
+    async function runFormat() {
+      const text = document.getElementById('fmt-text').value;
+      const style = document.getElementById('fmt-style').value;
+      const tagsStr = document.getElementById('fmt-tags').value;
+      const hashtags = tagsStr ? tagsStr.split(',').map(s => s.trim()).filter(Boolean) : [];
+
+      try {
+        const res = await fetch('/api/format', {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({text, platform: 'twitter', style, hashtags})
+        });
+        const data = await res.json();
+        
+        document.getElementById('tw-content').innerText = data.text || '';
+        document.getElementById('li-content').innerText = data.text || '';
+        document.getElementById('bs-content').innerText = data.text || '';
+        document.getElementById('th-content').innerText = data.text || '';
+
+        const countChip = document.getElementById('fmt-chip-count');
+        countChip.innerText = `${data.char_count} / 280 chars`;
+        countChip.className = 'chip ' + (data.is_valid ? 'good' : 'bad');
+
+        document.getElementById('fmt-chip-words').innerText = `${data.word_count} words`;
+        
+        const validChip = document.getElementById('fmt-chip-valid');
+        validChip.innerText = data.is_valid ? '✅ Valid' : `⚠️ Exceeds by ${-data.remaining_chars}`;
+        validChip.className = 'chip ' + (data.is_valid ? 'good' : 'bad');
+
+        const pct = Math.min(100, (data.char_count / 280) * 100);
+        document.getElementById('compProgressBar').style.width = pct + '%';
+      } catch (e) {
+        console.error(e);
+      }
+    }
+
+    async function runSplit() {
+      const text = document.getElementById('split-text').value;
+      const limit = parseInt(document.getElementById('split-limit').value) || 280;
+      const numbering_format = document.getElementById('split-format').value;
+
+      try {
+        const res = await fetch('/api/split', {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({text, limit, numbering_format, numbering: true})
+        });
+        const data = await res.json();
+        document.getElementById('split-total-badge').innerText = `${data.total_posts} posts`;
+        const container = document.getElementById('split-results');
+        container.innerHTML = '';
+        data.posts.forEach((p, idx) => {
+          const div = document.createElement('div');
+          div.className = 'sim-card';
+          div.innerHTML = `<div class="sim-header"><span>Post ${idx+1}/${data.total_posts}</span><span class="chip good">${p.char_count} chars</span></div><div class="sim-content">${p.content}</div>`;
+          container.appendChild(div);
+        });
+      } catch (e) {
+        console.error(e);
+      }
+    }
+
+    async function runHooks() {
+      const topic = document.getElementById('hook-topic').value;
+      const niche = document.getElementById('hook-niche').value;
+      const framework = document.getElementById('hook-framework').value;
+
+      try {
+        const res = await fetch('/api/hooks', {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({topic, niche, framework, count: 10})
+        });
+        const data = await res.json();
+        const container = document.getElementById('hooks-results');
+        container.innerHTML = '';
+        data.hooks.forEach(h => {
+          const div = document.createElement('div');
+          div.className = 'sim-card';
+          div.innerHTML = `<div style="font-size:0.75rem; text-transform:uppercase; color:#8ab4f8; font-weight:700;">${h.framework}</div><div style="font-size:0.95rem; margin-top:0.3rem;">${h.hook}</div>`;
+          container.appendChild(div);
+        });
+      } catch (e) {
+        console.error(e);
+      }
+    }
+
+    async function loadMcpConfig() {
+      try {
+        const res = await fetch('/api/mcp/config');
+        const data = await res.json();
+        document.getElementById('mcp-claude').innerText = JSON.stringify(data.claude_desktop, null, 2);
+        document.getElementById('mcp-cursor').innerText = JSON.stringify(data.cursor, null, 2);
+        document.getElementById('mcp-cline').innerText = JSON.stringify(data.cline, null, 2);
+        document.getElementById('mcp-zed').innerText = JSON.stringify(data.zed, null, 2);
+      } catch (e) {
+        console.error(e);
+      }
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      runFormat();
+      runSplit();
+      runHooks();
+    });
+  </script>
+</body>
+</html>

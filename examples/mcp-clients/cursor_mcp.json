@@ -1,0 +1,15 @@
+{
+  "mcpServers": {
+    "omnipost": {
+      "command": "python3",
+      "args": [
+        "-m",
+        "omnipost_social_engine.mcp_server"
+      ],
+      "env": {
+        "PYTHONPATH": "${workspaceFolder}/src",
+        "OMNIPOST_LOG_LEVEL": "DEBUG"
+      }
+    }
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "mcpServers": {
+    "omnipost-social-engine": {
+      "command": "python",
+      "args": [
+        "-m",
+        "omnipost_social_engine.mcp_server"
+      ],
+      "env": {
+        "PYTHONPATH": "src",
+        "OMNIPOST_ENV": "development",
+        "OMNIPOST_LOG_LEVEL": "INFO",
+        "OMNIPOST_DEFAULT_TIMEZONE": "UTC"
+      }
+    }
+  }
+}

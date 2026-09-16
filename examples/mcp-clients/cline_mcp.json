@@ -1,0 +1,23 @@
+{
+  "mcpServers": {
+    "omnipost-engine": {
+      "command": "python",
+      "args": [
+        "-m",
+        "omnipost_social_engine.mcp_server"
+      ],
+      "env": {
+        "PYTHONPATH": "src",
+        "OMNIPOST_ENABLE_DRY_RUN": "true"
+      },
+      "autoApprove": [
+        "score_virality",
+        "generate_thread",
+        "convert_platform",
+        "optimize_hook",
+        "validate_limits"
+      ],
+      "disabled": false
+    }
+  }
+}
