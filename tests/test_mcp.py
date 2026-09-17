@@ -165,7 +165,12 @@ class TestMCPServerProtocol:
         assert "omni_export_campaign" in tool_names
         assert "omni_get_diagnostics" in tool_names
         assert "omni_audit_accessibility" in tool_names
-        assert len(tools) == 7
+        assert "omni_build_utm_url" in tool_names
+        assert "omni_sanitize_url" in tool_names
+        assert "omni_generate_campaign_links" in tool_names
+        assert "omni_tag_post_links" in tool_names
+        assert "omni_vanity_redirect" in tool_names
+        assert len(tools) == 12
 
     def test_tool_call_audit_accessibility(self, server):
         req = json.dumps({

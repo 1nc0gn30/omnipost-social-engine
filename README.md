@@ -45,6 +45,11 @@ Equipped with a **Material 3 influenced Web Studio** (`public/index.html`, desig
 * **🛡️ Deterministic Platform Limits Engine**:
   * Precise character counting (Twitter weighted glyphs + 23-char `t.co` URLs, ATProto UTF-8 byte facets).
   * Leaky-bucket rate limit queues with exponential backoff.
+* **🔗 UTM Attribution & Privacy Cleanser (`utm_builder`)**:
+  * Strips invasive surveillance/ad-click trackers (`fbclid`, `gclid`, `msclkid`, `twclid`, `igshid`, `ttclid`, etc.).
+  * Generates synchronized multi-platform campaign links with platform presets (Twitter, LinkedIn, Bluesky, Threads, Mastodon).
+  * Auto-tags raw URLs within social post bodies.
+  * Generates zero-dependency static HTML vanity redirect landing pages with Open Graph & Twitter Card preview tags.
 
 ---
 

@@ -17,6 +17,14 @@ from typing import Any, Callable, Dict, List, Optional, Tuple, Union
 
 from .campaign_exporter import PLATFORM_LIMITS, CampaignExporter
 from .accessibility_synthesizer import evaluate_accessibility_suite
+from .utm_builder import (
+    build_utm_url,
+    build_platform_utm_url,
+    sanitize_tracking_params,
+    generate_campaign_links,
+    tag_post_links,
+    generate_vanity_redirect_html,
+)
 
 
 # Unicode Typography Mappings
@@ -850,6 +858,81 @@ class MCPServer:
                 },
                 "handler": self._handle_audit_accessibility,
             },
+            "omni_build_utm_url": {
+                "description": "Build a clean campaign tracking URL with source, medium, campaign, term, and content parameters.",
+                "inputSchema": {
+                    "type": "object",
+                    "properties": {
+                        "base_url": {"type": "string", "description": "Destination base URL."},
+                        "source": {"type": "string", "description": "Campaign source (e.g. twitter, linkedin, newsletter)."},
+                        "medium": {"type": "string", "description": "Campaign medium (e.g. social_post, email, cpc)."},
+                        "campaign": {"type": "string", "description": "Campaign name."},
+                        "term": {"type": "string", "description": "Optional search/ad keyword."},
+                        "content": {"type": "string", "description": "Optional content variation identifier."},
+                    },
+                    "required": ["base_url", "source", "medium", "campaign"],
+                },
+                "handler": self._handle_build_utm_url,
+            },
+            "omni_sanitize_url": {
+                "description": "Strip surveillance and ad network click IDs (fbclid, gclid, msclkid, twclid, etc.) from a URL.",
+                "inputSchema": {
+                    "type": "object",
+                    "properties": {
+                        "url": {"type": "string", "description": "Target URL to cleanse."},
+                        "keep_utm": {"type": "boolean", "description": "Whether to retain clean marketing UTM tags.", "default": True},
+                    },
+                    "required": ["url"],
+                },
+                "handler": self._handle_sanitize_url,
+            },
+            "omni_generate_campaign_links": {
+                "description": "Generate synchronized UTM campaign tracking links across multiple social platforms simultaneously.",
+                "inputSchema": {
+                    "type": "object",
+                    "properties": {
+                        "base_url": {"type": "string", "description": "Base target URL."},
+                        "campaign": {"type": "string", "description": "Campaign name."},
+                        "platforms": {
+                            "type": "array",
+                            "items": {"type": "string"},
+                            "description": "Target platforms (e.g. twitter, linkedin, bluesky, threads, mastodon, newsletter).",
+                        },
+                        "content": {"type": "string", "description": "Optional content identifier."},
+                    },
+                    "required": ["base_url", "campaign"],
+                },
+                "handler": self._handle_generate_campaign_links,
+            },
+            "omni_tag_post_links": {
+                "description": "Auto-detect URLs in social post body and replace them with platform-specific campaign UTM URLs.",
+                "inputSchema": {
+                    "type": "object",
+                    "properties": {
+                        "text": {"type": "string", "description": "Post text containing URLs."},
+                        "platform": {"type": "string", "description": "Target platform (twitter, linkedin, etc.)."},
+                        "campaign": {"type": "string", "description": "Campaign identifier."},
+                        "content": {"type": "string", "description": "Optional content variant identifier."},
+                    },
+                    "required": ["text", "platform", "campaign"],
+                },
+                "handler": self._handle_tag_post_links,
+            },
+            "omni_vanity_redirect": {
+                "description": "Generate a standalone zero-dependency HTML vanity redirect page with Open Graph and Twitter Card tags.",
+                "inputSchema": {
+                    "type": "object",
+                    "properties": {
+                        "target_url": {"type": "string", "description": "Destination redirect URL."},
+                        "title": {"type": "string", "description": "Page title for browser tab and OG preview."},
+                        "og_description": {"type": "string", "description": "OG card description preview text."},
+                        "og_image": {"type": "string", "description": "OG image URL for rich link preview card."},
+                        "delay_ms": {"type": "integer", "description": "Client redirect delay in milliseconds.", "default": 0},
+                    },
+                    "required": ["target_url", "title"],
+                },
+                "handler": self._handle_vanity_redirect,
+            },
         }
 
     # Tool Handlers
@@ -909,6 +992,72 @@ class MCPServer:
         platform = args.get("platform", "twitter")
         res = evaluate_accessibility_suite(alt_text=alt_text, post_text=post_text, platform=platform)
         return json.dumps(res, indent=2, ensure_ascii=False)
+
+    def _handle_build_utm_url(self, args: Dict[str, Any]) -> str:
+        base_url = args.get("base_url", "")
+        source = args.get("source", "")
+        medium = args.get("medium", "")
+        campaign = args.get("campaign", "")
+        term = args.get("term")
+        content = args.get("content")
+        final_url = build_utm_url(base_url, source=source, medium=medium, campaign=campaign, term=term, content=content)
+        return json.dumps({
+            "base_url": base_url,
+            "source": source,
+            "medium": medium,
+            "campaign": campaign,
+            "final_url": final_url,
+        }, indent=2, ensure_ascii=False)
+
+    def _handle_sanitize_url(self, args: Dict[str, Any]) -> str:
+        url = args.get("url", "")
+        keep_utm = args.get("keep_utm", True)
+        cleansed = sanitize_tracking_params(url, keep_utm=keep_utm)
+        return json.dumps({
+            "original_url": url,
+            "cleansed_url": cleansed,
+            "stripped": url != cleansed,
+        }, indent=2, ensure_ascii=False)
+
+    def _handle_generate_campaign_links(self, args: Dict[str, Any]) -> str:
+        base_url = args.get("base_url", "")
+        campaign = args.get("campaign", "")
+        platforms = args.get("platforms")
+        content = args.get("content")
+        links = generate_campaign_links(base_url, campaign=campaign, platforms=platforms, content=content)
+        return json.dumps({
+            "base_url": base_url,
+            "campaign": campaign,
+            "links": links,
+        }, indent=2, ensure_ascii=False)
+
+    def _handle_tag_post_links(self, args: Dict[str, Any]) -> str:
+        text = args.get("text", "")
+        platform = args.get("platform", "twitter")
+        campaign = args.get("campaign", "")
+        content = args.get("content")
+        tagged = tag_post_links(text, platform=platform, campaign=campaign, content=content)
+        return json.dumps({
+            "platform": platform,
+            "campaign": campaign,
+            "original_text": text,
+            "tagged_text": tagged,
+        }, indent=2, ensure_ascii=False)
+
+    def _handle_vanity_redirect(self, args: Dict[str, Any]) -> str:
+        target_url = args.get("target_url", "")
+        title = args.get("title", "Redirecting...")
+        og_desc = args.get("og_description")
+        og_image = args.get("og_image")
+        delay_ms = args.get("delay_ms", 0)
+        html_code = generate_vanity_redirect_html(
+            target_url=target_url,
+            title=title,
+            og_description=og_desc,
+            og_image=og_image,
+            delay_ms=delay_ms,
+        )
+        return html_code
 
     # JSON-RPC Message Processing
     def process_message(self, message_str: str) -> Optional[str]:

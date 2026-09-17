@@ -26,6 +26,14 @@ from .mcp_server import (
 )
 from .ui_server import run_server
 from .accessibility_synthesizer import evaluate_accessibility_suite
+from .utm_builder import (
+    build_utm_url,
+    build_platform_utm_url,
+    sanitize_tracking_params,
+    generate_campaign_links,
+    tag_post_links,
+    generate_vanity_redirect_html,
+)
 
 
 # Terminal Color Helpers
@@ -351,6 +359,113 @@ def cmd_platform(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_utm(args: argparse.Namespace) -> int:
+    """Build, sanitize, or generate UTM campaign URLs and vanity redirects."""
+    url = getattr(args, "url", None)
+    if args.sanitize:
+        if not url:
+            print(colorize("Error: --url is required for --sanitize", Colors.RED), file=sys.stderr)
+            return 1
+        clean_url = sanitize_tracking_params(url, keep_utm=not args.strip_all)
+        if args.json:
+            print(json.dumps({"original_url": url, "cleansed_url": clean_url, "stripped": url != clean_url}, indent=2))
+        else:
+            print(clean_url)
+        return 0
+
+    if args.campaign_links:
+        if not url or not args.campaign:
+            print(colorize("Error: --url and --campaign are required for --campaign-links", Colors.RED), file=sys.stderr)
+            return 1
+        platforms = args.platforms.split(",") if getattr(args, "platforms", None) else None
+        links = generate_campaign_links(url, campaign=args.campaign, platforms=platforms, content=args.content)
+        if args.json:
+            print(json.dumps({"base_url": url, "campaign": args.campaign, "links": links}, indent=2))
+        else:
+            print(f"{Colors.BOLD}Campaign Links ({args.campaign}):{Colors.RESET}")
+            for p, u in links.items():
+                print(f"  • {p:<12}: {u}")
+        return 0
+
+    if args.tag_post:
+        post_content = read_text_or_file(args.tag_post)
+        if not args.campaign:
+            print(colorize("Error: --campaign is required for --tag-post", Colors.RED), file=sys.stderr)
+            return 1
+        platform = args.platform or "twitter"
+        tagged = tag_post_links(post_content, platform=platform, campaign=args.campaign, content=args.content)
+        if args.out:
+            with open(args.out, "w", encoding="utf-8") as f:
+                f.write(tagged)
+            print(f"Tagged post saved to {args.out}")
+        else:
+            print(tagged)
+        return 0
+
+    if args.vanity:
+        if not url:
+            print(colorize("Error: --url is required for --vanity", Colors.RED), file=sys.stderr)
+            return 1
+        title = args.title or "Redirecting..."
+        html_code = generate_vanity_redirect_html(
+            target_url=url,
+            title=title,
+            og_description=args.description,
+            og_image=args.image,
+            delay_ms=args.delay or 0,
+        )
+        if args.out:
+            with open(args.out, "w", encoding="utf-8") as f:
+                f.write(html_code)
+            print(f"Vanity redirect page saved to {args.out}")
+        else:
+            print(html_code)
+        return 0
+
+    # Default: build single UTM URL
+    if not url:
+        print(colorize("Error: --url is required to build a UTM link", Colors.RED), file=sys.stderr)
+        return 1
+
+    campaign = args.campaign or "launch"
+    if args.platform:
+        final_url = build_platform_utm_url(
+            base_url=url,
+            platform=args.platform,
+            campaign=campaign,
+            content=args.content,
+            term=args.term,
+        )
+    else:
+        source = args.source or "social"
+        medium = args.medium or "post"
+        final_url = build_utm_url(
+            base_url=url,
+            source=source,
+            medium=medium,
+            campaign=campaign,
+            content=args.content,
+            term=args.term,
+        )
+
+    if args.json:
+        res = {
+            "base_url": url,
+            "campaign": campaign,
+            "final_url": final_url,
+        }
+        if args.platform:
+            res["platform"] = args.platform
+        print(json.dumps(res, indent=2))
+    elif args.out:
+        with open(args.out, "w", encoding="utf-8") as f:
+            f.write(final_url + "\n")
+        print(f"Tracked URL saved to {args.out}")
+    else:
+        print(final_url)
+    return 0
+
+
 def cmd_test(args: argparse.Namespace) -> int:
     """Run test suite."""
     import unittest
@@ -495,6 +610,29 @@ def build_parser() -> argparse.ArgumentParser:
     p_diag_alias.add_argument("--platform", "-p", help="Filter by specific platform")
     p_diag_alias.add_argument("--json", action="store_true", help="Output raw JSON")
     p_diag_alias.set_defaults(func=cmd_platform)
+
+    # utm
+    p_utm = subparsers.add_parser("utm", help="Build, sanitize, or generate UTM campaign URLs and vanity redirects")
+    p_utm.add_argument("--url", "-u", help="Destination base URL")
+    p_utm.add_argument("--campaign", "-c", default="launch", help="Campaign identifier (e.g. spring_sale, launch)")
+    p_utm.add_argument("--source", "-s", help="UTM source (e.g. twitter, linkedin, newsletter)")
+    p_utm.add_argument("--medium", "-m", help="UTM medium (e.g. social_post, email, banner)")
+    p_utm.add_argument("--term", help="UTM term / keyword")
+    p_utm.add_argument("--content", help="UTM content variation")
+    p_utm.add_argument("--platform", "-p", help="Target platform (auto-populates source and medium)")
+    p_utm.add_argument("--sanitize", action="store_true", help="Strip invasive surveillance tracking IDs from --url")
+    p_utm.add_argument("--strip-all", action="store_true", help="Strip both ad network IDs and UTM tags when sanitizing")
+    p_utm.add_argument("--campaign-links", action="store_true", help="Generate tracked URLs for all platforms")
+    p_utm.add_argument("--platforms", help="Comma-separated platforms for --campaign-links")
+    p_utm.add_argument("--tag-post", help="File or text string to auto-tag bare URLs within post body")
+    p_utm.add_argument("--vanity", action="store_true", help="Generate standalone HTML vanity redirect landing page")
+    p_utm.add_argument("--title", help="Title for vanity redirect page")
+    p_utm.add_argument("--description", help="OG description for vanity page")
+    p_utm.add_argument("--image", help="OG image URL for vanity page")
+    p_utm.add_argument("--delay", type=int, default=0, help="Delay in ms before redirecting")
+    p_utm.add_argument("--out", "-o", help="Write output to file")
+    p_utm.add_argument("--json", action="store_true", help="Output raw JSON")
+    p_utm.set_defaults(func=cmd_utm)
 
     # test
     p_test = subparsers.add_parser("test", help="Run test suite")

@@ -198,3 +198,93 @@ class TestStudioServerEndpoints:
             data = json.loads(resp.read().decode("utf-8"))
             assert data["cleaned_alt_text"] == "Mars rover landing."
             assert data["platform"] == "bluesky"
+
+    def test_post_api_utm_build(self, running_server):
+        payload = json.dumps({
+            "base_url": "https://myapp.com/features",
+            "source": "twitter",
+            "medium": "social",
+            "campaign": "v4_launch",
+        }).encode("utf-8")
+        req = urllib.request.Request(
+            f"{running_server.url}/api/utm/build",
+            data=payload,
+            headers={"Content-Type": "application/json"},
+            method="POST",
+        )
+        with urllib.request.urlopen(req) as resp:
+            assert resp.status == 200
+            data = json.loads(resp.read().decode("utf-8"))
+            assert "utm_source=twitter" in data["final_url"]
+            assert "utm_campaign=v4_launch" in data["final_url"]
+
+    def test_post_api_utm_sanitize(self, running_server):
+        payload = json.dumps({
+            "url": "https://myapp.com?fbclid=xyz&utm_source=newsletter",
+            "keep_utm": True,
+        }).encode("utf-8")
+        req = urllib.request.Request(
+            f"{running_server.url}/api/utm/sanitize",
+            data=payload,
+            headers={"Content-Type": "application/json"},
+            method="POST",
+        )
+        with urllib.request.urlopen(req) as resp:
+            assert resp.status == 200
+            data = json.loads(resp.read().decode("utf-8"))
+            assert data["stripped"] is True
+            assert "fbclid" not in data["cleansed_url"]
+            assert "utm_source=newsletter" in data["cleansed_url"]
+
+    def test_post_api_utm_campaign_links(self, running_server):
+        payload = json.dumps({
+            "base_url": "https://myapp.com",
+            "campaign": "promo",
+            "platforms": ["twitter", "linkedin"],
+        }).encode("utf-8")
+        req = urllib.request.Request(
+            f"{running_server.url}/api/utm/campaign-links",
+            data=payload,
+            headers={"Content-Type": "application/json"},
+            method="POST",
+        )
+        with urllib.request.urlopen(req) as resp:
+            assert resp.status == 200
+            data = json.loads(resp.read().decode("utf-8"))
+            assert "twitter" in data["links"]
+            assert "linkedin" in data["links"]
+
+    def test_post_api_utm_tag_post(self, running_server):
+        payload = json.dumps({
+            "text": "Check out https://myapp.com now!",
+            "platform": "twitter",
+            "campaign": "launch",
+        }).encode("utf-8")
+        req = urllib.request.Request(
+            f"{running_server.url}/api/utm/tag-post",
+            data=payload,
+            headers={"Content-Type": "application/json"},
+            method="POST",
+        )
+        with urllib.request.urlopen(req) as resp:
+            assert resp.status == 200
+            data = json.loads(resp.read().decode("utf-8"))
+            assert "utm_source=twitter" in data["tagged_text"]
+
+    def test_post_api_utm_vanity(self, running_server):
+        payload = json.dumps({
+            "target_url": "https://myapp.com",
+            "title": "Welcome Page",
+        }).encode("utf-8")
+        req = urllib.request.Request(
+            f"{running_server.url}/api/utm/vanity",
+            data=payload,
+            headers={"Content-Type": "application/json"},
+            method="POST",
+        )
+        with urllib.request.urlopen(req) as resp:
+            assert resp.status == 200
+            data = json.loads(resp.read().decode("utf-8"))
+            assert "<!DOCTYPE html>" in data["html"]
+            assert "Welcome Page" in data["html"]
+

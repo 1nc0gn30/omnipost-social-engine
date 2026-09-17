@@ -26,6 +26,10 @@ keywords = [
     "buffer",
     "hootsuite",
     "typefully",
+    "utm-builder",
+    "link-tracking",
+    "privacy-cleanser",
+    "url-sanitizer",
     "zero-dependencies"
 ]
 classifiers = [

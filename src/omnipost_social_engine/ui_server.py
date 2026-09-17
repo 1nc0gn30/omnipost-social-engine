@@ -27,6 +27,14 @@ from .mcp_server import (
     split_thread_engine,
 )
 from .accessibility_synthesizer import evaluate_accessibility_suite
+from .utm_builder import (
+    build_utm_url,
+    build_platform_utm_url,
+    sanitize_tracking_params,
+    generate_campaign_links,
+    tag_post_links,
+    generate_vanity_redirect_html,
+)
 
 
 def get_public_dir() -> str:
@@ -940,6 +948,86 @@ class OmnipostRequestHandler(http.server.BaseHTTPRequestHandler):
             platform = payload.get("platform", "twitter")
             res = evaluate_accessibility_suite(alt_text=alt_text, post_text=post_text, platform=platform)
             self._send_json(res)
+
+        elif path == "/api/utm/build":
+            base_url = payload.get("base_url", payload.get("url", ""))
+            campaign = payload.get("campaign", "launch")
+            platform = payload.get("platform")
+            if platform:
+                final_url = build_platform_utm_url(
+                    base_url=base_url,
+                    platform=platform,
+                    campaign=campaign,
+                    content=payload.get("content"),
+                    term=payload.get("term"),
+                )
+            else:
+                source = payload.get("source", "social")
+                medium = payload.get("medium", "post")
+                final_url = build_utm_url(
+                    base_url=base_url,
+                    source=source,
+                    medium=medium,
+                    campaign=campaign,
+                    content=payload.get("content"),
+                    term=payload.get("term"),
+                )
+            self._send_json({
+                "base_url": base_url,
+                "campaign": campaign,
+                "final_url": final_url,
+            })
+
+        elif path == "/api/utm/sanitize":
+            url = payload.get("url", "")
+            keep_utm = payload.get("keep_utm", True)
+            cleansed = sanitize_tracking_params(url, keep_utm=keep_utm)
+            self._send_json({
+                "original_url": url,
+                "cleansed_url": cleansed,
+                "stripped": url != cleansed,
+            })
+
+        elif path == "/api/utm/campaign-links":
+            base_url = payload.get("base_url", payload.get("url", ""))
+            campaign = payload.get("campaign", "launch")
+            platforms = payload.get("platforms")
+            content = payload.get("content")
+            links = generate_campaign_links(base_url, campaign=campaign, platforms=platforms, content=content)
+            self._send_json({
+                "base_url": base_url,
+                "campaign": campaign,
+                "links": links,
+            })
+
+        elif path == "/api/utm/tag-post":
+            text = payload.get("text", "")
+            platform = payload.get("platform", "twitter")
+            campaign = payload.get("campaign", "launch")
+            content = payload.get("content")
+            tagged = tag_post_links(text, platform=platform, campaign=campaign, content=content)
+            self._send_json({
+                "platform": platform,
+                "campaign": campaign,
+                "original_text": text,
+                "tagged_text": tagged,
+            })
+
+        elif path == "/api/utm/vanity":
+            target_url = payload.get("target_url", payload.get("url", ""))
+            title = payload.get("title", "Redirecting...")
+            html_code = generate_vanity_redirect_html(
+                target_url=target_url,
+                title=title,
+                og_description=payload.get("og_description", payload.get("description")),
+                og_image=payload.get("og_image", payload.get("image")),
+                delay_ms=payload.get("delay_ms", 0),
+            )
+            self._send_json({
+                "target_url": target_url,
+                "title": title,
+                "html": html_code,
+            })
 
         else:
             self._send_error_json(f"Unknown POST endpoint: {path}", 404)

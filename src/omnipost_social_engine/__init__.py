@@ -41,6 +41,17 @@ from .accessibility_synthesizer import (
     AltTextSynthesizer,
     evaluate_accessibility_suite,
 )
+from .utm_builder import (
+    UTMParameters,
+    build_utm_url,
+    build_platform_utm_url,
+    sanitize_tracking_params,
+    generate_campaign_links,
+    tag_post_links,
+    generate_vanity_redirect_html,
+    PLATFORM_UTM_DEFAULTS,
+    TRACKING_PARAMS_TO_STRIP,
+)
 
 # Granular engines if available
 try:
@@ -101,4 +112,13 @@ __all__ = [
     "ContentWarningSuggestion",
     "AltTextSynthesizer",
     "evaluate_accessibility_suite",
+    "UTMParameters",
+    "build_utm_url",
+    "build_platform_utm_url",
+    "sanitize_tracking_params",
+    "generate_campaign_links",
+    "tag_post_links",
+    "generate_vanity_redirect_html",
+    "PLATFORM_UTM_DEFAULTS",
+    "TRACKING_PARAMS_TO_STRIP",
 ]
