@@ -5,7 +5,7 @@
 [![CI Matrix](https://img.shields.io/github/actions/workflow/status/omnipost/omnipost-social-engine/ci.yml?branch=main&label=CI%20Matrix&logo=github)](https://github.com/omnipost/omnipost-social-engine/actions)
 [![Python Version](https://img.shields.io/badge/python-3.9%20%7C%203.10%20%7C%203.11%20%7C%203.12%20%7C%203.13-blue?logo=python)](https://pypi.org/project/omnipost-social-engine/)
 [![MCP Compliant](https://img.shields.io/badge/MCP-Native%20Server-9334e6?logo=anthropic)](https://modelcontextprotocol.io/)
-[![Google Material 3](https://img.shields.io/badge/UI-Google%20Material%203-1a73e8?logo=google)](./public/index.html)
+[![Material 3 Design](https://img.shields.io/badge/UI-Material%203%20Design-1a73e8)](./public/index.html)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 
 **The unified, type-safe multi-platform social media orchestration framework for Python & AI Agents.**
@@ -20,13 +20,14 @@
 
 **Omnipost Social Engine** eliminates the friction of managing cross-platform developer advocacy, launch campaigns, and technical content syndication. Write your post once, simulate how it looks across **Twitter / X**, **LinkedIn**, **BlueSky**, **Threads**, and **Mastodon**, optimize opening hooks with psychological heuristics, and broadcast safely with async leaky-bucket rate limiters.
 
-Equipped with a **Google Material 3 Light Mode Web Studio** (`public/index.html`) and a native **Model Context Protocol (MCP)** server, Omnipost can be operated by human creators or fully autonomous AI coding assistants (Claude Desktop, Cursor, Cline, Zed).
+Equipped with a **Material 3 influenced Web Studio** (`public/index.html`, design influenced by Google Material 3 tokens) and a native **Model Context Protocol (MCP)** server, Omnipost can be operated by human creators or fully autonomous AI coding assistants (Claude Desktop, Cursor, Cline, Zed).
 
 ---
 
 ## ✨ Key Features
 
-* **🎨 Google Material 3 Studio (`public/index.html`)**:
+* **🎨 Material 3 Omnipost Studio (`public/index.html`)**:
+  * Design influenced by Google Material 3 tokens.
   * 0 external font/cookie tracking scripts, fast, private, offline-first.
   * Live circular character counter progress ring with platform-aware limits.
   * Algorithmic Virality Score meter (0–100) with diagnostic breakdown.
@@ -52,7 +53,7 @@ Equipped with a **Google Material 3 Light Mode Web Studio** (`public/index.html`
 ```mermaid
 flowchart TD
     subgraph Input["Input Channels"]
-        Studio["🎨 Google Material 3 Studio<br/>(public/index.html)"]
+        Studio["🎨 Material 3 Omnipost Studio<br/>(public/index.html)"]
         CLI["💻 Omnipost CLI"]
         MCP["🤖 AI Agent MCP Clients<br/>(Claude, Cursor, Cline, Zed)"]
         PyAPI["🐍 Python SDK / API"]
@@ -101,7 +102,7 @@ cd omnipost-social-engine
 pip install -e .
 ```
 
-### 2. Launch Google Omnipost Web Studio
+### 2. Launch Omnipost Web Studio
 
 Open `public/index.html` directly in your browser (no Node.js build step or local server required):
 
@@ -218,7 +219,7 @@ omnipost-social-engine/
 │       ├── zed_settings.json
 │       └── README.md
 ├── public/
-│   └── index.html              # Google Material 3 Studio single-page application
+│   └── index.html              # Material 3 Omnipost Studio single-page application (Google M3 influenced)
 ├── src/
 │   └── omnipost_social_engine/ # Core engine Python package
 └── tests/

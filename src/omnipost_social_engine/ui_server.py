@@ -1,6 +1,6 @@
 """
 Omnipost Social Engine - Studio UI Server
-Zero-dependency ThreadingHTTPServer serving Google Material 3 Studio UI
+Zero-dependency ThreadingHTTPServer serving Material 3 Omnipost Studio UI (design influenced by Google Material tokens)
 and REST APIs (/api/health, /api/format, /api/split, /api/hooks, /api/analyze, /api/export, /api/mcp/config).
 """
 
