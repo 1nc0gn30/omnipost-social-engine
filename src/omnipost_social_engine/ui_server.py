@@ -30,19 +30,18 @@ from .mcp_server import (
 
 def get_public_dir() -> str:
     """Find the public static assets directory."""
+    # Check relative to module path (repository root)
+    pkg_dir = os.path.dirname(os.path.abspath(__file__))
+    repo_public = os.path.abspath(os.path.join(pkg_dir, "..", "..", "public"))
+    if os.path.isdir(repo_public) and os.path.isfile(os.path.join(repo_public, "index.html")):
+        return repo_public
+
     # Check current working directory
     cwd_public = os.path.join(os.getcwd(), "public")
     if os.path.isdir(cwd_public):
         return cwd_public
 
-    # Check relative to module path
-    pkg_dir = os.path.dirname(os.path.abspath(__file__))
-    repo_public = os.path.abspath(os.path.join(pkg_dir, "..", "..", "public"))
-    if os.path.isdir(repo_public):
-        return repo_public
-
-    # Fallback to pkg internal or cwd
-    return cwd_public
+    return repo_public
 
 
 EMBEDDED_STUDIO_HTML = """<!DOCTYPE html>
