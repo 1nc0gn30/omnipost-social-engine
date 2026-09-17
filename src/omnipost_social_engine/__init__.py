@@ -27,6 +27,14 @@ from .ui_server import (
     OmnipostServer,
     run_server,
 )
+from .schedule_planner import (
+    PlatformPeakSlot,
+    ScheduledPostSlot,
+    HashtagAnalysisResult,
+    get_peak_engagement_matrix,
+    plan_campaign_schedule,
+    analyze_hashtag_strategy,
+)
 
 # Granular engines if available
 try:
@@ -77,4 +85,10 @@ __all__ = [
     "OmnipostServer",
     "run_server",
     "main",
+    "PlatformPeakSlot",
+    "ScheduledPostSlot",
+    "HashtagAnalysisResult",
+    "get_peak_engagement_matrix",
+    "plan_campaign_schedule",
+    "analyze_hashtag_strategy",
 ]
