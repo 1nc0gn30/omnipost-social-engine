@@ -171,3 +171,30 @@ class TestStudioServerEndpoints:
         with pytest.raises(urllib.error.HTTPError) as exc_info:
             urllib.request.urlopen(req)
         assert exc_info.value.code == 404
+
+    def test_get_api_accessibility(self, running_server):
+        import urllib.parse
+        q = urllib.parse.urlencode({"alt": "Diagram of neural network layers", "post": "Deep learning paper update"})
+        req = urllib.request.Request(f"{running_server.url}/api/accessibility?{q}")
+        with urllib.request.urlopen(req) as resp:
+            assert resp.status == 200
+            data = json.loads(resp.read().decode("utf-8"))
+            assert data["alt_evaluation"]["is_valid_length"] is True
+
+    def test_post_api_accessibility(self, running_server):
+        payload = json.dumps({
+            "alt": "Photo of Mars rover landing.",
+            "post": "Big news regarding the rover mission!",
+            "platform": "bluesky",
+        }).encode("utf-8")
+        req = urllib.request.Request(
+            f"{running_server.url}/api/accessibility",
+            data=payload,
+            headers={"Content-Type": "application/json"},
+            method="POST",
+        )
+        with urllib.request.urlopen(req) as resp:
+            assert resp.status == 200
+            data = json.loads(resp.read().decode("utf-8"))
+            assert data["cleaned_alt_text"] == "Mars rover landing."
+            assert data["platform"] == "bluesky"

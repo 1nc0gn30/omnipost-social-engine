@@ -16,6 +16,7 @@ import sys
 from typing import Any, Callable, Dict, List, Optional, Tuple, Union
 
 from .campaign_exporter import PLATFORM_LIMITS, CampaignExporter
+from .accessibility_synthesizer import evaluate_accessibility_suite
 
 
 # Unicode Typography Mappings
@@ -628,6 +629,7 @@ def get_client_configs(
                     "omni_analyze_engagement",
                     "omni_export_campaign",
                     "omni_get_diagnostics",
+                    "omni_audit_accessibility",
                 ],
             }
         }
@@ -824,6 +826,30 @@ class MCPServer:
                 },
                 "handler": self._handle_get_diagnostics,
             },
+            "omni_audit_accessibility": {
+                "description": "Audit alt-text against WCAG 2.2 accessibility standards and detect content warning (CW) triggers for sensitive posts.",
+                "inputSchema": {
+                    "type": "object",
+                    "properties": {
+                        "alt_text": {
+                            "type": "string",
+                            "description": "Image alt-text description to audit.",
+                            "default": "",
+                        },
+                        "post_text": {
+                            "type": "string",
+                            "description": "Accompanying post body to scan for content warnings (CW).",
+                            "default": "",
+                        },
+                        "platform": {
+                            "type": "string",
+                            "description": "Target social platform (twitter, bluesky, mastodon, threads, linkedin).",
+                            "default": "twitter",
+                        },
+                    },
+                },
+                "handler": self._handle_audit_accessibility,
+            },
         }
 
     # Tool Handlers
@@ -875,6 +901,13 @@ class MCPServer:
     def _handle_get_diagnostics(self, args: Dict[str, Any]) -> str:
         plat = args.get("platform")
         res = get_diagnostics_engine(plat)
+        return json.dumps(res, indent=2, ensure_ascii=False)
+
+    def _handle_audit_accessibility(self, args: Dict[str, Any]) -> str:
+        alt_text = args.get("alt_text", "")
+        post_text = args.get("post_text", "")
+        platform = args.get("platform", "twitter")
+        res = evaluate_accessibility_suite(alt_text=alt_text, post_text=post_text, platform=platform)
         return json.dumps(res, indent=2, ensure_ascii=False)
 
     # JSON-RPC Message Processing

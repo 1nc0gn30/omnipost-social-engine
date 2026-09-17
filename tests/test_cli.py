@@ -125,3 +125,18 @@ class TestCLIExecution:
         data = json.loads(captured.out)
         assert data["engine"] == "Omnipost Social Engine"
         assert "twitter" in data["platform_limits"]
+
+    def test_cli_accessibility_audit(self, capsys):
+        ret = main(["accessibility", "--alt", "Image of our new UI dashboard with metrics.", "--post", "Check this out!"])
+        assert ret == 0
+        captured = capsys.readouterr()
+        assert "Accessibility & Content Warning Audit" in captured.out
+        assert "Alt-Text Quality Score" in captured.out
+
+    def test_cli_accessibility_json(self, capsys):
+        ret = main(["a11y", "--alt", "A sleek dark mode IDE screenshot.", "--post", "Spoiler: update is live!", "--json"])
+        assert ret == 0
+        captured = capsys.readouterr()
+        data = json.loads(captured.out)
+        assert data["alt_evaluation"]["is_valid_length"] is True
+        assert data["content_warning"]["needs_cw"] is True

@@ -25,6 +25,7 @@ from .mcp_server import (
     split_thread_engine,
 )
 from .ui_server import run_server
+from .accessibility_synthesizer import evaluate_accessibility_suite
 
 
 # Terminal Color Helpers
@@ -252,6 +253,50 @@ def cmd_export(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_accessibility(args: argparse.Namespace) -> int:
+    """Audit alt-text accessibility and check for Content Warning (CW) triggers."""
+    alt_text = read_text_or_file(args.alt) if getattr(args, "alt", None) else ""
+    post_text = read_text_or_file(args.post) if getattr(args, "post", None) else ""
+    platform = getattr(args, "platform", "twitter") or "twitter"
+    res = evaluate_accessibility_suite(alt_text=alt_text, post_text=post_text, platform=platform)
+
+    if getattr(args, "json", False):
+        print(json.dumps(res, indent=2))
+        return 0
+
+    print_banner()
+    print(f"{Colors.BOLD}Accessibility & Content Warning Audit [{platform.upper()}]:{Colors.RESET}\n")
+
+    if alt_text:
+        eval_data = res["alt_evaluation"]
+        grade_color = Colors.GREEN if eval_data["grade"] in ("AAA", "AA") else (Colors.YELLOW if eval_data["grade"] == "A" else Colors.RED)
+        print(f"  {Colors.BOLD}Alt-Text Quality Score:{Colors.RESET} {grade_color}{eval_data['descriptive_quality_score']}/100 ({eval_data['grade']}){Colors.RESET}")
+        print(f"  • Length: {eval_data['char_count']}/{eval_data['char_limit']} chars ({'Valid' if eval_data['is_valid_length'] else 'Exceeds limit'})")
+        if eval_data["has_redundant_intro"]:
+            print(f"  • {Colors.YELLOW}Warning:{Colors.RESET} Contains redundant prefix ('{eval_data['detected_redundancy']}').")
+            if res.get("cleaned_alt_text"):
+                print(f"    Suggested clean: \"{res['cleaned_alt_text']}\"")
+        if eval_data["recommendations"]:
+            print(f"  • Recommendations:")
+            for rec in eval_data["recommendations"]:
+                print(f"    - {rec}")
+    else:
+        print(f"  {Colors.YELLOW}No alt-text provided for audit.{Colors.RESET}")
+
+    print()
+    cw_data = res["content_warning"]
+    if cw_data["needs_cw"]:
+        print(f"  {Colors.BOLD}Content Warning (CW) Needed:{Colors.RESET} {Colors.YELLOW}YES{Colors.RESET}")
+        print(f"  • Trigger Categories: {', '.join(cw_data['categories_detected'])}")
+        print(f"  • Suggested Label: {Colors.BOLD}{cw_data['suggested_warning_label']}{Colors.RESET}")
+        if cw_data.get("formatted_mastodon_post"):
+            print(f"  • Mastodon formatted:\n    {cw_data['formatted_mastodon_post']}")
+    else:
+        print(f"  {Colors.BOLD}Content Warning:{Colors.RESET} {Colors.GREEN}No sensitive triggers detected.{Colors.RESET}")
+    print()
+    return 0
+
+
 def cmd_mcp(args: argparse.Namespace) -> int:
     """Run Model Context Protocol (MCP) server over stdio."""
     run_mcp_server()
@@ -422,6 +467,14 @@ def build_parser() -> argparse.ArgumentParser:
     )
     p_export.add_argument("--out", "-o", help="Write output to file")
     p_export.set_defaults(func=cmd_export)
+
+    # accessibility / a11y
+    p_a11y = subparsers.add_parser("accessibility", aliases=["a11y"], help="Audit alt-text accessibility and content warnings")
+    p_a11y.add_argument("--alt", "-a", help="Alt-text string or file to audit")
+    p_a11y.add_argument("--post", "-p", help="Post content string or file to scan for CWs")
+    p_a11y.add_argument("--platform", default="twitter", help="Target platform (twitter, bluesky, mastodon, threads, linkedin)")
+    p_a11y.add_argument("--json", action="store_true", help="Output raw JSON")
+    p_a11y.set_defaults(func=cmd_accessibility)
 
     # mcp
     p_mcp = subparsers.add_parser("mcp", help="Run stdio Model Context Protocol (MCP) server")

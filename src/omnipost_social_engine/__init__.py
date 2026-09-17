@@ -35,6 +35,12 @@ from .schedule_planner import (
     plan_campaign_schedule,
     analyze_hashtag_strategy,
 )
+from .accessibility_synthesizer import (
+    AltTextEvaluation,
+    ContentWarningSuggestion,
+    AltTextSynthesizer,
+    evaluate_accessibility_suite,
+)
 
 # Granular engines if available
 try:
@@ -91,4 +97,8 @@ __all__ = [
     "get_peak_engagement_matrix",
     "plan_campaign_schedule",
     "analyze_hashtag_strategy",
+    "AltTextEvaluation",
+    "ContentWarningSuggestion",
+    "AltTextSynthesizer",
+    "evaluate_accessibility_suite",
 ]

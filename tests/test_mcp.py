@@ -164,6 +164,30 @@ class TestMCPServerProtocol:
         assert "omni_analyze_engagement" in tool_names
         assert "omni_export_campaign" in tool_names
         assert "omni_get_diagnostics" in tool_names
+        assert "omni_audit_accessibility" in tool_names
+        assert len(tools) == 7
+
+    def test_tool_call_audit_accessibility(self, server):
+        req = json.dumps({
+            "jsonrpc": "2.0",
+            "id": 99,
+            "method": "tools/call",
+            "params": {
+                "name": "omni_audit_accessibility",
+                "arguments": {
+                    "alt_text": "A colorful bar chart displaying user retention rate across 6 months.",
+                    "post_text": "Spoiler alert! Here are the stats.",
+                    "platform": "mastodon",
+                },
+            },
+        })
+        resp = json.loads(server.process_message(req))
+        assert resp["id"] == 99
+        assert resp["result"]["isError"] is False
+        content = json.loads(resp["result"]["content"][0]["text"])
+        assert content["platform"] == "mastodon"
+        assert content["alt_evaluation"]["is_valid_length"] is True
+        assert content["content_warning"]["needs_cw"] is True
 
     def test_tool_call_format_post(self, server):
         req = json.dumps({

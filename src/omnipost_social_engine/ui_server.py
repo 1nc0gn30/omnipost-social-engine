@@ -26,6 +26,7 @@ from .mcp_server import (
     get_diagnostics_engine,
     split_thread_engine,
 )
+from .accessibility_synthesizer import evaluate_accessibility_suite
 
 
 def get_public_dir() -> str:
@@ -845,6 +846,15 @@ class OmnipostRequestHandler(http.server.BaseHTTPRequestHandler):
             self._send_json(hooks)
             return
 
+        elif path == "/api/accessibility":
+            query = urllib.parse.parse_qs(parsed.query)
+            alt_text = query.get("alt", query.get("alt_text", [""]))[0]
+            post_text = query.get("post", query.get("post_text", [""]))[0]
+            platform = query.get("platform", ["twitter"])[0]
+            res = evaluate_accessibility_suite(alt_text=alt_text, post_text=post_text, platform=platform)
+            self._send_json(res)
+            return
+
         # Static File Serving
         self._serve_static(path)
 
@@ -923,6 +933,13 @@ class OmnipostRequestHandler(http.server.BaseHTTPRequestHandler):
                 })
             except Exception as e:
                 self._send_error_json(f"Export failed: {str(e)}", 500)
+
+        elif path == "/api/accessibility":
+            alt_text = payload.get("alt", payload.get("alt_text", ""))
+            post_text = payload.get("post", payload.get("post_text", ""))
+            platform = payload.get("platform", "twitter")
+            res = evaluate_accessibility_suite(alt_text=alt_text, post_text=post_text, platform=platform)
+            self._send_json(res)
 
         else:
             self._send_error_json(f"Unknown POST endpoint: {path}", 404)
