@@ -7,9 +7,9 @@
   <style>
     :root {
       /* Google Material 3 Color Tokens */
-      --google-blue: #1a73e8;
-      --google-blue-hover: #1765cc;
-      --google-blue-light: #e8f0fe;
+      --google-blue: #B8860B;
+      --google-blue-hover: #8A6A09;
+      --google-blue-light: #FEF9E7;
       --google-green: #1e8e3e;
       --google-yellow: #f9ab00;
       --google-red: #d93025;
@@ -125,8 +125,8 @@
       color: #FFFFFF;
     }
     .tab-btn.active {
-      color: #8ab4f8;
-      border-bottom-color: #8ab4f8;
+      color: #D4AF37;
+      border-bottom-color: #D4AF37;
     }
 
     /* Main Container */
@@ -194,7 +194,7 @@
       transition: border-color 0.2s;
     }
     textarea:focus, input:focus, select:focus {
-      border-color: #8ab4f8;
+      border-color: #D4AF37;
     }
     textarea {
       min-height: 160px;
@@ -274,7 +274,7 @@
       justify-content: space-between;
       font-weight: 700;
       font-size: 0.95rem;
-      color: #8ab4f8;
+      color: #D4AF37;
     }
     .sim-content {
       font-size: 0.95rem;
@@ -297,6 +297,7 @@
       transition: width 0.3s ease;
     }
   </style>
+  <link rel="stylesheet" href="atelier.css">
 </head>
 <body>
   <header>
@@ -618,7 +619,7 @@ Simplicity scales.</textarea>
         data.hooks.forEach(h => {
           const div = document.createElement('div');
           div.className = 'sim-card';
-          div.innerHTML = `<div style="font-size:0.75rem; text-transform:uppercase; color:#8ab4f8; font-weight:700;">${h.framework}</div><div style="font-size:0.95rem; margin-top:0.3rem;">${h.hook}</div>`;
+          div.innerHTML = `<div style="font-size:0.75rem; text-transform:uppercase; color:#D4AF37; font-weight:700;">${h.framework}</div><div style="font-size:0.95rem; margin-top:0.3rem;">${h.hook}</div>`;
           container.appendChild(div);
         });
       } catch (e) {

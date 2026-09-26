@@ -1,0 +1,18 @@
+{
+  "name": "omnipost-social-engine",
+  "version": "1.0.0",
+  "description": "Omnipost Social Engine | Multi-Platform Social Media Orchestration",
+  "main": "bin/omnipost",
+  "bin": {
+    "omnipost": "bin/omnipost"
+  },
+  "scripts": {
+    "start": "bin/omnipost serve",
+    "cli": "bin/omnipost",
+    "ui": "python3 -m omnipost_social_engine.ui_server",
+    "mcp": "python3 -m omnipost_social_engine.mcp_server",
+    "test": "pytest"
+  },
+  "author": "Micro-Tools Web & Media",
+  "license": "MIT"
+}
