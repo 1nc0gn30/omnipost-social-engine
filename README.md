@@ -2,17 +2,27 @@
 
 <div align="center">
 
-[![CI Matrix](https://img.shields.io/github/actions/workflow/status/omnipost/omnipost-social-engine/ci.yml?branch=main&label=CI%20Matrix&logo=github)](https://github.com/omnipost/omnipost-social-engine/actions)
-[![Python Version](https://img.shields.io/badge/python-3.9%20%7C%203.10%20%7C%203.11%20%7C%203.12%20%7C%203.13-blue?logo=python)](https://pypi.org/project/omnipost-social-engine/)
+[![Live App](https://img.shields.io/badge/Live_App-omnipost.nullai.tech-gold?style=flat-square)](https://omnipost.nullai.tech)
+[![Dual Rails](https://img.shields.io/badge/Dual_Checkout-Stripe_%2B_Solana-success?style=flat-square)](https://omnipost.nullai.tech)
+[![Python Version](https://img.shields.io/badge/python-3.9%20%7C%203.10%20%7C%203.11%20%7C%203.12%20%7C%203.13-blue?logo=python)](https://github.com/1nc0gn30/omnipost-social-engine)
 [![MCP Compliant](https://img.shields.io/badge/MCP-Native%20Server-9334e6?logo=anthropic)](https://modelcontextprotocol.io/)
-[![Material 3 Design](https://img.shields.io/badge/UI-Material%203%20Design-1a73e8)](./public/index.html)
+[![Zero Dependencies](https://img.shields.io/badge/dependencies-0%20client-success.svg)](https://github.com/1nc0gn30/omnipost-social-engine)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 
-**The unified, type-safe multi-platform social media orchestration framework for Python & AI Agents.**
+**100% In-Browser Multi-Platform Social Media Engine, Smart Thread Splitter, Viral Hook Generator & MCP AI Agent Hub.**
 
-[Web Studio](./public/index.html) • [MCP Guide](./docs/MCP_GUIDE.md) • [Viral Hooks](./docs/VIRAL_HOOK_FORMULAS.md) • [Platform Limits](./docs/PLATFORM_LIMITS_GUIDE.md) • [Examples](./examples/README.md)
+[Live Application](https://omnipost.nullai.tech) • [MCP Guide](./docs/MCP_GUIDE.md) • [Viral Hooks](./docs/VIRAL_HOOK_FORMULAS.md) • [Platform Limits](./docs/PLATFORM_LIMITS_GUIDE.md)
 
 </div>
+
+---
+
+## 💎 Founding Member Access ($19 Lifetime)
+
+- **One-Time Sovereign License**: **$19 Lifetime** (<del>$79 Regular</del>)
+- **Credit Card / Apple Pay / Google Pay**: [Stripe Instant Checkout](https://buy.stripe.com/7sI7sA8hM2X8eFG8ww)
+- **Solana Web3 Rails**: Receiver `GG2eQbVh8ut1BK6j1A2tz7pSySdLpD38BgyEhGcxdXoK`
+- **Instant Activation**: Click *"Activate"* on the web app or load with `?licensed=true`.
 
 ---
 
@@ -248,6 +258,7 @@ All 15 matrix environments in GitHub Actions enforce:
 
 ---
 
-## 📄 License
+## 📄 License & Attribution
 
-Distributed under the **MIT License**. See `LICENSE` for details.
+- **Engineered by:** Neal Frazier Tech ([@1nc0gn30](https://github.com/1nc0gn30)) • [NullAI Platform](https://nullai.tech)
+- **License:** Distributed under the **MIT License**. See `LICENSE` for details.

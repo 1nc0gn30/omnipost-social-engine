@@ -1,18 +1,33 @@
 {
   "name": "omnipost-social-engine",
-  "version": "1.0.0",
-  "description": "Omnipost Social Engine | Multi-Platform Social Media Orchestration",
-  "main": "bin/omnipost",
+  "version": "2.0.0",
+  "description": "Multi-Platform Social Content Engine, Thread Splitter, UTM Builder & MCP Social Hub — Desktop Workstation",
+  "main": "electron/main.cjs",
   "bin": {
-    "omnipost": "bin/omnipost"
+    "omnipost": "./bin/omnipost.js",
+    "omnipost-social": "./bin/omnipost.js"
   },
   "scripts": {
-    "start": "bin/omnipost serve",
-    "cli": "bin/omnipost",
-    "ui": "python3 -m omnipost_social_engine.ui_server",
-    "mcp": "python3 -m omnipost_social_engine.mcp_server",
-    "test": "pytest"
+    "start": "python3 -m omnipost_social_engine.cli serve --port 8082",
+    "electron": "electron .",
+    "app": "electron .",
+    "test": "pytest tests/"
   },
-  "author": "Micro-Tools Web & Media",
-  "license": "MIT"
+  "keywords": [
+    "omnipost",
+    "social-media",
+    "content-engine",
+    "thread-splitter",
+    "utm-builder",
+    "campaign-exporter",
+    "zero-egress",
+    "sovereign",
+    "electron",
+    "zoth"
+  ],
+  "author": "NullAI Tech / Zoth Team",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^34.5.8"
+  }
 }

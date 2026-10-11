@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """
 Omnipost Social Engine - CLI Entry Point
 Invoked when running `python -m omnipost_social_engine`.

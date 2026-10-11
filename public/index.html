@@ -1,15 +1,94 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Omnipost Studio — Multi-Platform Social Automation & MCP Hub</title>
+  <title>Omnipost Studio | Multi-Platform Social Engine & Viral Copy Intelligence</title>
+  <meta name="description" content="Professional in-browser multi-platform social media formatter, thread splitter, viral hook generator, and MCP AI agent hub. Zero cloud egress.">
+  <meta name="theme-color" content="#1a73e8">
+
+  <!-- OpenGraph / Twitter Cards -->
+  <meta property="og:title" content="Omnipost Studio | Multi-Platform Social Engine & Viral Copy Intelligence">
+  <meta property="og:description" content="Format for Twitter/X, LinkedIn, BlueSky, Threads. Split long-form threads with sentence preservation. Generate 10 viral hook frameworks with zero cloud egress.">
+  <meta property="og:url" content="https://omnipost.nullai.tech">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://omnipost.nullai.tech/assets/banner.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@1nc0gn30">
+  <meta name="twitter:creator" content="@1nc0gn30">
+  <meta name="twitter:image" content="https://omnipost.nullai.tech/assets/banner.png">
+  <link rel="canonical" href="https://omnipost.nullai.tech">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link rel="icon" type="image/png" href="/assets/icon.png">
+  <script src="https://integrate.depay.com/widgets/v13.js" defer></script>
+
+  <!-- AEO & SEO Schema.org Graph -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "Omnipost Studio",
+        "url": "https://omnipost.nullai.tech",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "All",
+        "description": "Professional in-browser multi-platform social media formatter, thread splitter, viral hook generator, and MCP AI agent hub.",
+        "offers": {
+          "@type": "Offer",
+          "price": "19.00",
+          "priceCurrency": "USD"
+        },
+        "author": {
+          "@type": "Person",
+          "name": "Neal Frazier",
+          "url": "https://nealfrazier.tech"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "Neal Frazier Tech",
+          "url": "https://nullai.tech"
+        }
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What is Omnipost Studio?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Omnipost Studio is a local-first social automation and copywriting intelligence workstation featuring multi-platform character validation (Twitter/X, LinkedIn, BlueSky, Threads), paragraph-preserving thread splitting, 10 viral hook frameworks, and MCP AI agent connectivity."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Does Omnipost send my drafts or API keys to external servers?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. Omnipost operates with zero cloud egress. All text formatting, thread splitting, Unicode styling, and virality scoring run 100% in-browser client-side with zero remote telemetry."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How does the MCP Hub work?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Omnipost provides full Model Context Protocol client configurations for Claude Desktop, Cursor, Cline, and Zed, allowing frontier AI agents to programmatically invoke thread splitting and viral hook tools."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+
   <style>
     :root {
       /* Google Material 3 Color Tokens */
-      --google-blue: #B8860B;
-      --google-blue-hover: #8A6A09;
-      --google-blue-light: #FEF9E7;
+      --google-blue: #1a73e8;
+      --google-blue-hover: #1765cc;
+      --google-blue-light: #e8f0fe;
       --google-green: #1e8e3e;
       --google-yellow: #f9ab00;
       --google-red: #d93025;
@@ -28,6 +107,13 @@
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body {
+      overflow-x: hidden !important;
+      max-width: 100vw !important;
+      width: 100% !important;
+    }
+
     body {
       background-color: var(--md-sys-color-surface-dim);
       color: var(--md-sys-color-on-surface);
@@ -48,6 +134,8 @@
       position: sticky;
       top: 0;
       z-index: 100;
+      flex-wrap: wrap;
+      gap: 1rem;
     }
     .brand-container {
       display: flex;
@@ -71,8 +159,9 @@
       letter-spacing: -0.3px;
     }
     .brand-badge {
-      background: var(--google-purple);
-      color: #FFFFFF;
+      background: rgba(147, 52, 230, 0.2);
+      border: 1px solid rgba(147, 52, 230, 0.4);
+      color: #d7aefb;
       font-size: 0.7rem;
       font-weight: 700;
       padding: 0.2rem 0.6rem;
@@ -82,7 +171,8 @@
     .header-status {
       display: flex;
       align-items: center;
-      gap: 1rem;
+      gap: 0.75rem;
+      flex-wrap: wrap;
     }
     .virality-dial {
       display: flex;
@@ -93,10 +183,245 @@
       border-radius: 20px;
       font-size: 0.85rem;
       font-weight: 600;
+      border: 1px solid var(--md-sys-color-outline);
     }
     #headerViralityValue {
       color: #81c995;
       font-weight: 700;
+    }
+
+    .badge-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(26, 115, 232, 0.1);
+      border: 1px solid rgba(26, 115, 232, 0.3);
+      font-size: 11px;
+      font-weight: 600;
+      color: #8ab4f8;
+    }
+
+    .status-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #1e8e3e;
+      display: inline-block;
+    }
+
+    .btn-key-activate {
+      border: 1px solid var(--md-sys-color-outline);
+      font-size: 12px;
+      padding: 6px 12px;
+      cursor: pointer;
+      border-radius: 4px;
+      background: var(--md-sys-color-surface);
+      color: var(--md-sys-color-on-surface);
+      transition: all 0.15s ease;
+    }
+    .btn-key-activate:hover {
+      border-color: var(--google-blue);
+      color: #FFFFFF;
+    }
+
+    /* Founding Member Sales Banner */
+    .sales-banner {
+      background: linear-gradient(135deg, rgba(26, 115, 232, 0.12), rgba(32, 33, 36, 0.95));
+      border: 1.5px solid rgba(26, 115, 232, 0.4);
+      border-radius: 16px;
+      padding: 1.25rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1.2rem;
+      margin-bottom: 24px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25), 0 0 20px rgba(26, 115, 232, 0.15);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .sales-banner::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(26, 115, 232, 0.08) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .sales-content {
+      position: relative;
+      z-index: 2;
+      flex: 1;
+      min-width: 280px;
+    }
+
+    .sales-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: #8ab4f8;
+      background: rgba(26, 115, 232, 0.15);
+      border: 1px solid rgba(26, 115, 232, 0.3);
+      padding: 2px 8px;
+      border-radius: 999px;
+      margin-bottom: 0.4rem;
+    }
+
+    .sales-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #FFFFFF;
+      margin-bottom: 0.2rem;
+    }
+
+    .sales-desc {
+      font-size: 0.82rem;
+      color: var(--md-sys-color-on-surface-variant);
+    }
+
+    .sales-ctas {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      position: relative;
+      z-index: 2;
+    }
+
+    .btn-checkout {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: inherit;
+      font-size: 0.82rem;
+      font-weight: 600;
+      padding: 0.6rem 1.2rem;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      cursor: pointer;
+      border: none;
+      min-height: 40px;
+    }
+
+    .btn-stripe {
+      background: var(--google-blue);
+      color: #ffffff;
+      box-shadow: 0 4px 16px rgba(26, 115, 232, 0.35);
+    }
+
+    .btn-stripe:hover {
+      background: var(--google-blue-hover);
+      transform: translateY(-1px);
+    }
+
+    .btn-solana {
+      background: var(--md-sys-color-surface-container);
+      color: var(--md-sys-color-on-surface);
+      border: 1px solid var(--md-sys-color-outline);
+    }
+
+    .btn-solana:hover {
+      border-color: var(--google-blue);
+      background: var(--md-sys-color-surface-container-high);
+    }
+
+    .btn-license-inline {
+      background: none;
+      border: none;
+      color: #8ab4f8;
+      font-size: 0.78rem;
+      cursor: pointer;
+      text-decoration: underline;
+      padding: 4px;
+    }
+
+    /* Paywall Blur & Overlay */
+    .paywall-wrapper {
+      position: relative;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .paywall-locked .paywalled-content {
+      filter: blur(6px);
+      user-select: none;
+      pointer-events: none;
+    }
+
+    .paywall-overlay {
+      display: none;
+      position: absolute;
+      inset: 0;
+      background: rgba(23, 23, 23, 0.85);
+      backdrop-filter: blur(4px);
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 1.5rem;
+      z-index: 20;
+    }
+
+    .paywall-locked .paywall-overlay {
+      display: flex;
+    }
+
+    .lock-card {
+      background: var(--md-sys-color-surface-container);
+      border: 1.5px solid var(--google-blue);
+      border-radius: 16px;
+      padding: 2rem;
+      max-width: 440px;
+      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.5);
+    }
+
+    /* Modal */
+    .modal-backdrop {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(8px);
+      z-index: 2000;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+    }
+
+    .modal-backdrop.open {
+      display: flex;
+    }
+
+    .modal-card {
+      background: var(--md-sys-color-surface-container);
+      border: 1.5px solid var(--google-blue);
+      border-radius: 16px;
+      max-width: 520px;
+      width: 100%;
+      padding: 2rem;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+      position: relative;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: transparent;
+      border: none;
+      color: var(--md-sys-color-on-surface-variant);
+      font-size: 1.4rem;
+      cursor: pointer;
     }
 
     /* Workspace Tabs Bar */
@@ -125,8 +450,8 @@
       color: #FFFFFF;
     }
     .tab-btn.active {
-      color: #D4AF37;
-      border-bottom-color: #D4AF37;
+      color: #8ab4f8;
+      border-bottom-color: #8ab4f8;
     }
 
     /* Main Container */
@@ -169,6 +494,8 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.5rem;
     }
 
     /* Form Controls */
@@ -194,7 +521,7 @@
       transition: border-color 0.2s;
     }
     textarea:focus, input:focus, select:focus {
-      border-color: #D4AF37;
+      border-color: #8ab4f8;
     }
     textarea {
       min-height: 160px;
@@ -235,9 +562,35 @@
       align-items: center;
       gap: 0.5rem;
       transition: all 0.2s;
+      min-height: 40px;
     }
     .btn:hover {
       background: var(--google-blue-hover);
+    }
+    .btn-secondary {
+      background: var(--md-sys-color-surface-container-high);
+      border: 1px solid var(--md-sys-color-outline);
+      color: var(--md-sys-color-on-surface);
+    }
+    .btn-secondary:hover {
+      border-color: var(--google-blue);
+      color: #FFFFFF;
+    }
+
+    .btn-sm {
+      padding: 0.35rem 0.75rem;
+      font-size: 0.8rem;
+      border-radius: 6px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #e8eaed;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .btn-sm:hover {
+      background: rgba(26, 115, 232, 0.2);
+      border-color: var(--google-blue);
+      color: #8ab4f8;
     }
 
     /* Chips */
@@ -274,12 +627,15 @@
       justify-content: space-between;
       font-weight: 700;
       font-size: 0.95rem;
-      color: #D4AF37;
+      color: #8ab4f8;
+      flex-wrap: wrap;
+      gap: 0.5rem;
     }
     .sim-content {
       font-size: 0.95rem;
       line-height: 1.5;
       white-space: pre-wrap;
+      word-break: break-word;
     }
 
     /* Progress Ring Bar */
@@ -296,10 +652,33 @@
       width: 35%;
       transition: width 0.3s ease;
     }
+
+    /* Toast */
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: #202124;
+      border: 1px solid var(--google-blue);
+      color: #ffffff;
+      padding: 12px 20px;
+      border-radius: 8px;
+      font-size: 13.5px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+      z-index: 9999;
+      display: none;
+      animation: slideUp 0.25s ease;
+    }
+    @keyframes slideUp {
+      from { transform: translateY(20px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
   </style>
-  <link rel="stylesheet" href="atelier.css">
+
+  <link rel="stylesheet" href="zoth-theme.css">
 </head>
 <body>
+
   <header>
     <div class="brand-container">
       <div class="google-dots">
@@ -309,25 +688,59 @@
         <div class="dot-green"></div>
       </div>
       <div class="brand-title">Omnipost Studio</div>
-      <div class="brand-badge">Material 3 Influenced</div>
+      <div class="brand-badge">v2.4 SOVEREIGN</div>
     </div>
     <div class="header-status">
       <div class="virality-dial">
         <span>⚡ Virality Readiness:</span>
         <span id="headerViralityValue">88 / 100</span>
       </div>
+      <div class="badge-status" id="licenseStatusBadge">
+        <span class="status-dot"></span>
+        <span id="licenseBadgeText">FREE TIER</span>
+      </div>
+      <button class="btn-key-activate" id="activateKeyBtn" onclick="openLicenseModal()">
+        🔑 UNLOCK PRO
+      </button>
     </div>
   </header>
 
   <!-- 4 Interactive Workspace Tabs -->
   <nav class="tabs-bar">
-    <button class="tab-btn active" onclick="switchTab('composer')">Multi-Platform Composer & Simulator</button>
+    <button class="tab-btn active" onclick="switchTab('composer')">Multi-Platform Composer &amp; Simulator</button>
     <button class="tab-btn" onclick="switchTab('splitter')">Smart Thread Splitter</button>
     <button class="tab-btn" onclick="switchTab('hooks')">Viral Hook Generator</button>
-    <button class="tab-btn" onclick="switchTab('agent')">AI Agent & MCP Hub</button>
+    <button class="tab-btn" onclick="switchTab('agent')">AI Agent &amp; MCP Hub</button>
   </nav>
 
   <main>
+
+    <!-- Founding Member Sales Funnel Banner -->
+    <div class="sales-banner" id="salesBanner">
+      <div class="sales-content">
+        <div class="sales-badge">
+          ⭐ FOUNDING MEMBER ACCESS · 76% DISCOUNT
+        </div>
+        <div class="sales-title">
+          Unlock Unlimited Thread Splitting Exports, Multi-Platform Bundles &amp; Automated MCP Campaigns
+        </div>
+        <div class="sales-desc">
+          Get lifetime access to one-click multi-platform thread copying, campaign JSON downloads, and automated AI agent MCP pipelines for <strong>$19 one-time</strong> (<del style="color: #9aa0a6;">$79 regular</del>). Dual Stripe + Solana checkout rails.
+        </div>
+      </div>
+      <div class="sales-ctas">
+        <a href="https://buy.stripe.com/7sI7sA8hM2X8eFG8ww" target="_blank" rel="noopener" class="btn-checkout btn-stripe">
+          💳 Unlock Pro — $19 Lifetime
+        </a>
+        <button onclick="openDePayCheckout(event)" class="btn-checkout btn-solana">
+          ◎ Pay with Solana
+        </button>
+        <button onclick="openLicenseModal()" class="btn-license-inline">
+          Already have a key? Activate
+        </button>
+      </div>
+    </div>
+
     <!-- TAB 1: Multi-Platform Composer & Simulator -->
     <div id="tab-composer" class="tab-content active">
       <div class="two-col">
@@ -341,9 +754,6 @@
               <option value="italic">Italic (𝘐𝘵𝘢𝘭𝘪𝘤)</option>
               <option value="bold_italic">Bold Italic (𝘽𝙤𝙡𝙙 𝙄𝙩𝙖𝙡𝙞𝙘)</option>
               <option value="monospace">Monospace (𝙼𝚘𝚗𝚘𝚜𝚙𝚊𝚌𝚎)</option>
-              <option value="script">Script (𝒮𝒸𝓇𝒾𝓅𝓉)</option>
-              <option value="double_struck">Double Struck (𝔻𝕠𝕦𝕓𝕝𝕖)</option>
-              <option value="sans">Sans-Serif (𝖲𝖺𝗇𝗌)</option>
               <option value="underline">Underline (U̲n̲d̲e̲r̲l̲i̲n̲e̲)</option>
               <option value="strikethrough">Strikethrough (S̶t̶r̶i̶k̶e̶)</option>
             </select>
@@ -363,10 +773,10 @@ What is your favorite stdlib trick? Drop it below 👇</textarea>
           </div>
           <div>
             <label>Hashtags (Comma Separated)</label>
-            <input type="text" id="fmt-tags" placeholder="buildinpublic, python, mcp" oninput="runFormat()">
+            <input type="text" id="fmt-tags" placeholder="buildinpublic, python, mcp" value="buildinpublic, python, mcp" oninput="runFormat()">
           </div>
           <div>
-            <label>Character Budget Meter</label>
+            <label>Twitter / X Character Budget Meter</label>
             <div class="progress-bar-container">
               <div id="compProgressBar" class="progressRingBar"></div>
             </div>
@@ -385,7 +795,10 @@ What is your favorite stdlib trick? Drop it below 👇</textarea>
           <div id="mockTwitter" class="sim-card">
             <div class="sim-header">
               <span>🐦 Twitter / X Mockup (280)</span>
-              <span id="tw-count" class="chip good">OK</span>
+              <div style="display:flex; gap:0.5rem; align-items:center;">
+                <span id="tw-count" class="chip good">OK</span>
+                <button class="btn-sm" onclick="copyCardContent('tw-content')">Copy</button>
+              </div>
             </div>
             <div id="tw-content" class="sim-content"></div>
           </div>
@@ -393,7 +806,10 @@ What is your favorite stdlib trick? Drop it below 👇</textarea>
           <div id="mockLinkedIn" class="sim-card">
             <div class="sim-header">
               <span>💼 LinkedIn Story Mockup (3000)</span>
-              <span class="chip good">OK</span>
+              <div style="display:flex; gap:0.5rem; align-items:center;">
+                <span id="li-count" class="chip good">OK</span>
+                <button class="btn-sm" onclick="copyCardContent('li-content')">Copy</button>
+              </div>
             </div>
             <div id="li-content" class="sim-content"></div>
           </div>
@@ -401,7 +817,10 @@ What is your favorite stdlib trick? Drop it below 👇</textarea>
           <div id="mockBlueSky" class="sim-card">
             <div class="sim-header">
               <span>🦋 BlueSky Mockup (300)</span>
-              <span class="chip good">OK</span>
+              <div style="display:flex; gap:0.5rem; align-items:center;">
+                <span id="bs-count" class="chip good">OK</span>
+                <button class="btn-sm" onclick="copyCardContent('bs-content')">Copy</button>
+              </div>
             </div>
             <div id="bs-content" class="sim-content"></div>
           </div>
@@ -409,7 +828,10 @@ What is your favorite stdlib trick? Drop it below 👇</textarea>
           <div id="mockThreads" class="sim-card">
             <div class="sim-header">
               <span>🧵 Meta Threads Mockup (500)</span>
-              <span class="chip good">OK</span>
+              <div style="display:flex; gap:0.5rem; align-items:center;">
+                <span id="th-count" class="chip good">OK</span>
+                <button class="btn-sm" onclick="copyCardContent('th-content')">Copy</button>
+              </div>
             </div>
             <div id="th-content" class="sim-content"></div>
           </div>
@@ -424,38 +846,43 @@ What is your favorite stdlib trick? Drop it below 👇</textarea>
           <div class="card-title">Long Copy Input</div>
           <div>
             <label>Character Limit</label>
-            <input type="number" id="split-limit" value="280">
+            <input type="number" id="split-limit" value="280" oninput="runSplit()">
           </div>
           <div>
             <label>Numbering Format</label>
-            <select id="split-format">
+            <select id="split-format" onchange="runSplit()">
               <option value="fraction">(1/N) Standard</option>
               <option value="fraction_thread">🧵 1/N Thread Header</option>
               <option value="bracket">[1/N] Brackets</option>
               <option value="counter">1. Ordered List</option>
+              <option value="slash">1/ Clean Slash</option>
             </select>
           </div>
           <div>
             <label>Full Article / Story</label>
-            <textarea id="split-text" style="min-height: 220px;">Why we rejected a 300MB node_modules stack for our social automation engine:
+            <textarea id="split-text" style="min-height: 220px;" oninput="runSplit()">Why we rejected a 300MB node_modules stack for our social automation engine:
 
 Last month, we audited our team's social publishing workflow. We were juggling 4 different SaaS tabs, fighting character count truncations, and fixing broken line breaks on mobile.
 
 Instead of subscribing to another $99/mo tool, we engineered Omnipost:
-1/ 100% offline & local-first
-2/ Native Model Context Protocol (MCP) server for Claude & Cursor
+1/ 100% offline &amp; local-first
+2/ Native Model Context Protocol (MCP) server for Claude &amp; Cursor
 3/ Material 3 UI Studio served over local HTTP
 4/ Automatic Unicode typography styling
 
 Simplicity scales.</textarea>
           </div>
-          <button class="btn" onclick="runSplit()">🧵 Split Into Thread</button>
+          <button class="btn" onclick="runSplit()">🧵 Re-Split Thread</button>
         </div>
 
         <div class="card">
           <div class="card-title">
             <span>Generated Thread Sequence</span>
-            <span id="split-total-badge" class="chip">0 posts</span>
+            <div style="display: flex; gap: 0.5rem; align-items: center;">
+              <span id="split-total-badge" class="chip">0 posts</span>
+              <button class="btn-sm" onclick="copyAllThreadCards()">📋 Copy All Cards</button>
+              <button class="btn-sm" onclick="exportThreadJson()">⬇️ Export JSON</button>
+            </div>
           </div>
           <div id="split-results" style="display:flex; flex-direction:column; gap:0.75rem;"></div>
         </div>
@@ -480,14 +907,15 @@ Simplicity scales.</textarea>
             <select id="hook-framework">
               <option value="all">All Proven Frameworks</option>
               <option value="contrarian">Contrarian / Unpopular Opinion</option>
-              <option value="question">Curiosity Question</option>
-              <option value="number_list">Numbered List / Micro-habits</option>
+              <option value="step_by_step">Step-by-Step Blueprint</option>
+              <option value="numbered_list">Numbered List / Micro-habits</option>
               <option value="curiosity_gap">Curiosity Gap</option>
               <option value="transformation">Zero to Mastery Transformation</option>
               <option value="how_to">How-To Masterclass</option>
-              <option value="negative_bias">Costly Mistakes / Negative Bias</option>
-              <option value="secret_mistake">Secret Blueprint</option>
+              <option value="costly_mistakes">Costly Mistakes / Negative Bias</option>
+              <option value="secret_blueprint">Secret Blueprint</option>
               <option value="story_lead">Behind-the-Scenes Story</option>
+              <option value="pareto">The 80/20 Rule</option>
             </select>
           </div>
           <button class="btn" onclick="runHooks()">⚡ Generate 10 Hooks</button>
@@ -503,147 +931,651 @@ Simplicity scales.</textarea>
     <!-- TAB 4: AI Agent & MCP Hub -->
     <div id="tab-agent" class="tab-content">
       <div class="card">
-        <div class="card-title">Model Context Protocol (MCP) Client Configurations</div>
+        <div class="card-title">
+          <span>Model Context Protocol (MCP) Client Configurations</span>
+          <button class="btn-sm" onclick="exportFullCampaign()">📦 Export Campaign Bundle</button>
+        </div>
         <p style="color: var(--md-sys-color-on-surface-variant); font-size: 0.9rem;">
           Connect your local Omnipost MCP server directly to Claude Desktop, Cursor, Cline, or Zed to give your AI assistants native social copywriting, thread splitting, and campaign tools.
         </p>
         <div class="two-col">
           <div>
-            <label>Claude Desktop (~/.config/Claude/claude_desktop_config.json)</label>
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.4rem;">
+              <label style="margin:0;">Claude Desktop (~/.config/Claude/claude_desktop_config.json)</label>
+              <button class="btn-sm" onclick="copyBoxContent('mcp-claude')">Copy</button>
+            </div>
             <div id="mcp-claude" class="code-box">Loading...</div>
           </div>
           <div>
-            <label>Cursor (.cursor/mcp.json)</label>
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.4rem;">
+              <label style="margin:0;">Cursor (.cursor/mcp.json)</label>
+              <button class="btn-sm" onclick="copyBoxContent('mcp-cursor')">Copy</button>
+            </div>
             <div id="mcp-cursor" class="code-box">Loading...</div>
           </div>
         </div>
         <div class="two-col" style="margin-top: 1rem;">
           <div>
-            <label>Cline (cline_mcp_settings.json)</label>
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.4rem;">
+              <label style="margin:0;">Cline (cline_mcp_settings.json)</label>
+              <button class="btn-sm" onclick="copyBoxContent('mcp-cline')">Copy</button>
+            </div>
             <div id="mcp-cline" class="code-box">Loading...</div>
           </div>
           <div>
-            <label>Zed (settings.json)</label>
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.4rem;">
+              <label style="margin:0;">Zed (settings.json)</label>
+              <button class="btn-sm" onclick="copyBoxContent('mcp-zed')">Copy</button>
+            </div>
             <div id="mcp-zed" class="code-box">Loading...</div>
+          </div>
+        </div>
+
+        <!-- Full Campaign Automation Pipeline (Paywalled) -->
+        <div style="margin-top: 1.5rem;">
+          <div class="card-title">🚀 Automated AI Agent Execution Payload</div>
+          <div class="paywall-wrapper paywall-locked" id="campaignPaywallWrapper" style="margin-top:0.75rem;">
+            <div class="code-box paywalled-content" id="mcpCampaignPayload">
+{
+  "protocol": "mcp/v1",
+  "tools": [
+    {
+      "name": "omnipost_format",
+      "description": "Multi-platform social copy formatter with unicode styling and platform validation",
+      "parameters": {
+        "text": "string",
+        "platform": "twitter|linkedin|bluesky|threads",
+        "style": "normal|bold|italic|monospace"
+      }
+    },
+    {
+      "name": "omnipost_split_thread",
+      "description": "Smart thread splitter with sentence boundary preservation",
+      "parameters": {
+        "text": "string",
+        "limit": 280,
+        "format": "fraction|fraction_thread|bracket"
+      }
+    },
+    {
+      "name": "omnipost_generate_hooks",
+      "description": "Generate viral hook candidates across 10 frameworks",
+      "parameters": {
+        "topic": "string",
+        "niche": "string",
+        "framework": "all|contrarian|curiosity"
+      }
+    }
+  ]
+}
+            </div>
+            <div class="paywall-overlay">
+              <div class="lock-card">
+                <div style="font-size: 2.2rem; margin-bottom: 0.5rem;">🔒</div>
+                <h4 style="font-size: 1.15rem; font-weight: 700; margin-bottom: 0.4rem; color: #FFFFFF;">Pro MCP Campaign Pipeline Locked</h4>
+                <p style="font-size: 0.82rem; margin-bottom: 1.25rem; line-height: 1.5; color: var(--md-sys-color-on-surface-variant);">
+                  Unlock automated AI Agent pipelines, complete campaign JSON exports, and full thread copy bundles.
+                </p>
+                <div style="display: flex; flex-direction: column; gap: 0.6rem;">
+                  <a href="https://buy.stripe.com/7sI7sA8hM2X8eFG8ww" target="_blank" rel="noopener" class="btn-checkout btn-stripe" style="justify-content: center;">
+                    💳 Unlock Pro — $19 Lifetime
+                  </a>
+                  <button onclick="openDePayCheckout(event)" class="btn-checkout btn-solana" style="justify-content: center;">
+                    ◎ Pay with Solana
+                  </button>
+                  <button onclick="openLicenseModal()" style="background: none; border: none; color: #8ab4f8; font-size: 0.8rem; cursor: pointer; text-decoration: underline; margin-top: 0.3rem;">
+                    Already have a license key? Activate now
+                  </button>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </main>
 
+  <!-- Pro Paywall Modal -->
+  <div class="modal-backdrop" id="licenseModal">
+    <div class="modal-card">
+      <button class="modal-close" onclick="closeLicenseModal()">&times;</button>
+      <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.8rem;">
+        <span style="font-size: 1.5rem;">⭐</span>
+        <h2 style="font-size: 1.2rem; font-weight: 700; color: #FFFFFF;">Omnipost Pro Activation</h2>
+      </div>
+      <p style="font-size: 0.85rem; color: var(--md-sys-color-on-surface-variant); margin-bottom: 1.2rem;">
+        Get instant lifetime access to all multi-platform thread formats, automated MCP pipelines, and bulk exports for $19.
+      </p>
+
+      <div style="display: flex; gap: 0.6rem; flex-wrap: wrap; margin-bottom: 1.2rem;">
+        <a href="https://buy.stripe.com/7sI7sA8hM2X8eFG8ww" target="_blank" rel="noopener" class="btn-checkout btn-stripe" style="flex: 1; justify-content: center;">
+          💳 Buy with Stripe ($19)
+        </a>
+        <button class="btn-checkout btn-solana" onclick="openDePayCheckout(event)" style="flex: 1; justify-content: center;">
+          ◎ Pay with Solana
+        </button>
+      </div>
+
+      <div style="margin-bottom: 1.2rem;">
+        <label style="display: block; font-family: var(--font-mono); font-size: 0.75rem; font-weight: 600; color: #8ab4f8; margin-bottom: 0.4rem;">
+          LICENSE KEY OR STRIPE EMAIL:
+        </label>
+        <input type="text" id="licenseInput" placeholder="pro_live_... or your@email.com" style="width: 100%; font-size: 0.95rem; min-height: 44px;">
+      </div>
+
+      <div style="display: flex; gap: 0.8rem; margin-bottom: 1.5rem; flex-wrap: wrap;">
+        <button class="btn-checkout btn-stripe" onclick="activateLicenseKey()" style="flex: 1; justify-content: center; min-width: 140px;">
+          Activate Pro ⚡
+        </button>
+        <button class="btn-checkout btn-solana" onclick="activateDemoLicense()" style="flex: 1; justify-content: center; min-width: 140px;">
+          Instant Preview Key
+        </button>
+      </div>
+
+      <div style="padding: 1rem; border-radius: 8px; background: rgba(255,255,255,0.04); border: 1px solid var(--md-sys-color-outline); font-size: 0.78rem; color: var(--md-sys-color-on-surface-variant); line-height: 1.6;">
+        <strong style="color: #8ab4f8;">Pro Feature Matrix:</strong><br>
+        ✓ 1-Click "Copy All Thread Cards" sequence formatting<br>
+        ✓ Unlimited Campaign JSON and Markdown exports<br>
+        ✓ Automated MCP Tool definitions for Claude Desktop, Cursor &amp; Cline<br>
+        ✓ 100% in-browser client execution with zero network telemetry<br>
+        ✓ Permanent localStorage activation across visits
+      </div>
+    </div>
+  </div>
+
+  <div id="toast" class="toast">Action completed!</div>
+
+  <footer class="zoth-brand-footer">
+    <div class="zoth-foot-name">Omnipost Studio • Part of the NullAI Sovereign Tool Suite</div>
+    <div>Engineered by <a href="https://nealfrazier.tech" target="_blank" rel="noopener">Neal Frazier Tech (@1nc0gn30)</a> &bull; <a href="https://nullai.tech" target="_blank" rel="noopener">NullAI Platform</a> &bull; <a href="https://github.com/1nc0gn30/omnipost-social-engine" target="_blank" rel="noopener">GitHub</a></div>
+  </footer>
+
   <script>
+    let isProLicensed = false;
+
+    // Unicode Transformation Tables
+    const UNICODE_FONTS = {
+      bold: {
+        A: '𝗔', B: '𝗕', C: '𝗖', D: '𝗗', E: '𝗘', F: '𝗙', G: '𝗚', H: '𝗛', I: '𝗜', J: '𝗝', K: '𝗞', L: '𝗟', M: '𝗠',
+        N: '𝗡', O: '𝗢', P: '𝗣', Q: '𝗤', R: '𝗥', S: '𝗦', T: '𝗧', U: '𝗨', V: '𝗩', W: '𝗪', X: '𝗫', Y: '𝗬', Z: '𝗭',
+        a: '𝗮', b: '𝗯', c: '𝗰', d: '𝗱', e: '𝗲', f: '𝗳', g: '𝗴', h: '𝗵', i: '𝗶', j: '𝗷', k: '𝗸', l: '𝗹', m: '𝗺',
+        n: '𝗻', o: '𝗼', p: '𝗽', q: '𝗾', r: '𝗿', s: '𝘀', t: '𝘁', u: '𝘂', v: '𝘃', w: '𝘄', x: '𝘅', y: '𝘆', z: '𝘇',
+        '0': '𝟬', '1': '𝟭', '2': '𝟮', '3': '𝟯', '4': '𝟰', '5': '𝟱', '6': '𝟲', '7': '𝟳', '8': '𝟴', '9': '𝟵'
+      },
+      italic: {
+        A: '𝘈', B: '𝘉', C: '𝘊', D: '𝘋', E: '𝘌', F: '𝘍', G: '𝘎', H: '𝘏', I: '𝘐', J: '𝘑', K: '𝘒', L: '𝘓', M: '𝘔',
+        N: '𝘕', O: '𝘖', P: '𝘗', Q: '𝘘', R: '𝘙', S: '𝘚', T: '𝘛', U: '𝘜', V: '𝘝', W: '𝘞', X: '𝘟', Y: '𝘠', Z: '𝘡',
+        a: '𝘢', b: '𝘣', c: '𝘤', d: '𝘥', e: '𝘦', f: '𝘧', g: '𝘨', h: '𝘩', i: '𝘪', j: '𝘫', k: '𝘬', l: '𝘭', m: '𝘮',
+        n: '𝘯', o: '𝘰', p: '𝘱', q: '𝘲', r: '𝘳', s: '𝘴', t: '𝘵', u: '𝘶', v: '𝘷', w: '𝘸', x: '𝘹', y: '𝘺', z: '𝘻'
+      },
+      bold_italic: {
+        A: '𝘼', B: '𝘽', C: '𝘾', D: '𝘿', E: '𝙀', F: '𝙁', G: '𝙂', H: '𝙃', I: '𝙄', J: '𝙅', K: '𝙆', L: '𝙇', M: '𝙈',
+        N: '𝙉', O: '𝙊', P: '𝙋', Q: '𝙌', R: '𝙍', S: '𝙎', T: '𝙏', U: '𝙐', V: '𝙑', W: '𝙒', X: '𝙓', Y: '𝙔', Z: '𝙕',
+        a: '𝙖', b: '𝙗', c: '𝙘', d: '𝙙', e: '𝙚', f: '𝙛', g: '𝙜', h: '𝙝', i: '𝙞', j: '𝙟', k: '𝙠', l: '𝙡', m: '𝙢',
+        n: '𝙣', o: '𝙤', p: '𝙥', q: '𝙦', r: '𝙧', s: '𝙨', t: '𝙩', u: '𝙪', v: '𝙫', w: '𝙬', x: '𝙭', y: '𝙮', z: '𝙯'
+      },
+      monospace: {
+        A: '𝙼', B: '𝙱', C: '𝙲', D: '𝙳', E: '𝙴', F: '𝙵', G: '𝙶', H: '𝙷', I: '𝙸', J: '𝙹', K: '𝙺', L: '𝙻', M: '𝙼',
+        N: '𝙽', O: '𝙾', P: '𝙿', Q: '𝚀', R: '𝚁', S: '𝚂', T: '𝚃', U: '𝚄', V: '𝚅', W: '𝚆', X: '𝚇', Y: '𝚈', Z: '𝚉',
+        a: '𝚊', b: '𝚋', c: '𝚌', d: '𝚍', e: '𝚎', f: '𝚏', g: '𝚐', h: '𝚑', i: '𝚒', j: '𝚓', k: '𝚔', l: '𝚕', m: '𝚖',
+        n: '𝚗', o: '𝚘', p: '𝚙', q: '𝚚', r: '𝚛', s: '𝚜', t: '𝚝', u: '𝚞', v: '𝚟', w: '𝚠', x: '𝚡', y: '𝚢', z: '𝚣',
+        '0': '𝟶', '1': '𝟷', '2': '𝟸', '3': '𝟹', '4': '𝟺', '5': '𝟻', '6': '𝟼', '7': '𝟽', '8': '𝟾', '9': '𝟿'
+      }
+    };
+
+    function applyUnicodeStyle(text, style) {
+      if (!style || style === 'normal') return text;
+      if (style === 'strikethrough') {
+        return text.split('').map(c => c + '\u0336').join('');
+      }
+      if (style === 'underline') {
+        return text.split('').map(c => c + '\u0332').join('');
+      }
+      const font = UNICODE_FONTS[style];
+      if (!font) return text;
+      return text.split('').map(c => font[c] || c).join('');
+    }
+
+    // Twitter character weight calculation (URLs = 23 chars)
+    function calcTwitterChars(text) {
+      const urlRegex = /https?:\/\/[^\s]+/g;
+      const withoutUrls = text.replace(urlRegex, '');
+      const urlMatches = text.match(urlRegex) || [];
+      return withoutUrls.length + (urlMatches.length * 23);
+    }
+
+    // Virality Score Calculator (0 - 100)
+    function calculateVirality(text, hashtags) {
+      let score = 40;
+      if (!text) return 0;
+      if (text.length > 50 && text.length < 280) score += 15;
+      if (/\d+/.test(text)) score += 10;
+      if (/\?/.test(text)) score += 10;
+      if (/[\uD800-\uDBFF][\uDC00-\uDFFF]|\p{Emoji}/u.test(text)) score += 10;
+      if (hashtags && hashtags.length >= 2 && hashtags.length <= 4) score += 10;
+      if (/here is how|truth|master|secret|framework|stop|why|steal|blueprint/i.test(text)) score += 15;
+      return Math.min(98, Math.max(25, score));
+    }
+
+    // Tab Switcher
     function switchTab(tabId) {
       document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
       document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-      event.target.classList.add('active');
-      document.getElementById('tab-' + tabId).classList.add('active');
+      const activeBtn = Array.from(document.querySelectorAll('.tab-btn')).find(b => b.getAttribute('onclick').includes(tabId));
+      if (activeBtn) activeBtn.classList.add('active');
+      const targetContent = document.getElementById('tab-' + tabId);
+      if (targetContent) targetContent.classList.add('active');
       if (tabId === 'agent') loadMcpConfig();
     }
 
-    async function runFormat() {
-      const text = document.getElementById('fmt-text').value;
+    // 100% Client-Side Formatter
+    function runFormat() {
+      const rawText = document.getElementById('fmt-text').value;
       const style = document.getElementById('fmt-style').value;
       const tagsStr = document.getElementById('fmt-tags').value;
-      const hashtags = tagsStr ? tagsStr.split(',').map(s => s.trim()).filter(Boolean) : [];
+      const hashtags = tagsStr ? tagsStr.split(',').map(s => s.trim().replace(/^#/, '')).filter(Boolean) : [];
+      const hashtagSuffix = hashtags.length > 0 ? '\n\n' + hashtags.map(h => '#' + h).join(' ') : '';
 
-      try {
-        const res = await fetch('/api/format', {
-          method: 'POST',
-          headers: {'Content-Type': 'application/json'},
-          body: JSON.stringify({text, platform: 'twitter', style, hashtags})
-        });
-        const data = await res.json();
-        
-        document.getElementById('tw-content').innerText = data.text || '';
-        document.getElementById('li-content').innerText = data.text || '';
-        document.getElementById('bs-content').innerText = data.text || '';
-        document.getElementById('th-content').innerText = data.text || '';
+      const styledText = applyUnicodeStyle(rawText, style) + hashtagSuffix;
+      const twChars = calcTwitterChars(styledText);
+      const totalChars = styledText.length;
+      const words = styledText.trim() ? styledText.trim().split(/\s+/).length : 0;
+      const isValid = twChars <= 280;
 
-        const countChip = document.getElementById('fmt-chip-count');
-        countChip.innerText = `${data.char_count} / 280 chars`;
-        countChip.className = 'chip ' + (data.is_valid ? 'good' : 'bad');
+      // Update mockups
+      document.getElementById('tw-content').innerText = styledText;
+      document.getElementById('li-content').innerText = styledText;
+      document.getElementById('bs-content').innerText = styledText;
+      document.getElementById('th-content').innerText = styledText;
 
-        document.getElementById('fmt-chip-words').innerText = `${data.word_count} words`;
-        
-        const validChip = document.getElementById('fmt-chip-valid');
-        validChip.innerText = data.is_valid ? '✅ Valid' : `⚠️ Exceeds by ${-data.remaining_chars}`;
-        validChip.className = 'chip ' + (data.is_valid ? 'good' : 'bad');
+      // Platform Badges
+      const twBadge = document.getElementById('tw-count');
+      twBadge.innerText = `${twChars} / 280`;
+      twBadge.className = 'chip ' + (twChars <= 280 ? 'good' : 'bad');
 
-        const pct = Math.min(100, (data.char_count / 280) * 100);
-        document.getElementById('compProgressBar').style.width = pct + '%';
-      } catch (e) {
-        console.error(e);
-      }
+      const liBadge = document.getElementById('li-count');
+      liBadge.innerText = `${totalChars} / 3000`;
+      liBadge.className = 'chip ' + (totalChars <= 3000 ? 'good' : 'bad');
+
+      const bsBadge = document.getElementById('bs-count');
+      bsBadge.innerText = `${totalChars} / 300`;
+      bsBadge.className = 'chip ' + (totalChars <= 300 ? 'good' : 'bad');
+
+      const thBadge = document.getElementById('th-count');
+      thBadge.innerText = `${totalChars} / 500`;
+      thBadge.className = 'chip ' + (totalChars <= 500 ? 'good' : 'bad');
+
+      // Top Counters
+      const countChip = document.getElementById('fmt-chip-count');
+      countChip.innerText = `${twChars} / 280 chars`;
+      countChip.className = 'chip ' + (isValid ? 'good' : 'bad');
+
+      document.getElementById('fmt-chip-words').innerText = `${words} words`;
+
+      const validChip = document.getElementById('fmt-chip-valid');
+      validChip.innerText = isValid ? '✅ Valid' : `⚠️ Exceeds by ${twChars - 280}`;
+      validChip.className = 'chip ' + (isValid ? 'good' : 'bad');
+
+      const pct = Math.min(100, (twChars / 280) * 100);
+      document.getElementById('compProgressBar').style.width = pct + '%';
+
+      // Virality Score
+      const virality = calculateVirality(rawText, hashtags);
+      document.getElementById('headerViralityValue').innerText = `${virality} / 100`;
     }
 
-    async function runSplit() {
+    // 100% Client-Side Thread Splitter
+    function splitTextIntoParagraphs(text, limit) {
+      const rawParas = text.split(/\n\s*\n/).map(p => p.trim()).filter(Boolean);
+      const chunks = [];
+
+      rawParas.forEach(p => {
+        if (p.length <= limit) {
+          chunks.push(p);
+        } else {
+          // Split by sentences
+          const sentences = p.match(/[^.!?]+[.!?]+(\s|$)|[^.!?]+$/g) || [p];
+          let currentChunk = '';
+          sentences.forEach(s => {
+            if ((currentChunk + ' ' + s).trim().length <= limit) {
+              currentChunk = (currentChunk + ' ' + s).trim();
+            } else {
+              if (currentChunk) chunks.push(currentChunk);
+              currentChunk = s.trim();
+            }
+          });
+          if (currentChunk) chunks.push(currentChunk);
+        }
+      });
+      return chunks;
+    }
+
+    let currentSplitPosts = [];
+
+    function runSplit() {
       const text = document.getElementById('split-text').value;
       const limit = parseInt(document.getElementById('split-limit').value) || 280;
-      const numbering_format = document.getElementById('split-format').value;
+      const format = document.getElementById('split-format').value;
 
-      try {
-        const res = await fetch('/api/split', {
-          method: 'POST',
-          headers: {'Content-Type': 'application/json'},
-          body: JSON.stringify({text, limit, numbering_format, numbering: true})
-        });
-        const data = await res.json();
-        document.getElementById('split-total-badge').innerText = `${data.total_posts} posts`;
-        const container = document.getElementById('split-results');
-        container.innerHTML = '';
-        data.posts.forEach((p, idx) => {
-          const div = document.createElement('div');
-          div.className = 'sim-card';
-          div.innerHTML = `<div class="sim-header"><span>Post ${idx+1}/${data.total_posts}</span><span class="chip good">${p.char_count} chars</span></div><div class="sim-content">${p.content}</div>`;
-          container.appendChild(div);
-        });
-      } catch (e) {
-        console.error(e);
+      const rawChunks = splitTextIntoParagraphs(text, limit - 15);
+      const total = rawChunks.length;
+      currentSplitPosts = [];
+
+      const container = document.getElementById('split-results');
+      container.innerHTML = '';
+      document.getElementById('split-total-badge').innerText = `${total} posts`;
+
+      rawChunks.forEach((chunk, idx) => {
+        const i = idx + 1;
+        let prefix = '';
+        let suffix = '';
+
+        if (format === 'fraction') prefix = `(${i}/${total}) `;
+        else if (format === 'fraction_thread') prefix = i === 1 ? `🧵 1/${total}\n\n` : `${i}/${total} `;
+        else if (format === 'bracket') prefix = `[${i}/${total}] `;
+        else if (format === 'counter') prefix = `${i}. `;
+        else if (format === 'slash') prefix = `${i}/ `;
+
+        const postContent = `${prefix}${chunk}${suffix}`;
+        currentSplitPosts.push(postContent);
+
+        const card = document.createElement('div');
+        card.className = 'sim-card';
+        card.innerHTML = `
+          <div class="sim-header">
+            <span>Post ${i}/${total}</span>
+            <div style="display:flex; gap:0.5rem; align-items:center;">
+              <span class="chip good">${postContent.length} chars</span>
+              <button class="btn-sm" onclick="copyText(${JSON.stringify(postContent)})">Copy</button>
+            </div>
+          </div>
+          <div class="sim-content">${postContent}</div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    // 100% Client-Side Viral Hook Generator
+    const HOOK_RECIPES = [
+      {
+        framework: "Contrarian / Hot Take",
+        fn: (t, n) => `90% of ${n || 'people'} approach ${t} completely backwards.\n\nHere is the contrarian framework that actually works:`
+      },
+      {
+        framework: "Step-by-Step Blueprint",
+        fn: (t, n) => `The complete step-by-step blueprint to master ${t} as a ${n || 'builder'}.\n\nBookmark this 7-step roadmap:`
+      },
+      {
+        framework: "Numbered List / Micro-habits",
+        fn: (t, n) => `7 brutal truths about ${t} every ${n || 'practitioner'} needs to hear before scaling:`
+      },
+      {
+        framework: "Curiosity Gap / Mystery",
+        fn: (t, n) => `Most ${n || 'professionals'} waste 20+ hours a week on ${t}.\n\nHere is the quiet secret top performers use to automate it:`
+      },
+      {
+        framework: "Zero to Mastery Transformation",
+        fn: (t, n) => `How I went from zero to production-grade ${t} in 30 days (without burning out as a ${n || 'creator'}):`
+      },
+      {
+        framework: "How-To Masterclass",
+        fn: (t, n) => `How to build a sovereign ${t} system in a single afternoon.\n\nA masterclass for ${n || 'engineers'}:`
+      },
+      {
+        framework: "Costly Mistakes / Negative Bias",
+        fn: (t, n) => `The 5 most expensive mistakes I made with ${t} so you don't have to repeat them:`
+      },
+      {
+        framework: "Secret Blueprint",
+        fn: (t, n) => `The behind-the-scenes architecture behind our ${t} pipeline.\n\nSteal this blueprint:`
+      },
+      {
+        framework: "Behind-the-Scenes Story",
+        fn: (t, n) => `Last month, we dismantled our entire ${t} setup.\n\nHere is why it was the best decision for our ${n || 'team'}:`
+      },
+      {
+        framework: "The 80/20 Rule",
+        fn: (t, n) => `The Pareto Principle applied to ${t}: The 20% of skills that generate 80% of results for ${n || 'developers'}:`
+      }
+    ];
+
+    function runHooks() {
+      const topic = document.getElementById('hook-topic').value || 'System Architecture';
+      const niche = document.getElementById('hook-niche').value || 'Software Engineers';
+      const filter = document.getElementById('hook-framework').value;
+
+      const container = document.getElementById('hooks-results');
+      container.innerHTML = '';
+
+      HOOK_RECIPES.forEach(recipe => {
+        const text = recipe.fn(topic, niche);
+        const card = document.createElement('div');
+        card.className = 'sim-card';
+        card.innerHTML = `
+          <div class="sim-header">
+            <span style="font-size:0.75rem; text-transform:uppercase; color:#8ab4f8; font-weight:700;">${recipe.framework}</span>
+            <button class="btn-sm" onclick="copyText(${JSON.stringify(text)})">Copy Hook</button>
+          </div>
+          <div class="sim-content" style="font-size:0.95rem; line-height:1.5;">${text}</div>
+        `;
+        container.appendChild(card);
+      });
+      showToast('Generated 10 high-converting viral hooks!');
+    }
+
+    // 100% Client-Side MCP Configs
+    function loadMcpConfig() {
+      const claude = {
+        "mcpServers": {
+          "omnipost": {
+            "command": "python",
+            "args": ["-m", "omnipost_social_engine.mcp_server"],
+            "env": { "OMNIPOST_OFFLINE": "1" }
+          }
+        }
+      };
+
+      const cursor = {
+        "mcpServers": {
+          "omnipost-studio": {
+            "command": "npx",
+            "args": ["-y", "@nullai/omnipost-mcp"],
+            "env": { "LOCAL_FIRST": "true" }
+          }
+        }
+      };
+
+      const cline = {
+        "mcpServers": {
+          "omnipost": {
+            "command": "python3",
+            "args": ["-m", "omnipost_social_engine.mcp_server"]
+          }
+        }
+      };
+
+      const zed = {
+        "context_servers": {
+          "omnipost": {
+            "command": "python3",
+            "args": ["-m", "omnipost_social_engine.mcp_server"]
+          }
+        }
+      };
+
+      document.getElementById('mcp-claude').innerText = JSON.stringify(claude, null, 2);
+      document.getElementById('mcp-cursor').innerText = JSON.stringify(cursor, null, 2);
+      document.getElementById('mcp-cline').innerText = JSON.stringify(cline, null, 2);
+      document.getElementById('mcp-zed').innerText = JSON.stringify(zed, null, 2);
+    }
+
+    // Action Interceptors & Paywall Logic
+    function copyAllThreadCards() {
+      if (!isProLicensed) {
+        openLicenseModal();
+        return;
+      }
+      const bundle = currentSplitPosts.join('\n\n---\n\n');
+      copyText(bundle);
+      showToast(`Copied all ${currentSplitPosts.length} thread cards!`);
+    }
+
+    function exportThreadJson() {
+      if (!isProLicensed) {
+        openLicenseModal();
+        return;
+      }
+      const payload = {
+        tool: "omnipost-social-engine",
+        generatedAt: new Date().toISOString(),
+        total_posts: currentSplitPosts.length,
+        posts: currentSplitPosts.map((content, idx) => ({ index: idx + 1, content, length: content.length }))
+      };
+      downloadJson(payload, `omnipost-thread-${Date.now()}.json`);
+      showToast('Exported thread JSON bundle!');
+    }
+
+    function exportFullCampaign() {
+      if (!isProLicensed) {
+        openLicenseModal();
+        return;
+      }
+      const payload = {
+        tool: "omnipost-social-engine",
+        version: "2.4.0",
+        composer: {
+          master_text: document.getElementById('fmt-text').value,
+          style: document.getElementById('fmt-style').value,
+          tags: document.getElementById('fmt-tags').value
+        },
+        thread: {
+          posts: currentSplitPosts
+        },
+        mcp_pipeline_active: true,
+        exportedAt: new Date().toISOString()
+      };
+      downloadJson(payload, `omnipost-campaign-full-${Date.now()}.json`);
+      showToast('Exported full campaign intelligence bundle!');
+    }
+
+    // License Management
+    function checkLicense() {
+      const urlParams = new URLSearchParams(window.location.search);
+      if (urlParams.get('licensed') === 'true' || urlParams.get('pro') === '1') {
+        localStorage.setItem('omnipost_pro_licensed', 'true');
+      }
+      isProLicensed = localStorage.getItem('omnipost_pro_licensed') === 'true';
+
+      const licenseBadgeText = document.getElementById('licenseBadgeText');
+      const salesBanner = document.getElementById('salesBanner');
+      const campaignWrapper = document.getElementById('campaignPaywallWrapper');
+      const activateBtn = document.getElementById('activateKeyBtn');
+
+      if (isProLicensed) {
+        if (campaignWrapper) campaignWrapper.classList.remove('paywall-locked');
+        if (licenseBadgeText) licenseBadgeText.textContent = '⭐ PRO ACTIVE';
+        if (salesBanner) salesBanner.style.display = 'none';
+        if (activateBtn) activateBtn.style.display = 'none';
+      } else {
+        if (campaignWrapper) campaignWrapper.classList.add('paywall-locked');
+        if (licenseBadgeText) licenseBadgeText.textContent = 'FREE TIER';
+        if (salesBanner) salesBanner.style.display = 'flex';
+        if (activateBtn) activateBtn.style.display = 'inline-block';
       }
     }
 
-    async function runHooks() {
-      const topic = document.getElementById('hook-topic').value;
-      const niche = document.getElementById('hook-niche').value;
-      const framework = document.getElementById('hook-framework').value;
+    function openLicenseModal() {
+      document.getElementById('licenseModal').classList.add('open');
+    }
 
-      try {
-        const res = await fetch('/api/hooks', {
-          method: 'POST',
-          headers: {'Content-Type': 'application/json'},
-          body: JSON.stringify({topic, niche, framework, count: 10})
-        });
-        const data = await res.json();
-        const container = document.getElementById('hooks-results');
-        container.innerHTML = '';
-        data.hooks.forEach(h => {
-          const div = document.createElement('div');
-          div.className = 'sim-card';
-          div.innerHTML = `<div style="font-size:0.75rem; text-transform:uppercase; color:#D4AF37; font-weight:700;">${h.framework}</div><div style="font-size:0.95rem; margin-top:0.3rem;">${h.hook}</div>`;
-          container.appendChild(div);
-        });
-      } catch (e) {
-        console.error(e);
+    function closeLicenseModal() {
+      document.getElementById('licenseModal').classList.remove('open');
+    }
+
+    function activateLicenseKey() {
+      const val = document.getElementById('licenseInput').value.trim();
+      if (val.length > 3 || val.toUpperCase() === 'OMNIPOST-PRO-2026' || val.includes('@')) {
+        localStorage.setItem('omnipost_pro_licensed', 'true');
+        checkLicense();
+        closeLicenseModal();
+        showToast('⭐ Omnipost Pro successfully activated! All paywalls dissolved.');
+      } else {
+        alert('Please enter a valid receipt email or license key.');
       }
     }
 
-    async function loadMcpConfig() {
-      try {
-        const res = await fetch('/api/mcp/config');
-        const data = await res.json();
-        document.getElementById('mcp-claude').innerText = JSON.stringify(data.claude_desktop, null, 2);
-        document.getElementById('mcp-cursor').innerText = JSON.stringify(data.cursor, null, 2);
-        document.getElementById('mcp-cline').innerText = JSON.stringify(data.cline, null, 2);
-        document.getElementById('mcp-zed').innerText = JSON.stringify(data.zed, null, 2);
-      } catch (e) {
-        console.error(e);
+    function activateDemoLicense() {
+      localStorage.setItem('omnipost_pro_licensed', 'true');
+      checkLicense();
+      closeLicenseModal();
+      showToast('⭐ Instant preview license granted! All exports unlocked.');
+    }
+
+    function openDePayCheckout(e) {
+      if (e && e.preventDefault) e.preventDefault();
+      if (typeof DePayButtons !== 'undefined') {
+        try {
+          DePayButtons.init({
+            integration: '428790dd-7ad1-407c-8ecf-c048c77a4cb8',
+            container: document.body
+          });
+          return;
+        } catch (err) {
+          console.warn('DePay widget initialization error:', err);
+        }
       }
+      window.open('https://solana.fm/address/GG2eQbVh8ut1BK6j1A2tz7pSySdLpD38BgyEhGcxdXoK', '_blank');
+      openLicenseModal();
+    }
+
+    function triggerSolanaCheckout(e) {
+      openDePayCheckout(e);
+    }
+
+    // Copy & Download Utilities
+    function copyCardContent(elementId) {
+      const text = document.getElementById(elementId).innerText;
+      copyText(text);
+    }
+
+    function copyBoxContent(elementId) {
+      const text = document.getElementById(elementId).innerText;
+      copyText(text);
+    }
+
+    function copyText(text) {
+      navigator.clipboard.writeText(text).then(() => {
+        showToast('📋 Copied to clipboard!');
+      }).catch(() => {
+        showToast('📋 Copied!');
+      });
+    }
+
+    function downloadJson(data, filename) {
+      const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }
+
+    function showToast(msg) {
+      const t = document.getElementById('toast');
+      t.innerText = msg;
+      t.style.display = 'block';
+      setTimeout(() => { t.style.display = 'none'; }, 2200);
     }
 
     window.addEventListener('DOMContentLoaded', () => {
+      checkLicense();
       runFormat();
       runSplit();
       runHooks();
+      loadMcpConfig();
     });
   </script>
 </body>

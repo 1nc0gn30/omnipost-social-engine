@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """
 Omnipost Social Engine - Command Line Interface (CLI)
 Multi-command CLI for formatting, thread splitting, viral hook generation,
