@@ -13,13 +13,18 @@
   <meta property="og:url" content="https://omnipost.nullai.tech">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://omnipost.nullai.tech/assets/banner.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Omnipost Studio Sovereign Social Engine & Viral Copy Intelligence">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:site" content="@1nc0gn30">
   <meta name="twitter:creator" content="@1nc0gn30">
   <meta name="twitter:image" content="https://omnipost.nullai.tech/assets/banner.png">
+  <meta name="twitter:image:alt" content="Omnipost Studio Sovereign Social Engine & Viral Copy Intelligence">
   <link rel="canonical" href="https://omnipost.nullai.tech">
   <link rel="icon" type="image/x-icon" href="/favicon.ico">
-  <link rel="icon" type="image/png" href="/assets/icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icon.png">
   <script src="https://integrate.depay.com/widgets/v13.js" defer></script>
 
   <!-- AEO & SEO Schema.org Graph -->
@@ -681,6 +686,7 @@
 
   <header>
     <div class="brand-container">
+      <img src="/assets/icon.png" alt="Omnipost Studio Logo" class="brand-icon" style="width: 28px; height: 28px; border-radius: 7px; object-fit: cover; border: 1px solid rgba(255,255,255,0.15);">
       <div class="google-dots">
         <div class="dot-blue"></div>
         <div class="dot-red"></div>
@@ -688,16 +694,16 @@
         <div class="dot-green"></div>
       </div>
       <div class="brand-title">Omnipost Studio</div>
-      <div class="brand-badge">v2.4 SOVEREIGN</div>
+      <div class="brand-badge">v2.5 SOVEREIGN</div>
     </div>
     <div class="header-status">
       <div class="virality-dial">
         <span>⚡ Virality Readiness:</span>
         <span id="headerViralityValue">88 / 100</span>
       </div>
-      <div class="badge-status" id="licenseStatusBadge">
+      <div class="badge-status" id="licenseBadge">
         <span class="status-dot"></span>
-        <span id="licenseBadgeText">FREE TIER</span>
+        <span id="licenseBadgeText">⚡ FREE TIER</span>
       </div>
       <button class="btn-key-activate" id="activateKeyBtn" onclick="openLicenseModal()">
         🔑 UNLOCK PRO
@@ -1060,11 +1066,11 @@ Simplicity scales.</textarea>
         <label style="display: block; font-family: var(--font-mono); font-size: 0.75rem; font-weight: 600; color: #8ab4f8; margin-bottom: 0.4rem;">
           LICENSE KEY OR STRIPE EMAIL:
         </label>
-        <input type="text" id="licenseInput" placeholder="pro_live_... or your@email.com" style="width: 100%; font-size: 0.95rem; min-height: 44px;">
+        <input type="text" id="licenseInput" placeholder="OMNIPOST-PRO-2026 or receipt email" style="width: 100%; font-size: 0.95rem; min-height: 44px;">
       </div>
 
       <div style="display: flex; gap: 0.8rem; margin-bottom: 1.5rem; flex-wrap: wrap;">
-        <button class="btn-checkout btn-stripe" onclick="activateLicenseKey()" style="flex: 1; justify-content: center; min-width: 140px;">
+        <button id="btnActivateKey" class="btn-checkout btn-stripe" onclick="activateLicenseKey()" style="flex: 1; justify-content: center; min-width: 140px;">
           Activate Pro ⚡
         </button>
         <button class="btn-checkout btn-solana" onclick="activateDemoLicense()" style="flex: 1; justify-content: center; min-width: 140px;">
@@ -1442,7 +1448,7 @@ Simplicity scales.</textarea>
       }
       const payload = {
         tool: "omnipost-social-engine",
-        version: "2.4.0",
+        version: "2.5.0",
         composer: {
           master_text: document.getElementById('fmt-text').value,
           style: document.getElementById('fmt-style').value,
@@ -1463,8 +1469,11 @@ Simplicity scales.</textarea>
       const urlParams = new URLSearchParams(window.location.search);
       if (urlParams.get('licensed') === 'true' || urlParams.get('pro') === '1') {
         localStorage.setItem('omnipost_pro_licensed', 'true');
+        localStorage.setItem('omnipost_pro_key', 'true');
       }
-      isProLicensed = localStorage.getItem('omnipost_pro_licensed') === 'true';
+      isProLicensed = localStorage.getItem('omnipost_pro_licensed') === 'true' ||
+                      localStorage.getItem('omnipost_pro_key') === 'true' ||
+                      localStorage.getItem('pro_licensed') === 'true';
 
       const licenseBadgeText = document.getElementById('licenseBadgeText');
       const salesBanner = document.getElementById('salesBanner');
@@ -1478,7 +1487,7 @@ Simplicity scales.</textarea>
         if (activateBtn) activateBtn.style.display = 'none';
       } else {
         if (campaignWrapper) campaignWrapper.classList.add('paywall-locked');
-        if (licenseBadgeText) licenseBadgeText.textContent = 'FREE TIER';
+        if (licenseBadgeText) licenseBadgeText.textContent = '⚡ FREE TIER';
         if (salesBanner) salesBanner.style.display = 'flex';
         if (activateBtn) activateBtn.style.display = 'inline-block';
       }
@@ -1492,10 +1501,11 @@ Simplicity scales.</textarea>
       document.getElementById('licenseModal').classList.remove('open');
     }
 
-    function activateLicenseKey() {
-      const val = document.getElementById('licenseInput').value.trim();
+    function activateLicenseKey(providedKey) {
+      const val = (providedKey || (document.getElementById('licenseInput') ? document.getElementById('licenseInput').value : '')).trim();
       if (val.length > 3 || val.toUpperCase() === 'OMNIPOST-PRO-2026' || val.includes('@')) {
         localStorage.setItem('omnipost_pro_licensed', 'true');
+        localStorage.setItem('omnipost_pro_key', val);
         checkLicense();
         closeLicenseModal();
         showToast('⭐ Omnipost Pro successfully activated! All paywalls dissolved.');
@@ -1506,6 +1516,7 @@ Simplicity scales.</textarea>
 
     function activateDemoLicense() {
       localStorage.setItem('omnipost_pro_licensed', 'true');
+      localStorage.setItem('omnipost_pro_key', 'demo_preview');
       checkLicense();
       closeLicenseModal();
       showToast('⭐ Instant preview license granted! All exports unlocked.');
