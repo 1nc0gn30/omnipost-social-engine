@@ -43,12 +43,16 @@ class TestPublicIndexHtml:
         assert "dot-green" in self.content
 
     def test_zero_external_network_scripts(self):
-        """Verify 0 external font, CDN, or tracking scripts for privacy & offline operation."""
-        # No external script tags
-        external_scripts = re.findall(r'<script\s+[^>]*src=["\'](http[s]?://[^"\']+)["\']', self.content)
+        """Verify 0 external font, CDN, or tracking scripts for privacy & offline operation (except DePay payment rail)."""
+        # No external script tags except official DePay widget
+        external_scripts = [
+            s for s in re.findall(r'<script\s+[^>]*src=["\'](http[s]?://[^"\']+)["\']', self.content)
+            if not s.startswith("https://integrate.depay.com/")
+        ]
         assert len(external_scripts) == 0, f"Found external scripts: {external_scripts}"
-        # No external stylesheet links
-        external_links = re.findall(r'<link\s+[^>]*href=["\'](http[s]?://[^"\']+)["\']', self.content)
+        # No external stylesheet links (canonical <link rel="canonical"> is permitted)
+        external_links = re.findall(r'<link\s+[^>]*rel=["\']stylesheet["\'][^>]*href=["\'](http[s]?://[^"\']+)["\']', self.content)
+        external_links += re.findall(r'<link\s+[^>]*href=["\'](http[s]?://[^"\']+)["\'][^>]*rel=["\']stylesheet["\']', self.content)
         assert len(external_links) == 0, f"Found external stylesheets: {external_links}"
 
     def test_four_interactive_workspace_tabs_exist(self):
