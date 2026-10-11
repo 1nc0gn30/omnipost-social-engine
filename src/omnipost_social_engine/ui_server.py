@@ -37,6 +37,17 @@ from .utm_builder import (
 )
 
 
+def _safe_rel(raw: str) -> str:
+    """Request path -> safe relative path inside a static dir; '' (index) if it
+    tries to climb out with '..' or is absolute. Raw request paths are not normalised."""
+    from urllib.parse import unquote
+    rel = unquote(str(raw or "")).replace("\\", "/").lstrip("/")
+    parts = [p for p in rel.split("/") if p not in ("", ".")]
+    if any(p == ".." for p in parts) or ":" in (parts[0] if parts else ""):
+        return ""
+    return "/".join(parts)
+
+
 def get_public_dir() -> str:
     """Find the public static assets directory."""
     # Check relative to module path (repository root)
@@ -1053,7 +1064,7 @@ class OmnipostRequestHandler(http.server.BaseHTTPRequestHandler):
             return
 
         # Attempt to serve file from public_dir
-        rel_path = path.lstrip("/")
+        rel_path = _safe_rel(path)
         file_path = os.path.normpath(os.path.join(public_dir, rel_path))
 
         # Security check: ensure path is within public_dir
