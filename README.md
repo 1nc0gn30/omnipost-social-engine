@@ -1,3 +1,9 @@
+<div align="center">
+  <img src="assets/hero-banner.svg" alt="OmniPost Social Engine — Sovereign Architecture Banner" width="100%" />
+</div>
+
+<br />
+
 # 🚀 Omnipost Social Engine
 
 <div align="center">
