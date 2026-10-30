@@ -834,7 +834,7 @@ class OmnipostRequestHandler(http.server.BaseHTTPRequestHandler):
             path = "/"
 
         # API Endpoints
-        if path == "/api/health":
+        if path in ("/health", "/api/health"):
             self._send_json({
                 "status": "ok",
                 "service": "omnipost-studio",

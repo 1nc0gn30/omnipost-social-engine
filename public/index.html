@@ -25,8 +25,6 @@
   <link rel="icon" type="image/x-icon" href="/favicon.ico">
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/icon.png">
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/icon.png">
-  <script src="https://integrate.depay.com/widgets/v13.js" defer></script>
-
   <!-- AEO & SEO Schema.org Graph -->
   <script type="application/ld+json">
   {
@@ -41,7 +39,7 @@
         "description": "Professional in-browser multi-platform social media formatter, thread splitter, viral hook generator, and MCP AI agent hub.",
         "offers": {
           "@type": "Offer",
-          "price": "19.00",
+          "price": "0",
           "priceCurrency": "USD"
         },
         "author": {
@@ -358,7 +356,7 @@
     }
 
     .paywall-locked .paywalled-content {
-      filter: blur(6px);
+      filter: none;
       user-select: none;
       pointer-events: none;
     }
@@ -368,7 +366,7 @@
       position: absolute;
       inset: 0;
       background: rgba(23, 23, 23, 0.85);
-      backdrop-filter: blur(4px);
+      backdrop-filter: none;
       flex-direction: column;
       align-items: center;
       justify-content: center;
@@ -396,7 +394,7 @@
       position: fixed;
       inset: 0;
       background: rgba(0, 0, 0, 0.75);
-      backdrop-filter: blur(8px);
+      backdrop-filter: none;
       z-index: 2000;
       align-items: center;
       justify-content: center;
@@ -681,8 +679,50 @@
   </style>
 
   <link rel="stylesheet" href="zoth-theme.css">
+  <link rel="stylesheet" href="wave.css">
+  <link rel="stylesheet" href="wave-states.css">
+  <link rel="stylesheet" href="wave-type.css">
+
+  <!-- Zoth 100% Open-Access & Buy Us a Coffee Invariant -->
+  <script id="zoth-open-access-init">
+    (function() {
+      try {
+        var keys = ['agent_audiocipher_pro', 'agent_cyber_turtle_pro', 'agent_datamosh_pro', 'agent_nexus3d_pro', 'agent_policy_pro', 'audiocipher_license', 'audiocipher_pro_licensed', 'badge3d_pro_licensed', 'certpath_pro_key', 'certpath_pro_licensed', 'cron_rhythm_pro_key', 'cron_rhythm_pro_licensed', 'cwv-speed-engine_pro_licensed', 'cwv_pro_licensed', 'cyber_turtle_pro_licensed', 'datamosh_pro_licensed', 'deepsearch-research-agent_pro_licensed', 'deepsearch_pro_licensed', 'entropy_studio_licensed', 'envguard-secrets-vault_pro_licensed', 'envguard_pro_license', 'etsy_connector_pro', 'jwt_guard_licensed', 'mdg_pro_licensed', 'neuro_pro_licensed', 'nexus3d_pro_licensed', 'omnipost_pro_key', 'omnipost_pro_licensed', 'osint_pro_licensed', 'payload-entropy-studio_pro_licensed', 'polyglot_pro_licensed', 'pro_licensed', 'promptmaster_pro_licensed', 'promptmaster_pro_active', 'robots-txt-auditor_pro_licensed', 'robots_pro_licensed', 'schema_illustrator_pro_licensed', 'sovereign_pro_licensed', 'subsweep-lead-scanner_pro_licensed', 'subsweep_licensed', 'turtle_pro_licensed', 'ufo_sacred_licensed', 'vector-search-engine_pro_licensed', 'vector_studio_pro_licensed', 'web-security-guard_pro_licensed', 'web_security_guard_licensed', 'yourdigitalspace_pro', 'zela_guide_pro_licensed', 'zoth_ascii_magic_pro', 'zoth_audiocipher_licensed', 'zoth_badge3d_licensed', 'zoth_cyber_turtle_licensed', 'zoth_datamosh_licensed', 'zoth_etsy_licensed', 'zoth_nexus3d_licensed', 'zoth_osint_licensed', 'zoth_policy_licensed', 'zoth_sacred_licensed', 'zoth_ufo_licensed'];
+        for (var i = 0; i < keys.length; i++) {
+          localStorage.setItem(keys[i], 'true');
+        }
+        localStorage.setItem('pm_license_v2', JSON.stringify({ method: 'open_access', ref: 'free_forever', at: '2026-01-01T00:00:00Z' }));
+        window.isPro = true;
+        window.isProLicensed = true;
+      } catch (e) {}
+    })();
+  </script>
+  <style id="zoth-open-access-override">
+    .paywall-overlay, .output-paywall-overlay, #outputPaywallOverlay, #schemaPaywallOverlay,
+    #transformerPaywallOverlay, #proPaywallModal, #licenseModal, #salesBanner, #founding-offer-banner,
+    #funnelHeroBanner, [data-alias="paywallOverlay"], [data-alias="founding-offer-banner"] {
+      display: none !important;
+      opacity: 0 !important;
+      pointer-events: none !important;
+    }
+    .paywall-wrap #outputPreview, .paywall-wrap #reportContentArea, .paywall-content,
+    .paywall-content.locked, .paywall-wrap.is-locked #outputPreview, .paywall-wrap.locked #outputPreview {
+      filter: none !important;
+      -webkit-filter: none !important;
+      user-select: auto !important;
+      pointer-events: auto !important;
+    }
+  </style>
+
 </head>
 <body>
+
+<div id="zoth-coffee-support-bar" style="background: linear-gradient(90deg, rgba(16,185,129,0.12), rgba(212,175,55,0.14)); border-bottom: 1px solid rgba(212,175,55,0.35); padding: 8px 16px; display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 12px; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size: 12px; z-index: 9999;">
+  <span style="color: #10B981; font-weight: 800;">✦ 100% FREE &amp; OPEN ACCESS · ZERO PAYWALLS</span>
+  <a href="https://buy.stripe.com/3cIfZg27PdKo2D64Ocfw40X" target="_blank" rel="noopener noreferrer" style="background: #D4AF37; color: #08080B; padding: 4px 12px; border-radius: 6px; font-weight: 800; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">☕ Buy Us a Coffee (Stripe)</a>
+  <a href="solana:GG2eQbVh8ut1BK6j1A2tz7pSySdLpD38BgyEhGcxdXoK" onclick="if(navigator.clipboard){navigator.clipboard.writeText('GG2eQbVh8ut1BK6j1A2tz7pSySdLpD38BgyEhGcxdXoK');this.textContent='✓ Copied GG2eQb...dXoK!';}" style="background: rgba(20,241,149,0.15); color: #14F195; border: 1px solid rgba(20,241,149,0.45); padding: 4px 12px; border-radius: 6px; font-weight: 800; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">◎ Solana Tip (GG2e...dXoK)</a>
+</div>
+
 
   <header>
     <div class="brand-container">
@@ -701,51 +741,22 @@
         <span>⚡ Virality Readiness:</span>
         <span id="headerViralityValue">88 / 100</span>
       </div>
-      <div class="badge-status" id="licenseBadge">
-        <span class="status-dot"></span>
-        <span id="licenseBadgeText">⚡ FREE TIER</span>
+      <div class="badge-status" id="licenseBadge" style="display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 9999px; background: rgba(16,185,129,0.15); border: 1px solid rgba(16,185,129,0.4); font-size: 11px; font-weight: 800; color: #10B981;">
+        <span style="width: 7px; height: 7px; border-radius: 50%; background: #10B981; display: inline-block;"></span>
+        <span id="licenseBadgeText">✦ 100% UNLOCKED</span>
       </div>
-      <button class="btn-key-activate" id="activateKeyBtn" onclick="openLicenseModal()">
-        🔑 UNLOCK PRO
-      </button>
     </div>
   </header>
 
   <!-- 4 Interactive Workspace Tabs -->
   <nav class="tabs-bar">
-    <button class="tab-btn active" onclick="switchTab('composer')">Multi-Platform Composer &amp; Simulator</button>
+    <button class="tab-btn active" onclick="switchTab('composer')">Multi-Platform Composer & Simulator</button>
     <button class="tab-btn" onclick="switchTab('splitter')">Smart Thread Splitter</button>
     <button class="tab-btn" onclick="switchTab('hooks')">Viral Hook Generator</button>
-    <button class="tab-btn" onclick="switchTab('agent')">AI Agent &amp; MCP Hub</button>
+    <button class="tab-btn" onclick="switchTab('agent')">AI Agent & MCP Hub</button>
   </nav>
 
   <main>
-
-    <!-- Founding Member Sales Funnel Banner -->
-    <div class="sales-banner" id="salesBanner" data-alias="founding-offer-banner">
-      <div class="sales-content">
-        <div class="sales-badge">
-          ⭐ FOUNDING MEMBER ACCESS · 76% DISCOUNT
-        </div>
-        <div class="sales-title">
-          Unlock Unlimited Thread Splitting Exports, Multi-Platform Bundles &amp; Automated MCP Campaigns
-        </div>
-        <div class="sales-desc">
-          Get lifetime access to one-click multi-platform thread copying, campaign JSON downloads, and automated AI agent MCP pipelines for <strong>$19 one-time</strong> (<del style="color: #9aa0a6;">$79 regular</del>). Dual Stripe + Solana checkout rails.
-        </div>
-      </div>
-      <div class="sales-ctas">
-        <a href="https://buy.stripe.com/4gMfZg9AheOsdhKbcAfw40L" target="_blank" rel="noopener" class="btn-checkout btn-stripe">
-          💳 Unlock Pro — $19 Lifetime
-        </a>
-        <button onclick="openDePayCheckout(event)" class="btn-checkout btn-solana">
-          ◎ Pay with Solana
-        </button>
-        <button onclick="openLicenseModal()" class="btn-license-inline">
-          Already have a key? Activate
-        </button>
-      </div>
-    </div>
 
     <!-- TAB 1: Multi-Platform Composer & Simulator -->
     <div id="tab-composer" class="tab-content active">
@@ -871,8 +882,8 @@ What is your favorite stdlib trick? Drop it below 👇</textarea>
 Last month, we audited our team's social publishing workflow. We were juggling 4 different SaaS tabs, fighting character count truncations, and fixing broken line breaks on mobile.
 
 Instead of subscribing to another $99/mo tool, we engineered Omnipost:
-1/ 100% offline &amp; local-first
-2/ Native Model Context Protocol (MCP) server for Claude &amp; Cursor
+1/ 100% offline & local-first
+2/ Native Model Context Protocol (MCP) server for Claude & Cursor
 3/ Material 3 UI Studio served over local HTTP
 4/ Automatic Unicode typography styling
 
@@ -977,10 +988,10 @@ Simplicity scales.</textarea>
           </div>
         </div>
 
-        <!-- Full Campaign Automation Pipeline (Paywalled) -->
+        <!-- Full Campaign Automation Pipeline -->
         <div style="margin-top: 1.5rem;">
           <div class="card-title">🚀 Automated AI Agent Execution Payload</div>
-          <div class="paywall-wrapper paywall-locked" id="campaignPaywallWrapper" style="margin-top:0.75rem;">
+          <div class="paywall-wrapper" id="campaignPaywallWrapper" style="margin-top:0.75rem;">
             <div class="code-box paywalled-content" id="mcpCampaignPayload">
 {
   "protocol": "mcp/v1",
@@ -1015,79 +1026,11 @@ Simplicity scales.</textarea>
   ]
 }
             </div>
-            <div class="paywall-overlay">
-              <div class="lock-card">
-                <div style="font-size: 2.2rem; margin-bottom: 0.5rem;">🔒</div>
-                <h4 style="font-size: 1.15rem; font-weight: 700; margin-bottom: 0.4rem; color: #FFFFFF;">Pro MCP Campaign Pipeline Locked</h4>
-                <p style="font-size: 0.82rem; margin-bottom: 1.25rem; line-height: 1.5; color: var(--md-sys-color-on-surface-variant);">
-                  Unlock automated AI Agent pipelines, complete campaign JSON exports, and full thread copy bundles.
-                </p>
-                <div style="display: flex; flex-direction: column; gap: 0.6rem;">
-                  <a href="https://buy.stripe.com/4gMfZg9AheOsdhKbcAfw40L" target="_blank" rel="noopener" class="btn-checkout btn-stripe" style="justify-content: center;">
-                    💳 Unlock Pro — $19 Lifetime
-                  </a>
-                  <button onclick="openDePayCheckout(event)" class="btn-checkout btn-solana" style="justify-content: center;">
-                    ◎ Pay with Solana
-                  </button>
-                  <button id="btn-paywall-key" onclick="openLicenseModal()" style="background: none; border: none; color: #8ab4f8; font-size: 0.8rem; cursor: pointer; text-decoration: underline; margin-top: 0.3rem;">
-                    Already have a license key? Activate now
-                  </button>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
       </div>
     </div>
   </main>
-
-  <!-- Pro Paywall Modal -->
-  <div class="modal-backdrop" id="licenseModal" data-alias="paywall-modal">
-    <div class="modal-card">
-      <button class="modal-close" onclick="closeLicenseModal()">&times;</button>
-      <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.8rem;">
-        <span style="font-size: 1.5rem;">⭐</span>
-        <h2 style="font-size: 1.2rem; font-weight: 700; color: #FFFFFF;">Omnipost Pro Activation</h2>
-      </div>
-      <p style="font-size: 0.85rem; color: var(--md-sys-color-on-surface-variant); margin-bottom: 1.2rem;">
-        Get instant lifetime access to all multi-platform thread formats, automated MCP pipelines, and bulk exports for $19.
-      </p>
-
-      <div style="display: flex; gap: 0.6rem; flex-wrap: wrap; margin-bottom: 1.2rem;">
-        <a href="https://buy.stripe.com/4gMfZg9AheOsdhKbcAfw40L" target="_blank" rel="noopener" class="btn-checkout btn-stripe" style="flex: 1; justify-content: center;">
-          💳 Buy with Stripe ($19)
-        </a>
-        <button class="btn-checkout btn-solana" onclick="openDePayCheckout(event)" style="flex: 1; justify-content: center;">
-          ◎ Pay with Solana
-        </button>
-      </div>
-
-      <div style="margin-bottom: 1.2rem;">
-        <label style="display: block; font-family: var(--font-mono); font-size: 0.75rem; font-weight: 600; color: #8ab4f8; margin-bottom: 0.4rem;">
-          LICENSE KEY OR STRIPE EMAIL:
-        </label>
-        <input type="text" id="license-input" data-alias="license-input" placeholder="OMNIPOST-PRO-2026 or receipt email" style="width: 100%; font-size: 0.95rem; min-height: 44px;">
-      </div>
-
-      <div style="display: flex; gap: 0.8rem; margin-bottom: 1.5rem; flex-wrap: wrap;">
-        <button id="btnActivateKey" class="btn-checkout btn-stripe" onclick="activateLicenseKey()" style="flex: 1; justify-content: center; min-width: 140px;">
-          Activate Pro ⚡
-        </button>
-        <button class="btn-checkout btn-solana" onclick="activateDemoLicense()" style="flex: 1; justify-content: center; min-width: 140px;">
-          Instant Preview Key
-        </button>
-      </div>
-
-      <div style="padding: 1rem; border-radius: 8px; background: rgba(255,255,255,0.04); border: 1px solid var(--md-sys-color-outline); font-size: 0.78rem; color: var(--md-sys-color-on-surface-variant); line-height: 1.6;">
-        <strong style="color: #8ab4f8;">Pro Feature Matrix:</strong><br>
-        ✓ 1-Click "Copy All Thread Cards" sequence formatting<br>
-        ✓ Unlimited Campaign JSON and Markdown exports<br>
-        ✓ Automated MCP Tool definitions for Claude Desktop, Cursor &amp; Cline<br>
-        ✓ 100% in-browser client execution with zero network telemetry<br>
-        ✓ Permanent localStorage activation across visits
-      </div>
-    </div>
-  </div>
 
   <div id="toast" class="toast">Action completed!</div>
 
@@ -1097,7 +1040,7 @@ Simplicity scales.</textarea>
   </footer>
 
   <script>
-    let isProLicensed = false;
+    let isProLicensed = true;
 
     // Unicode Transformation Tables
     const UNICODE_FONTS = {
@@ -1464,46 +1407,23 @@ Simplicity scales.</textarea>
       showToast('Exported full campaign intelligence bundle!');
     }
 
-    // License Management
+    // License Management (100% Free & Open Access)
     function checkLicense() {
-      const urlParams = new URLSearchParams(window.location.search);
-      if (urlParams.get('licensed') === 'true' || urlParams.get('pro') === '1') {
-        localStorage.setItem('omnipost_pro_licensed', 'true');
-        localStorage.setItem('omnipost_pro_key', 'true');
-        try {
-          const cleanUrl = window.location.protocol + "//" + window.location.host + window.location.pathname;
-          window.history.replaceState({ path: cleanUrl }, '', cleanUrl);
-        } catch (e) {}
-      }
-      isProLicensed = localStorage.getItem('omnipost_pro_licensed') === 'true' ||
-                      localStorage.getItem('omnipost_pro_key') === 'true' ||
-                      localStorage.getItem('pro_licensed') === 'true';
+      isProLicensed = true;
 
       const licenseBadgeText = document.getElementById('licenseBadgeText');
       const salesBanner = document.getElementById('salesBanner');
       const campaignWrapper = document.getElementById('campaignPaywallWrapper');
       const activateBtn = document.getElementById('activateKeyBtn');
 
-      if (isProLicensed) {
-        if (campaignWrapper) campaignWrapper.classList.remove('paywall-locked');
-        if (licenseBadgeText) licenseBadgeText.textContent = '⭐ PRO ACTIVE';
-        if (salesBanner) salesBanner.style.display = 'none';
-        if (activateBtn) activateBtn.style.display = 'none';
-      } else {
-        if (campaignWrapper) campaignWrapper.classList.add('paywall-locked');
-        if (licenseBadgeText) licenseBadgeText.textContent = '⚡ FREE TIER';
-        if (salesBanner) salesBanner.style.display = 'flex';
-        if (activateBtn) activateBtn.style.display = 'inline-block';
-      }
+      if (campaignWrapper) campaignWrapper.classList.remove('paywall-locked');
+      if (licenseBadgeText) licenseBadgeText.textContent = '✦ 100% UNLOCKED';
+      if (salesBanner) salesBanner.style.display = 'none';
+      if (activateBtn) activateBtn.style.display = 'none';
     }
 
-    function openLicenseModal() {
-      document.getElementById('licenseModal').classList.add('open');
-    }
-
-    function closeLicenseModal() {
-      document.getElementById('licenseModal').classList.remove('open');
-    }
+    function openLicenseModal() {}
+    function closeLicenseModal() {}
 
     function activateLicenseKey(providedKey) {
       const inputEl = document.getElementById('license-input') || document.getElementById('licenseInput');

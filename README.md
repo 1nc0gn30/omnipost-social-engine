@@ -9,7 +9,9 @@
 <div align="center">
 
 [![Live App](https://img.shields.io/badge/Live_App-omnipost.nullai.tech-gold?style=flat-square)](https://omnipost.nullai.tech)
-[![Dual Rails](https://img.shields.io/badge/Dual_Checkout-Stripe_%2B_Solana-success?style=flat-square)](https://omnipost.nullai.tech)
+[![Access: 100% Free](https://img.shields.io/badge/Access-100%25%20Free%20%26%20Open-10B981?style=flat-square)](https://omnipost.nullai.tech)
+[![Buy Us a Coffee](https://img.shields.io/badge/%E2%98%95%20Buy%20Us%20a%20Coffee-Stripe-D4AF37?style=flat-square)](https://buy.stripe.com/3cIfZg27PdKo2D64Ocfw40X)
+[![Solana Tip](https://img.shields.io/badge/%E2%97%8E%20Solana%20Tip-GG2e...dXoK-14F195?style=flat-square)](solana:GG2eQbVh8ut1BK6j1A2tz7pSySdLpD38BgyEhGcxdXoK)
 [![Python Version](https://img.shields.io/badge/python-3.9%20%7C%203.10%20%7C%203.11%20%7C%203.12%20%7C%203.13-blue?logo=python)](https://github.com/1nc0gn30/omnipost-social-engine)
 [![MCP Compliant](https://img.shields.io/badge/MCP-Native%20Server-9334e6?logo=anthropic)](https://modelcontextprotocol.io/)
 [![Zero Dependencies](https://img.shields.io/badge/dependencies-0%20client-success.svg)](https://github.com/1nc0gn30/omnipost-social-engine)
@@ -23,12 +25,45 @@
 
 ---
 
-## 💎 Founding Member Access ($19 Lifetime)
+## ☕ Support & Tip Rails (100% Free & Open-Access)
 
-- **One-Time Sovereign License**: **$19 Lifetime** (<del>$79 Regular</del>)
-- **Credit Card / Apple Pay / Google Pay**: [Stripe Instant Checkout](https://buy.stripe.com/7sI7sA8hM2X8eFG8ww)
-- **Solana Web3 Rails**: Receiver `GG2eQbVh8ut1BK6j1A2tz7pSySdLpD38BgyEhGcxdXoK`
-- **Instant Activation**: Click *"Activate"* on the web app or load with `?licensed=true`.
+Every feature in OmniPost Social Engine is **100% free, open-source, and unlocked by default**. If you find this sovereign tool valuable, you can support continuous development:
+
+- **☕ Buy Us a Coffee (Stripe)**: [buy.stripe.com/3cIfZg27PdKo2D64Ocfw40X](https://buy.stripe.com/3cIfZg27PdKo2D64Ocfw40X)
+- **◎ Solana Tip Address**: `GG2eQbVh8ut1BK6j1A2tz7pSySdLpD38BgyEhGcxdXoK`
+
+---
+
+## ⚡ Quickstart & Installation
+
+### Option 1: Standalone Server on Port 8091
+```bash
+git clone https://github.com/1nc0gn30/omnipost-social-engine.git
+cd omnipost-social-engine
+python3 server.py --port 8091
+```
+Navigate to `http://127.0.0.1:8091` to access the full OmniPost Studio.
+
+### Option 2: ZothOS CLI Binary Commands
+```bash
+# Check daemon & environment status
+omnipost --status
+
+# Get structured JSON telemetry & system metadata
+omnipost --json
+
+# Run platform specs & character limits
+omnipost platform
+
+# Run internal engine self-tests (177 tests)
+omnipost test
+
+# Format post for Twitter with unicode bold styling
+omnipost format --text "Building sovereign tools on Linux" --platform twitter --style bold
+
+# Split long essay into a thread
+omnipost split --text "Long essay content..." --platform twitter --limit 280
+```
 
 ---
 
