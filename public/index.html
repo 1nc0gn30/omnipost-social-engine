@@ -44,12 +44,12 @@
         },
         "author": {
           "@type": "Person",
-          "name": "Neal Frazier",
-          "url": "https://nealfrazier.tech"
+          "name": "1nc0gn30",
+          "url": "https://nullai.tech"
         },
         "publisher": {
           "@type": "Organization",
-          "name": "Neal Frazier Tech",
+          "name": "1nc0gn30 • NullAI",
           "url": "https://nullai.tech"
         }
       },
@@ -1036,7 +1036,7 @@ Simplicity scales.</textarea>
 
   <footer class="zoth-brand-footer">
     <div class="zoth-foot-name">Omnipost Studio • Part of the NullAI Sovereign Tool Suite</div>
-    <div>Engineered by <a href="https://nealfrazier.tech" target="_blank" rel="noopener">Neal Frazier Tech (@1nc0gn30)</a> &bull; <a href="https://nullai.tech" target="_blank" rel="noopener">NullAI Platform</a> &bull; <a href="https://github.com/1nc0gn30/omnipost-social-engine" target="_blank" rel="noopener">GitHub</a></div>
+    <div>Engineered by <a href="https://nullai.tech" target="_blank" rel="noopener">1nc0gn30 (@1nc0gn30)</a> &bull; <a href="https://nullai.tech" target="_blank" rel="noopener">NullAI Platform</a> &bull; <a href="https://github.com/1nc0gn30/omnipost-social-engine" target="_blank" rel="noopener">GitHub</a></div>
   </footer>
 
   <script>
@@ -1425,49 +1425,6 @@ Simplicity scales.</textarea>
     function openLicenseModal() {}
     function closeLicenseModal() {}
 
-    function activateLicenseKey(providedKey) {
-      const inputEl = document.getElementById('license-input') || document.getElementById('licenseInput');
-      const val = (providedKey || (inputEl ? inputEl.value : '')).trim();
-      if (val.length > 3 || val.toUpperCase() === 'OMNIPOST-PRO-2026' || val.toUpperCase() === 'SOVEREIGN-PRO-2026' || val.includes('@')) {
-        localStorage.setItem('omnipost_pro_licensed', 'true');
-        localStorage.setItem('omnipost_pro_key', val);
-        checkLicense();
-        closeLicenseModal();
-        showToast('⭐ Omnipost Pro successfully activated! All paywalls dissolved.');
-      } else {
-        showToast('Please enter a valid receipt email or license key.');
-      }
-    }
-
-    function activateDemoLicense() {
-      localStorage.setItem('omnipost_pro_licensed', 'true');
-      localStorage.setItem('omnipost_pro_key', 'demo_preview');
-      checkLicense();
-      closeLicenseModal();
-      showToast('⭐ Instant preview license granted! All exports unlocked.');
-    }
-
-    function openDePayCheckout(e) {
-      if (e && e.preventDefault) e.preventDefault();
-      if (typeof DePayButtons !== 'undefined') {
-        try {
-          DePayButtons.init({
-            integration: '428790dd-7ad1-407c-8ecf-c048c77a4cb8',
-            container: document.body
-          });
-          return;
-        } catch (err) {
-          console.warn('DePay widget initialization error:', err);
-        }
-      }
-      window.open('https://solana.fm/address/GG2eQbVh8ut1BK6j1A2tz7pSySdLpD38BgyEhGcxdXoK', '_blank');
-      openLicenseModal();
-    }
-
-    function triggerSolanaCheckout(e) {
-      openDePayCheckout(e);
-    }
-
     // Copy & Download Utilities
     function copyCardContent(elementId) {
       const text = document.getElementById(elementId).innerText;
@@ -1514,5 +1471,6 @@ Simplicity scales.</textarea>
       loadMcpConfig();
     });
   </script>
+  <script src="/assets/sovereign-upgrade.js" defer></script>
 </body>
 </html>

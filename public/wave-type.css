@@ -1,0 +1,100 @@
+/* ============================================================
+   Omnipost Studio — Wave Typography Stylesheet (wave-type.css)
+   Pure typography refinement:
+   1. Readable measure on the main work surface (60-72ch)
+   2. Tabular numbers on existing scores, counters, meters, and prices
+   3. Crisp, optically tuned heading tracking (-0.015em to -0.025em)
+   Strictly scoped to selectors existing in public/index.html.
+   Zero color changes, zero motion, zero JavaScript changes.
+   ============================================================ */
+
+/* ---- 1. Readable Measure & Line Hierarchy on the Main Work Surface ---- */
+.sim-content {
+  max-width: 68ch;
+  line-height: 1.62;
+  text-wrap: pretty;
+}
+
+textarea {
+  max-width: 100%;
+  line-height: 1.6;
+}
+
+#fmt-text,
+#split-text {
+  line-height: 1.6;
+}
+
+.sales-desc {
+  max-width: 66ch;
+  line-height: 1.55;
+  text-wrap: pretty;
+}
+
+.card p,
+.modal-card p,
+.lock-card p {
+  max-width: 62ch;
+  line-height: 1.55;
+  text-wrap: pretty;
+}
+
+.code-box {
+  line-height: 1.55;
+}
+
+/* ---- 2. Tabular Numbers on Scores, Counts, Meters & Prices ---- */
+.virality-dial,
+#headerViralityValue,
+.chip,
+.chip-row,
+#fmt-chip-count,
+#fmt-chip-words,
+#fmt-chip-valid,
+#tw-count,
+#li-count,
+#bs-count,
+#th-count,
+#split-total-badge,
+.brand-badge,
+.sales-badge,
+.sales-desc strong,
+.sales-desc del,
+.btn-checkout,
+.btn-stripe,
+.btn-solana,
+input[type="number"],
+#split-limit,
+.code-box {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
+}
+
+/* ---- 3. Clearer Heading Tracking & Optical Tuning ---- */
+h1, h2, h3, h4, h5, h6 {
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+.brand-title {
+  letter-spacing: -0.025em;
+}
+
+.sales-title {
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+  line-height: 1.35;
+}
+
+.card-title {
+  letter-spacing: -0.018em;
+}
+
+.sim-header {
+  letter-spacing: -0.01em;
+}
+
+.modal-card h2,
+.lock-card h4 {
+  letter-spacing: -0.022em;
+}

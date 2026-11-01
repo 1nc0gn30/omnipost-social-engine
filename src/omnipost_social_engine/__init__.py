@@ -10,7 +10,9 @@ from .campaign_exporter import (
     CampaignExporter,
     Post,
 )
-from .cli import main
+def main(*args, **kwargs):
+    from .cli import main as _main
+    return _main(*args, **kwargs)
 from .mcp_server import (
     UNICODE_MAPS,
     MCPServer,

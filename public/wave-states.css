@@ -1,0 +1,256 @@
+/* ============================================================
+   Omnipost Studio — Wave States Stylesheet
+   Focus-visible, hover, empty states, error presentation,
+   and prefers-reduced-motion accessibility invariants.
+   Scoped strictly to existing selectors in public/index.html.
+   ============================================================ */
+
+/* ---- 1. Accessible Focus-Visible States ---- */
+textarea:focus-visible,
+input:focus-visible,
+select:focus-visible {
+  outline: 2px solid var(--zoth-gold, #d4af37) !important;
+  outline-offset: 2px !important;
+  border-color: var(--zoth-gold, #d4af37) !important;
+  box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.25) !important;
+}
+
+.btn:focus-visible,
+.btn-sm:focus-visible,
+.btn-checkout:focus-visible,
+.btn-key-activate:focus-visible,
+.tab-btn:focus-visible,
+.modal-close:focus-visible,
+.btn-license-inline:focus-visible {
+  outline: 2px solid var(--zoth-gold, #d4af37) !important;
+  outline-offset: 3px !important;
+}
+
+.zoth-brand-footer a:focus-visible {
+  outline: 2px solid var(--zoth-gold, #d4af37);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* ---- 2. Interactive Hover & Active Feedback ---- */
+textarea:hover,
+input:hover,
+select:hover {
+  border-color: rgba(212, 175, 55, 0.45);
+}
+
+.tab-btn {
+  transition: color 140ms ease, border-color 140ms ease, background-color 140ms ease;
+}
+
+.tab-btn:hover {
+  color: #ffffff;
+  background-color: rgba(255, 255, 255, 0.03);
+}
+
+.tab-btn.active {
+  color: var(--zoth-gold, #d4af37);
+  border-bottom-color: var(--zoth-gold, #d4af37);
+}
+
+.btn {
+  transition: transform 140ms cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 140ms cubic-bezier(0.16, 1, 0.3, 1),
+              background 140ms ease,
+              border-color 140ms ease;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(212, 175, 55, 0.28);
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+.btn-sm {
+  transition: background-color 140ms ease,
+              border-color 140ms ease,
+              color 140ms ease,
+              transform 100ms ease;
+}
+
+.btn-sm:hover {
+  background-color: rgba(212, 175, 55, 0.12);
+  border-color: var(--zoth-gold, #d4af37);
+  color: #ffffff;
+}
+
+.btn-sm:active {
+  transform: scale(0.98);
+}
+
+.btn-checkout {
+  transition: transform 140ms cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 140ms cubic-bezier(0.16, 1, 0.3, 1),
+              background-color 140ms ease,
+              border-color 140ms ease;
+}
+
+.btn-checkout.btn-stripe:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(212, 175, 55, 0.35);
+  background-color: var(--zoth-gold, #d4af37);
+}
+
+.btn-checkout.btn-stripe:active {
+  transform: translateY(0);
+}
+
+.btn-checkout.btn-solana:hover {
+  border-color: var(--zoth-gold, #d4af37);
+  background-color: var(--md-sys-color-surface-container-high, #16161f);
+}
+
+.btn-key-activate {
+  transition: border-color 140ms ease,
+              background-color 140ms ease,
+              color 140ms ease,
+              box-shadow 140ms ease;
+}
+
+.btn-key-activate:hover {
+  border-color: var(--zoth-gold, #d4af37);
+  background-color: rgba(212, 175, 55, 0.1);
+  color: #ffffff;
+  box-shadow: 0 0 8px rgba(212, 175, 55, 0.2);
+}
+
+.btn-key-activate:active {
+  transform: scale(0.98);
+}
+
+.btn-license-inline:hover {
+  color: #ffffff;
+  text-decoration-color: var(--zoth-gold, #d4af37);
+}
+
+.modal-close {
+  transition: color 120ms ease, background-color 120ms ease;
+  border-radius: 4px;
+  width: 32px;
+  height: 32px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-close:hover {
+  color: var(--zoth-gold, #d4af37);
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+.sim-card {
+  transition: border-color 160ms ease, box-shadow 160ms ease;
+}
+
+.sim-card:hover {
+  border-color: rgba(212, 175, 55, 0.25);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+}
+
+.zoth-brand-footer a:hover {
+  color: var(--zoth-gold-light, #f5e6ab);
+}
+
+/* ---- 3. Empty State Presentation ---- */
+#split-results:empty::before {
+  content: "No thread generated yet. Enter copy and click \"Re-Split Thread\".";
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2.5rem 1.5rem;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px dashed var(--zoth-border, #2a2a33);
+  border-radius: 10px;
+  color: var(--zoth-muted, #9aa0a6);
+  font-size: 0.88rem;
+  font-style: italic;
+  text-align: center;
+}
+
+#hooks-results:empty::before {
+  content: "No hooks generated yet. Select a topic and click \"Generate 10 Hooks\".";
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2.5rem 1.5rem;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px dashed var(--zoth-border, #2a2a33);
+  border-radius: 10px;
+  color: var(--zoth-muted, #9aa0a6);
+  font-size: 0.88rem;
+  font-style: italic;
+  text-align: center;
+}
+
+.sim-content:empty::before {
+  content: "Waiting for post content...";
+  color: var(--zoth-muted, #9aa0a6);
+  font-style: italic;
+  opacity: 0.7;
+}
+
+/* ---- 4. Error & Validation Presentation ---- */
+.chip.bad {
+  color: var(--md-error, #f97066) !important;
+  border-color: var(--md-error, #f97066) !important;
+  background-color: rgba(249, 112, 102, 0.12) !important;
+  font-weight: 600;
+}
+
+.chip.warn {
+  color: var(--zoth-gold, #d4af37) !important;
+  border-color: var(--zoth-gold, #d4af37) !important;
+  background-color: rgba(212, 175, 55, 0.1) !important;
+  font-weight: 600;
+}
+
+.chip.good {
+  color: var(--md-success, #12b76a) !important;
+  border-color: var(--md-success, #12b76a) !important;
+  background-color: rgba(18, 183, 106, 0.1) !important;
+  font-weight: 600;
+}
+
+input:invalid:not(:placeholder-shown) {
+  border-color: var(--md-error, #f97066) !important;
+  box-shadow: 0 0 0 2px rgba(249, 112, 102, 0.2) !important;
+}
+
+/* ---- 5. Reduced Motion Invariants ---- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .btn,
+  .btn:hover,
+  .btn:active,
+  .btn-checkout,
+  .btn-checkout:hover,
+  .btn-checkout:active,
+  .btn-sm,
+  .btn-sm:hover,
+  .btn-sm:active,
+  .btn-key-activate,
+  .btn-key-activate:hover,
+  .btn-key-activate:active,
+  .sim-card,
+  .sim-card:hover,
+  .tab-btn,
+  .tab-btn:hover {
+    transform: none !important;
+  }
+}
