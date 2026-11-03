@@ -6,7 +6,6 @@ and REST APIs (/api/health, /api/format, /api/split, /api/hooks, /api/analyze, /
 
 from __future__ import annotations
 
-import cgi
 import http.server
 import json
 import mimetypes
