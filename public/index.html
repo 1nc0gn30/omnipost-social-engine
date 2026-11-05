@@ -1471,6 +1471,22 @@ Simplicity scales.</textarea>
       loadMcpConfig();
     });
   </script>
-  <script src="/assets/sovereign-upgrade.js" defer></script>
+  
+
+  <script src="/sovereign_tutorial.js"></script>
+  <script>
+    window.addEventListener("DOMContentLoaded", function() {
+      if (window.createSovereignTutorial) {
+        window.createSovereignTutorial({
+          toolId: "omnipost-social-engine",
+          toolName: "OmniPost Social Engine",
+          tagline: "Multi-platform social content scheduler and cross-post automation!",
+          accentColor: "#EC4899",
+          steps: [{"icon": "\ud83d\udce2", "title": "Post Once, Reach Everyone", "desc": "Write your update once and OmniPost formats it perfectly for X, LinkedIn, Mastodon, and Threads."}, {"icon": "\ud83d\udcc5", "title": "Visual Content Calendar", "desc": "Drag and drop posts across days and times to plan your social media launches ahead of time."}, {"icon": "\ud83d\udcca", "title": "Character Count Guardians", "desc": "Automatically trims and thread-splits your text so you never exceed character limits."}]
+        });
+      }
+    });
+  </script>
+
 </body>
 </html>
