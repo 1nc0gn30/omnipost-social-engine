@@ -238,7 +238,7 @@ class TestWorkflowsAndDocs:
         assert "ubuntu-latest" in content
         assert "macos-latest" in content
         assert "windows-latest" in content
-        for ver in ["3.9", "3.10", "3.11", "3.12", "3.13"]:
+        for ver in ["3.10", "3.11", "3.12", "3.13"]:
             assert ver in content
         assert "pytest" in content
 
