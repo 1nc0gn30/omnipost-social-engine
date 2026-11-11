@@ -241,7 +241,7 @@ class ViralHookGenerator:
         # 12. Curiosity Gap
         def t12(topic: str, audience: Optional[str], tone: str) -> str:
             aud = f" regarding {audience}" if audience else ""
-            return f"The hidden secret behind world-class {topic}{aud} that the top 1% never share publicly:\n\nHere is the inside breakdown:"
+            return f"The hidden secret behind high-performing {topic}{aud} that the top 1% never share publicly:\n\nHere is the inside breakdown:"
 
         self._templates[12] = HookTemplate(
             template_id=12,

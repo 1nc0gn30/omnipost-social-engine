@@ -10,7 +10,7 @@ readme = "README.md"
 requires-python = ">=3.9"
 license = { text = "MIT" }
 authors = [
-    { name = "Omnipost Contributors" }
+    { name = "1nc0gn30", email = "hello@nullai.tech" }
 ]
 keywords = [
     "social-media",
@@ -53,6 +53,11 @@ dependencies = []
 dev = [
     "pytest>=7.0.0",
 ]
+
+[project.urls]
+Homepage = "https://zoth.nullai.tech/tools/omnipost-social-engine"
+Repository = "https://github.com/1nc0gn30/omnipost-social-engine"
+Documentation = "https://nullai.tech"
 
 [project.scripts]
 omnipost = "omnipost_social_engine.cli:main"

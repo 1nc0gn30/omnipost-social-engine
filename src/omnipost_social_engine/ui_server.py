@@ -1096,7 +1096,7 @@ class OmnipostRequestHandler(http.server.BaseHTTPRequestHandler):
 class OmnipostServer:
     """Threaded HTTP Server for Omnipost Studio."""
 
-    def __init__(self, host: str = "0.0.0.0", port: int = 8086):
+    def __init__(self, host: str = "127.0.0.1", port: int = 8091):
         self.host = host
         self.port = port
         self.httpd: Optional[http.server.ThreadingHTTPServer] = None
@@ -1134,7 +1134,7 @@ class OmnipostServer:
             self.httpd = None
 
 
-def run_server(host: str = "0.0.0.0", port: int = 8086, open_browser: bool = False) -> None:
+def run_server(host: str = "127.0.0.1", port: int = 8091, open_browser: bool = False) -> None:
     """Entry point for CLI command `omnipost serve`."""
     server = OmnipostServer(host=host, port=port)
     print(f"\n✨ Omnipost Studio live at: {server.url}")

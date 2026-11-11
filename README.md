@@ -1,331 +1,174 @@
-<div align="center">
-  <img src="assets/hero-banner.svg" alt="OmniPost Social Engine — Sovereign Architecture Banner" width="100%" />
-</div>
+<p align="center">
+  <img src="assets/hero-banner.svg" alt="Omnipost Social Engine — Multi-Platform Social Content Engine, Thread Splitter, UTM Builder & MCP Server" width="100%" />
+</p>
 
-<br />
+# Omnipost Social Engine
 
-# 🚀 Omnipost Social Engine
+**Zero-dependency Python 3.9+ multi-platform social copy formatter, sentence-aware thread splitter, copywriting hook generator, WCAG 2.2 alt-text accessibility auditor, UTM campaign URL builder/sanitizer, campaign exporter, and MCP server.**
 
-<div align="center">
-
-[![Live App](https://img.shields.io/badge/Live_App-omnipost.nullai.tech-gold?style=flat-square)](https://omnipost.nullai.tech)
-[![Access: 100% Free](https://img.shields.io/badge/Access-100%25%20Free%20%26%20Open-10B981?style=flat-square)](https://omnipost.nullai.tech)
-[![Buy Us a Coffee](https://img.shields.io/badge/%E2%98%95%20Buy%20Us%20a%20Coffee-Stripe-D4AF37?style=flat-square)](https://buy.stripe.com/3cIfZg27PdKo2D64Ocfw40X)
-[![Solana Tip](https://img.shields.io/badge/%E2%97%8E%20Solana%20Tip-GG2e...dXoK-14F195?style=flat-square)](solana:GG2eQbVh8ut1BK6j1A2tz7pSySdLpD38BgyEhGcxdXoK)
-[![Python Version](https://img.shields.io/badge/python-3.9%20%7C%203.10%20%7C%203.11%20%7C%203.12%20%7C%203.13-blue?logo=python)](https://github.com/1nc0gn30/omnipost-social-engine)
-[![MCP Compliant](https://img.shields.io/badge/MCP-Native%20Server-9334e6?logo=anthropic)](https://modelcontextprotocol.io/)
-[![Zero Dependencies](https://img.shields.io/badge/dependencies-0%20client-success.svg)](https://github.com/1nc0gn30/omnipost-social-engine)
-[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
-
-**100% In-Browser Multi-Platform Social Media Engine, Smart Thread Splitter, Viral Hook Generator & MCP AI Agent Hub.**
-
-[Live Application](https://omnipost.nullai.tech) • [MCP Guide](./docs/MCP_GUIDE.md) • [Viral Hooks](./docs/VIRAL_HOOK_FORMULAS.md) • [Platform Limits](./docs/PLATFORM_LIMITS_GUIDE.md)
-
-</div>
+- **Zoth Studio v2 Dossier**: [https://zoth.nullai.tech/tools/omnipost-social-engine](https://zoth.nullai.tech/tools/omnipost-social-engine)
+- **Default Loopback Endpoint**: `http://127.0.0.1:8091`
+- **Runtime Dependencies**: Zero external Python runtime packages (100% Python `stdlib`)
+- **License**: MIT (100% free and open-source)
 
 ---
 
-## ☕ Support & Tip Rails (100% Free & Open-Access)
+## Overview
 
-Every feature in OmniPost Social Engine is **100% free, open-source, and unlocked by default**. If you find this sovereign tool valuable, you can support continuous development:
-
-- **☕ Buy Us a Coffee (Stripe)**: [buy.stripe.com/3cIfZg27PdKo2D64Ocfw40X](https://buy.stripe.com/3cIfZg27PdKo2D64Ocfw40X)
-- **◎ Solana Tip Address**: `GG2eQbVh8ut1BK6j1A2tz7pSySdLpD38BgyEhGcxdXoK`
+`omnipost-social-engine` formats and validates posts across X/Twitter (`280` chars), Bluesky (`300` chars), Threads (`500` chars), Mastodon (`500` chars), LinkedIn (`3,000` chars), Facebook, and Instagram. It ships with a Google Material 3 dark loopback web workstation, deterministic Unicode typography styling (`bold`, `italic`, `bold_italic`, `monospace`, `script`, `double_struck`, `sans`, `underline`, `strikethrough`), sentence-preserving thread segmentation, engagement/readability scoring, ad-tracker parameter stripping (`fbclid`, `gclid`, `msclkid`, `twclid`), Buffer/Hootsuite/Typefully CSV export, and a 12-tool Model Context Protocol (MCP) server.
 
 ---
 
-## ⚡ Quickstart & Installation
+## Architecture
 
-### Option 1: Standalone Server on Port 8091
+```text
+src/omnipost_social_engine/
+├── campaign_exporter.py          # Buffer, Hootsuite, Typefully CSV, JSON, and Markdown calendar exporters
+├── hook_generator.py             # Deterministic hook templates across 9 copywriting frameworks
+├── accessibility_synthesizer.py  # WCAG 2.2 image alt-text auditor and content-warning trigger scanner
+├── utm_builder.py                # UTM parameter builder, click-ID URL sanitizer, and vanity HTML redirector
+├── mcp_server.py                 # JSON-RPC 2.0 stdio MCP server exposing 12 social & UTM tools
+├── ui_server.py                  # Loopback HTTP API + Google Material 3 Studio UI (127.0.0.1:8091)
+└── cli.py                        # Unified CLI entrypoint (`omnipost`)
+```
+
+---
+
+## Quickstart
+
 ```bash
 git clone https://github.com/1nc0gn30/omnipost-social-engine.git
 cd omnipost-social-engine
-python3 server.py --port 8091
-```
-Navigate to `http://127.0.0.1:8091` to access the full OmniPost Studio.
+python3 -m pip install -e ".[dev]"
 
-### Option 2: ZothOS CLI Binary Commands
-```bash
-# Check daemon & environment status
-omnipost --status
-
-# Get structured JSON telemetry & system metadata
-omnipost --json
-
-# Run platform specs & character limits
-omnipost platform
-
-# Run internal engine self-tests (177 tests)
-omnipost test
-
-# Format post for Twitter with unicode bold styling
-omnipost format --text "Building sovereign tools on Linux" --platform twitter --style bold
-
-# Split long essay into a thread
-omnipost split --text "Long essay content..." --platform twitter --limit 280
+# Launch the loopback web workstation on http://127.0.0.1:8091
+omnipost serve --host 127.0.0.1 --port 8091
 ```
 
----
-
-## 🌟 Overview
-
-**Omnipost Social Engine** eliminates the friction of managing cross-platform developer advocacy, launch campaigns, and technical content syndication. Write your post once, simulate how it looks across **Twitter / X**, **LinkedIn**, **BlueSky**, **Threads**, and **Mastodon**, optimize opening hooks with psychological heuristics, and broadcast safely with async leaky-bucket rate limiters.
-
-Equipped with a **Material 3 influenced Web Studio** (`public/index.html`, design influenced by Google Material 3 tokens) and a native **Model Context Protocol (MCP)** server, Omnipost can be operated by human creators or fully autonomous AI coding assistants (Claude Desktop, Cursor, Cline, Zed).
-
----
-
-## ✨ Key Features
-
-* **🎨 Material 3 Omnipost Studio (`public/index.html`)**:
-  * Design influenced by Google Material 3 tokens.
-  * 0 external font/cookie tracking scripts, fast, private, offline-first.
-  * Live circular character counter progress ring with platform-aware limits.
-  * Algorithmic Virality Score meter (0–100) with diagnostic breakdown.
-* **✍️ Multi-Platform Composer & Simulator**:
-  * Real-time side-by-side mockups of Twitter, LinkedIn (with 210-char `see more` cutoff), BlueSky, and Threads.
-  * 1-Click Unicode mathematical typography toolbar (Bold, Italic, Monospace, Strikethrough).
-* **🧵 Smart Thread Splitter**:
-  * Auto-split essays, markdown docs, or newsletters into numbered thread cards.
-  * Look-ahead sentence boundary packing (<280 chars) with draggable reordering.
-* **🎣 High-Converting Viral Hook Generator**:
-  * 15+ battle-tested psychological copywriting frameworks (Curiosity Gap, Contrarian Hot Takes, Playbooks, Shocking Metrics).
-* **🤖 Native Model Context Protocol (MCP) Server**:
-  * Seamless integration with Claude Desktop, Cursor, Cline, and Zed.
-  * Standard JSON-RPC 2.0 tools: `score_virality`, `generate_thread`, `convert_platform`, `optimize_hook`, `schedule_campaign`, `validate_limits`.
-* **🛡️ Deterministic Platform Limits Engine**:
-  * Precise character counting (Twitter weighted glyphs + 23-char `t.co` URLs, ATProto UTF-8 byte facets).
-  * Leaky-bucket rate limit queues with exponential backoff.
-* **🔗 UTM Attribution & Privacy Cleanser (`utm_builder`)**:
-  * Strips invasive surveillance/ad-click trackers (`fbclid`, `gclid`, `msclkid`, `twclid`, `igshid`, `ttclid`, etc.).
-  * Generates synchronized multi-platform campaign links with platform presets (Twitter, LinkedIn, Bluesky, Threads, Mastodon).
-  * Auto-tags raw URLs within social post bodies.
-  * Generates zero-dependency static HTML vanity redirect landing pages with Open Graph & Twitter Card preview tags.
-
----
-
-## 🏗️ Architecture
-
-```mermaid
-flowchart TD
-    subgraph Input["Input Channels"]
-        Studio["🎨 Material 3 Omnipost Studio<br/>(public/index.html)"]
-        CLI["💻 Omnipost CLI"]
-        MCP["🤖 AI Agent MCP Clients<br/>(Claude, Cursor, Cline, Zed)"]
-        PyAPI["🐍 Python SDK / API"]
-    end
-
-    subgraph Core["Omnipost Social Engine Core"]
-        Tokenizer["AST Tokenizer & Thread Splitter"]
-        UnicodeEngine["Unicode Mathematical Typography"]
-        ViralityScorer["Algorithmic Virality Diagnostics"]
-        EnvelopeEngine["Platform Envelope Translators"]
-        RateLimiter["Leaky Bucket Async Token Bucket"]
-    end
-
-    subgraph Outputs["Target Platforms"]
-        TW["𝕏 / Twitter (280 chars)"]
-        LI["💼 LinkedIn (3000 chars)"]
-        BS["🦋 BlueSky ATProto (300 chars)"]
-        TH["🧵 Threads (500 chars)"]
-        MA["🐘 Mastodon Fediverse (500 chars)"]
-    end
-
-    Studio --> Core
-    CLI --> Core
-    MCP --> Core
-    PyAPI --> Core
-
-    Core --> TW
-    Core --> LI
-    Core --> BS
-    Core --> TH
-    Core --> MA
-```
-
----
-
-## ⚡ Quickstart
-
-### 1. Installation
+Run directly from a source checkout without installing:
 
 ```bash
-# Clone the repository
-git clone https://github.com/omnipost/omnipost-social-engine.git
-cd omnipost-social-engine
-
-# Install in editable mode
-pip install -e .
+PYTHONPATH=src python3 -m omnipost_social_engine.cli serve --host 127.0.0.1 --port 8091
 ```
 
-### 2. Launch Omnipost Web Studio
+---
 
-Open `public/index.html` directly in your browser (no Node.js build step or local server required):
+## CLI & MCP Usage
+
+### CLI Subcommands
 
 ```bash
-# macOS
-open public/index.html
+# View CLI help
+omnipost --help
 
-# Linux
-xdg-open public/index.html
+# Format and style a post for X/Twitter, LinkedIn, Bluesky, Threads, or Mastodon
+omnipost format "Shipping deterministic Python tools." --platform bluesky --style bold --tags python,mcp --json
 
-# Windows
-start public/index.html
+# Split long-form copy into numbered thread segments
+omnipost split examples/developer-thread/draft.txt --platform twitter --limit 280 --numbering-format fraction --json
+
+# Generate copywriting hooks across 9 frameworks
+omnipost hooks "local-first developer tools" --niche tech --framework contrarian --count 5 --json
+
+# Score readability, structure, and engagement readiness (0-100)
+omnipost analyze "Here is why zero-dependency CLIs start faster." --platform linkedin --json
+
+# Export a campaign schedule to Buffer/Hootsuite/Typefully CSV, JSON, or Markdown
+omnipost export examples/launch-campaign/campaign.json --format csv --preset buffer
+
+# Audit image alt-text accessibility and content-warning triggers
+omnipost accessibility --alt "Terminal screenshot showing JSON output" --platform mastodon --json
+
+# Build UTM URLs, strip tracking IDs, or generate multi-platform campaign links
+omnipost utm --url "https://nullai.tech" --platform twitter --campaign q4_launch --json
+omnipost utm --url "https://example.com/?fbclid=abc123&utm_source=x" --sanitize --json
+
+# Print platform character limits and runtime diagnostics
+omnipost platform --json
+
+# Launch stdio MCP server or print client configs
+omnipost mcp
+omnipost mcp-config --client claude
 ```
 
----
+### ZothOS v3.4.0 CLI Integration
 
-## 🐍 Python API Usage
+On ZothOS v3.4.0 workstations, `omnipost` is available in `/usr/local/bin/omnipost`:
 
-### Score Virality & Diagnose Draft
-
-```python
-from omnipost_social_engine import OmnipostEngine
-
-engine = OmnipostEngine()
-
-draft = """
-🚀 We just open-sourced Omnipost Social Engine!
-
-One unified Python library to compose, simulate, and broadcast across:
-• Twitter / X
-• LinkedIn
-• BlueSky & Threads
-
-Star the repo on GitHub 👇
-#Python #OpenSource
-"""
-
-result = engine.score_virality(draft, platform="twitter")
-print(f"Virality Score: {result.score}/100 ({result.grade})")
-print(f"Hook Strength: {result.factors.hook_power}/30")
+```bash
+omnipost platform --json
+omnipost web                 # Starts http://127.0.0.1:8091
+omnipost desktop             # Launches the Electron workstation shell
 ```
 
-### Split Long Essay into a Verified Thread
+### Model Context Protocol (MCP) Tools
 
-```python
-essay = Path("article.md").read_text()
-
-thread = engine.split_thread(
-    source_text=essay,
-    max_chars_per_post=280,
-    numbering_style="fraction", # (1/N)
-    auto_hook=True,
-    auto_cta=True
-)
-
-for post in thread.posts:
-    print(f"[{post.order}/{len(thread.posts)}] ({len(post.text)} chars):\n{post.text}\n---")
-```
-
----
-
-## 🤖 Model Context Protocol (MCP) Integration
-
-Omnipost includes ready-to-copy MCP configurations for all major AI coding environments in [`examples/mcp-clients/`](./examples/mcp-clients/):
-
-* **Claude Desktop**: Add to `claude_desktop_config.json`:
 ```json
 {
   "mcpServers": {
-    "omnipost-social-engine": {
-      "command": "python",
-      "args": ["-m", "omnipost_social_engine.mcp_server"],
-      "env": {
-        "PYTHONPATH": "src"
-      }
+    "omnipost": {
+      "command": "omnipost",
+      "args": ["mcp"]
     }
   }
 }
 ```
 
-* **Cursor IDE**: Add to `.cursor/mcp.json`.
-* **Cline**: Add to `cline_mcp_settings.json`.
-* **Zed**: Add to `~/.config/zed/settings.json`.
-
-Read the complete [MCP Guide](./docs/MCP_GUIDE.md) for full tool schemas.
-
----
-
-## 📂 Repository Structure
-
-```
-omnipost-social-engine/
-├── .github/
-│   └── workflows/
-│       ├── ci.yml              # 15-job matrix (Ubuntu, macOS, Win / Python 3.9-3.13)
-│       └── release.yml         # Wheel/sdist packaging, SHA256, PyPI & GitHub Release
-├── docs/
-│   ├── MCP_GUIDE.md            # Model Context Protocol manual & tool schemas
-│   ├── PLATFORM_LIMITS_GUIDE.md# Platform rate limits, character specs & media matrix
-│   └── VIRAL_HOOK_FORMULAS.md  # 15+ psychological copywriting formulas & heuristics
-├── examples/
-│   ├── README.md               # Master examples catalog
-│   ├── developer-thread/       # 10-part technical developer thread example
-│   │   ├── thread.md
-│   │   └── README.md
-│   ├── launch-campaign/        # Complete omnichannel product launch dataset
-│   │   ├── campaign.json
-│   │   ├── posts.csv
-│   │   └── README.md
-│   └── mcp-clients/            # Pre-built configs for Claude, Cursor, Cline, Zed
-│       ├── claude_desktop_config.json
-│       ├── cursor_mcp.json
-│       ├── cline_mcp.json
-│       ├── zed_settings.json
-│       └── README.md
-├── public/
-│   └── index.html              # Material 3 Omnipost Studio single-page application (Google M3 influenced)
-├── src/
-│   └── omnipost_social_engine/ # Core engine Python package
-└── tests/
-    └── test_examples.py        # Validation test suite for UI, examples & docs
-```
+| MCP Tool | Description |
+| :--- | :--- |
+| `omni_format_post` | Format and style social copy with platform character checks and Unicode typography |
+| `omni_split_thread` | Split long-form text into numbered, sentence-bounded thread segments |
+| `omni_generate_hooks` | Generate opening hooks across 9 copywriting frameworks (`contrarian`, `curiosity_gap`, etc.) |
+| `omni_analyze_engagement` | Score readability, sentiment, structure, and engagement readiness (`0-100`) |
+| `omni_export_campaign` | Export multi-post campaigns to Buffer/Hootsuite/Typefully CSV, JSON, or Markdown |
+| `omni_get_diagnostics` | Return platform character budgets, Unicode support status, and engine diagnostics |
+| `omni_audit_accessibility` | Audit image alt-text against WCAG 2.2 checks and scan for content-warning triggers |
+| `omni_build_utm_url` | Construct clean UTM campaign tracking URLs |
+| `omni_sanitize_url` | Strip surveillance click IDs (`fbclid`, `gclid`, `msclkid`, `twclid`) while optionally keeping UTM tags |
+| `omni_generate_campaign_links` | Generate synchronized UTM tracking URLs across multiple social platforms |
+| `omni_tag_post_links` | Detect bare URLs inside post copy and tag them with platform UTM parameters |
+| `omni_vanity_redirect` | Generate a standalone HTML redirect page with Open Graph and Twitter Card metadata |
 
 ---
 
-## 🧪 Testing & Verification
+## HTTP API Reference
 
-Run the comprehensive pytest suite:
+When running on `http://127.0.0.1:8091`:
 
-```bash
-PYTHONPATH=src pytest tests/ -v
-```
-
-All 15 matrix environments in GitHub Actions enforce:
-* Python 3.9, 3.10, 3.11, 3.12, 3.13
-* Linux (Ubuntu), macOS, and Windows runners
-* 100% test pass rate
-
----
-
-## 📄 License & Attribution
-
-- **Engineered by:** 1nc0gn30 • NullAI ([@1nc0gn30](https://github.com/1nc0gn30)) • [NullAI Platform](https://nullai.tech)
-- **License:** Distributed under the **MIT License**. See `LICENSE` for details.
-
----
-
-## 🏛️ ZothOS v3.4, Zoth Studio v2 & Obsidian Second Brain Ecosystem
-
-### Cross-Surface Integration Matrix
-
-| Surface | Endpoint / Binary | Capabilities |
+| Method | Endpoint | Description |
 | :--- | :--- | :--- |
-| **Standalone Workstation** | `http://127.0.0.1:8091` | 100% Free & Open-Access Web Deck, live `/health` & REST telemetry |
-| **Zoth Studio v2 Route** | `http://127.0.0.1:3000/tools/omnipost-social-engine` | Interactive God-Mode component inside Zoth Studio (`https://zoth.nullai.tech`) |
-| **ZothOS v3.4 CLI & TUI** | `omnipost-social-engine` / `omnipost-social-engine-tui` | Global binary in `/usr/local/bin/` with Unicode `U+2800` Braille TUI & `--json` output |
-| **ZothOS-Lite Web Desktop** | `http://127.0.0.1:8145` | Browser-native KDE-style window manager & terminal launcher |
-| **Zoth Obsidian Tracker** | `http://127.0.0.1:8151` | Interactive Obsidian Second Brain vault explorer (`~/Documents/Obsidian Vault/Studio/Tools/Studio omnipost-social-engine.md`) |
-| **Neuro-Memory STDP Cortex** | `http://127.0.0.1:8094` | 3-Factor STDP synaptic memory daemon & 21-tool MCP server |
+| `GET` | `/health`, `/api/health` | Service health status and Python runtime version |
+| `GET` | `/api/diagnostics` | Platform character limits and engine diagnostics |
+| `GET` | `/api/mcp/config` | Ready-to-paste MCP client configurations (`claude_desktop`, `cursor`, `cline`, `zed`) |
+| `POST` | `/api/format` | Format and apply Unicode typography to post text |
+| `POST` | `/api/split` | Split long text into numbered thread posts |
+| `GET`/`POST` | `/api/hooks` | Generate hook candidates by topic, niche, and framework |
+| `POST` | `/api/analyze` | Compute engagement readiness and readability metrics |
+| `POST` | `/api/export` | Export campaign schedules (`json`, `csv`, `markdown`, `txt`) |
+| `GET`/`POST` | `/api/accessibility` | Run WCAG 2.2 alt-text and content-warning checks |
+| `POST` | `/api/utm/build`, `/api/utm/sanitize`, `/api/utm/campaign-links`, `/api/utm/tag-post`, `/api/utm/vanity` | UTM link construction, sanitization, and vanity redirect generation |
+
+---
+
+## Testing & Verification
 
 ```bash
-# Inspect CLI & Unicode U+2800 Braille TUI on ZothOS v3.4
-omnipost-social-engine --help
-omnipost-social-engine-tui --status
-omnipost-social-engine-tui --json
+# Run the pytest suite
+python3 -m pytest -q
 
-# Verify Second Brain Vault & 12-Step Verification Gallery on :8151
-zoth-obsidian-tracker --verify
+# Run CLI self-test
+omnipost test
+
+# Scan repository with gitleaks
+gitleaks detect --source . --no-banner --redact
 ```
 
+---
+
+## Support
+
+Omnipost Social Engine is 100% free and open-source software. Optional community support is available via [Buy Us a Coffee (Stripe)](https://buy.stripe.com/3cIfZg27PdKo2D64Ocfw40X).
+
+## License
+
+MIT License — Copyright (c) 2026 [1nc0gn30](https://1nc0gn30.si) (`@1nc0gn30`) & [NullAI](https://nullai.tech). See [LICENSE](LICENSE) for full text.

@@ -495,8 +495,8 @@ def build_parser() -> argparse.ArgumentParser:
 
     # serve
     p_serve = subparsers.add_parser("serve", help="Start Omnipost Material 3 Studio web UI")
-    p_serve.add_argument("--port", type=int, default=8086, help="Port to bind (default: 8086)")
-    p_serve.add_argument("--host", default="0.0.0.0", help="Host interface (default: 0.0.0.0)")
+    p_serve.add_argument("--port", type=int, default=8091, help="Port to bind (default: 8091)")
+    p_serve.add_argument("--host", default="127.0.0.1", help="Host interface (default: 127.0.0.1)")
     p_serve.add_argument("--open", action="store_true", help="Automatically open browser")
     p_serve.set_defaults(func=cmd_serve)
 

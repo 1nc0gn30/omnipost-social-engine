@@ -11,7 +11,7 @@ help:
 	@echo "  make install-dev   Install omnipost with dev dependencies"
 	@echo "  make test          Run full test suite with pytest"
 	@echo "  make test-unit     Run tests using Python stdlib unittest"
-	@echo "  make serve         Start Material 3 Studio web UI (http://localhost:8086)"
+	@echo "  make serve         Start Material 3 Studio web UI (http://127.0.0.1:8091)"
 	@echo "  make mcp           Run stdio Model Context Protocol (MCP) server"
 	@echo "  make mcp-config    Print MCP configuration snippets for AI clients"
 	@echo "  make clean         Clean build and cache artifacts"
@@ -29,7 +29,7 @@ test-unit:
 	PYTHONPATH=src $(PYTHON) -m unittest discover -s tests -v
 
 serve:
-	PYTHONPATH=src $(PYTHON) -m omnipost_social_engine serve --port 8086
+	PYTHONPATH=src $(PYTHON) -m omnipost_social_engine serve --host 127.0.0.1 --port 8091
 
 mcp:
 	PYTHONPATH=src $(PYTHON) -m omnipost_social_engine mcp

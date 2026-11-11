@@ -13,8 +13,8 @@
     "omnipost-social": "./bin/omnipost.js"
   },
   "scripts": {
-    "start": "python3 -m http.server 8091 --directory public",
-    "serve:public": "python3 -m http.server 8091 --directory public",
+    "start": "PYTHONPATH=src python3 -m omnipost_social_engine.cli serve --host 127.0.0.1 --port 8091",
+    "serve:public": "python3 -m http.server 8091 --bind 127.0.0.1 --directory public",
     "electron": "electron .",
     "app": "electron .",
     "test": "pytest tests/",

@@ -5,7 +5,7 @@ Name=OmniPost Social Studio
 GenericName=Multi-Platform Social Content Engine & Workstation
 Comment=Multi-Platform Social Formatting, Thread Synthesis, Engagement Analytics & MCP Workstation
 Exec=/usr/local/bin/omnipost desktop
-Icon=/media/neo/f2fdda77-178b-4603-ae80-c7aa4cd97908/zoth-micro-repos/omnipost-social-engine/assets/icon.png
+Icon=omnipost
 Terminal=false
 Categories=Development;Utility;Publishing;
 StartupNotify=true
@@ -16,5 +16,5 @@ Name=Open OmniPost CLI
 Exec=x-terminal-emulator -e "/usr/local/bin/omnipost --help"
 
 [Desktop Action Web]
-Name=Open Web UI (Port 8082)
+Name=Open Web UI (Port 8091)
 Exec=/usr/local/bin/omnipost web
